@@ -196,6 +196,31 @@ def write_stats_construction_ini():
 	fd.close()
 	f.close()
 
+def write_stats_features_ini():
+	if not os.path.isfile("stats/features.txt"):
+		return
+	print("W stats/features.ini")
+	fd = open("stats/features.txt", "rt")
+	f = open("stats/features.ini", "wt")
+	for line in read_csv_lines(fd):
+		l = line.split(",")
+		d = {}
+		n = l[0]
+		d["name"] = messages_strings_names_txt[n]
+		d["width"] = l[1]
+		d["breadth"] = l[2]
+		d["damageable"] = l[3]
+		d["armour"] = l[4]
+		d["hitpoints"] = l[5]
+		d["model"] = l[6]
+		d["type"] = l[7]
+		d["tiledraw"] = l[8]
+		d["los"] = l[9]
+		d["visible"] = l[10]
+		write_ini_section(f, n, d)
+	fd.close()
+	f.close()
+
 def write_stats_weapons_ini():
 	if not os.path.isfile("stats/weapons.txt"):
 		return
@@ -272,8 +297,9 @@ def write_stats_weapons_ini():
 # Here goes nothing.
 
 load_messages_strings_names_txt()
-write_stats_weapons_ini()
 write_stats_body_ini()
 write_stats_bodypropulsionimd_ini()
 write_stats_construction_ini()
+write_stats_features_ini()
+write_stats_weapons_ini()
 

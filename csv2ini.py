@@ -291,6 +291,27 @@ def write_stats_propulsion_ini():
 	fd.close()
 	f.close()
 
+def write_stats_propulsionsounds_ini():
+	if not os.path.isfile("stats/propulsionsounds.txt"):
+		return
+	print("W stats/propulsionsounds.ini")
+	fd = open("stats/propulsionsounds.txt", "rt")
+	f = open("stats/propulsionsounds.ini", "wt")
+	for line in read_csv_lines(fd):
+		l = line.split(",")
+		d = {}
+		n = l[0]
+		d["szStart"] = l[1]
+		d["szIdle"] = l[2]
+		d["szMoveOff"] = l[3]
+		d["szMove"] = l[4]
+		d["szHiss"] = l[5]
+		d["szShutDown"] = l[6]
+		#unused = l[7]
+		write_ini_section(f, n, d)
+	fd.close()
+	f.close()
+
 def write_stats_weapons_ini():
 	if not os.path.isfile("stats/weapons.txt"):
 		return
@@ -378,4 +399,5 @@ write_stats_construction_ini()
 write_stats_ecm_ini()
 write_stats_features_ini()
 write_stats_propulsion_ini()
+write_stats_propulsionsounds_ini()
 write_stats_weapons_ini()

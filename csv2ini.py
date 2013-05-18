@@ -486,6 +486,25 @@ def write_stats_structure_ini():
 	fd.close()
 	f.close()
 
+def write_stats_structuremodifier_ini():
+	if not os.path.isfile("stats/structuremodifier.txt"):
+		return
+	print("W stats/structuremodifier.ini")
+	fd = open("stats/structuremodifier.txt", "rt")
+	f = open("stats/structuremodifier.ini", "wt")
+	dd = {}
+	for line in read_csv_lines(fd, True):
+		l = line.split(",")
+		n = l[0]
+		if not n in dd:
+			dd[n] = {}
+		p = l[1]
+		dd[n][p] = l[2]
+	for (k, v) in dd.items():
+		write_ini_section(f, k, v)
+	fd.close()
+	f.close()
+
 def write_stats_weapons_ini():
 	if not os.path.isfile("stats/weapons.txt"):
 		return
@@ -582,4 +601,5 @@ write_stats_propulsionsounds_ini()
 write_stats_repair_ini()
 write_stats_sensor_ini()
 write_stats_structure_ini()
+write_stats_structuremodifier_ini()
 write_stats_weapons_ini()

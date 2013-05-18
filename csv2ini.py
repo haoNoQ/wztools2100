@@ -98,6 +98,29 @@ def remove_c_style_comments(fd):
 # Stuff to pre-load: files referenced from many other files.
 
 messages_strings_names_txt = {}
+stats_functions_txt = {}
+stats_structureweapons_txt = {}
+stats_structurefunctions_txt = {}
+
+def load_stats_functions_txt():
+	print("R stats/functions.txt")
+	global stats_functions_txt
+	fd = open("stats/functions.txt", "rt")
+	for line in fd:
+		l = line.split(",")
+		g = l[0]
+		n = l[1]
+		if g == "Production":
+			stats_functions_txt[n] = ("productionPoints", l[3])
+		elif g == "Power Generator":
+			stats_functions_txt[n] = ("powerPoints", l[3])
+		elif g == "Research":
+			stats_functions_txt[n] = ("researchPoints", l[2])
+		elif g == "Repair Droid":
+			stats_functions_txt[n] = ("repairPoints", l[2])
+		elif g == "ReArm":
+			stats_functions_txt[n] = ("rearmPoints", l[2])
+	fd.close()
 
 def load_messages_strings_names_txt():
 	print("R messages/strings/names.txt")
@@ -110,6 +133,40 @@ def load_messages_strings_names_txt():
 		one,two = line.split(None, 1)
 		messages_strings_names_txt[one] = two.translate(trans).strip()
 
+def load_stats_structurefunctions_txt():
+	print("R stats/structurefunctions.txt")
+	global stats_structurefunctions_txt
+	global stats_functions_txt
+	fd = open("stats/structurefunctions.txt")
+	for line in fd:
+		l = line.split(",")
+		if l[1] in stats_functions_txt:
+			g = stats_functions_txt[l[1]]
+			if not l[0] in stats_structurefunctions_txt:
+				stats_structurefunctions_txt[l[0]] = []
+			stats_structurefunctions_txt[l[0]].append(g)
+	fd.close()
+
+def load_stats_structureweapons_txt():
+	print("R stats/structureweapons.txt")
+	global stats_structureweapons_txt
+	fd = open("stats/structureweapons.txt", "rt")
+	for line in fd:
+		l = line.split(",")
+		r = []
+		n = l[0]
+		if not l[1] == "NULL":
+			r.append(l[1])
+		else:
+			continue
+		if not l[2] == "NULL":
+			r.append(l[2])
+		if not l[3] == "NULL":
+			r.append(l[3])
+		if not l[4] == "NULL":
+			r.append(l[4])
+		stats_structureweapons_txt[n] = r
+	fd.close()
 
 ##########################################################################
 # Routines to write out specific ini files.
@@ -384,6 +441,51 @@ def write_stats_sensor_ini():
 	fd.close()
 	f.close()
 
+def write_stats_structure_ini():
+	if not os.path.isfile("stats/structures.txt"):
+		return
+	print("W stats/structure.ini")
+	fd = open("stats/structures.txt", "rt")
+	f = open("stats/structure.ini", "wt")
+	for line in read_csv_lines(fd, True):
+		l = line.split(",")
+		d = {}
+		n = l[0]
+		d["name"] = messages_strings_names_txt[n]
+		d["type"] = l[1]
+		#unused = l[2]
+		d["strength"] = l[3]
+		#unused = l[4]
+		d["baseWidth"] = l[5]
+		d["baseBreadth"] = l[6]
+		#unused = l[7]
+		d["buildPoints"] = l[8]
+		d["height"] = l[9]
+		d["armour"] = l[10]
+		d["bodyPoints"] = l[11]
+		#unused = l[12]
+		d["buildPower"] = l[13]
+		#unused = l[14]
+		d["resistance"] = l[15]
+		#unused = l[16]
+		#unused = l[17]
+		if not l[18] == "ZNULLECM":
+			d["ecmID"] = l[18]
+		if not l[19] == "ZNULLSENSOR":
+			d["sensorID"] = l[19]
+		#unused = l[20]
+		d["structureModel"] = l[21].replace("@", ", ")
+		d["baseModel"] = l[22]
+		#unused = l[23]
+		if n in stats_structureweapons_txt:
+			d["weapons"] = list_to_ini_string(stats_structureweapons_txt[n])
+		if n in stats_structurefunctions_txt:
+			for g in stats_structurefunctions_txt[n]:
+				d[g[0]] = g[1]
+		write_ini_section(f, n, d)
+	fd.close()
+	f.close()
+
 def write_stats_weapons_ini():
 	if not os.path.isfile("stats/weapons.txt"):
 		return
@@ -464,7 +566,11 @@ def write_stats_weapons_ini():
 ##########################################################################
 # Here goes nothing.
 
+load_stats_functions_txt()
 load_messages_strings_names_txt()
+load_stats_structurefunctions_txt()
+load_stats_structureweapons_txt()
+
 write_stats_body_ini()
 write_stats_bodypropulsionimd_ini()
 write_stats_construction_ini()
@@ -475,4 +581,5 @@ write_stats_propulsiontype_ini()
 write_stats_propulsionsounds_ini()
 write_stats_repair_ini()
 write_stats_sensor_ini()
+write_stats_structure_ini()
 write_stats_weapons_ini()

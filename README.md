@@ -7,7 +7,8 @@ _________________________
 Prints the total number oil resources on the map, including pre-placed derricks and open oil resources.
 
 Usage: 
-    python2 count-oils.py 
+
+    python2 count-oils.py 2c-SomeMap.wz
 
 _________________________
 

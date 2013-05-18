@@ -205,6 +205,34 @@ def write_stats_construction_ini():
 	fd.close()
 	f.close()
 
+def write_stats_ecm_ini():
+	if not os.path.isfile("stats/ecm.txt"):
+		return
+	print("W stats/ecm.ini")
+	fd = open("stats/ecm.txt", "rt")
+	f = open("stats/ecm.ini", "wt")
+	for line in read_csv_lines(fd):
+		l = line.split(",")
+		d = {}
+		n = l[0]
+		d["name"] = messages_strings_names_txt[n]
+		#unused = l[1]
+		d["buildPower"] = l[2]
+		d["buildPoints"] = l[3]
+		d["weight"] = l[4]
+		#unused = l[5]
+		#unused = l[6]
+		d["body"] = l[7]
+		d["sensorModel"] = l[8]
+		d["mountModel"] = l[9]
+		d["location"] = l[10]
+		#unused = l[11]
+		d["range"] = l[12]
+		d["designable"] = l[13]
+		write_ini_section(f, n, d)
+	fd.close()
+	f.close()
+
 def write_stats_features_ini():
 	if not os.path.isfile("stats/features.txt"):
 		return
@@ -314,6 +342,7 @@ load_messages_strings_names_txt()
 write_stats_body_ini()
 write_stats_bodypropulsionimd_ini()
 write_stats_construction_ini()
+write_stats_ecm_ini()
 write_stats_features_ini()
 write_stats_weapons_ini()
 

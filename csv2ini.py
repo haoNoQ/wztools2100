@@ -357,6 +357,35 @@ def write_stats_repair_ini():
 	fd.close()
 	f.close()
 
+def write_stats_sensor_ini():
+	if not os.path.isfile("stats/sensor.txt"):
+		return
+	print("W stats/sensor.ini")
+	fd = open("stats/sensor.txt", "rt")
+	f = open("stats/sensor.ini", "wt")
+	for line in read_csv_lines(fd, True):
+		l = line.split(",")
+		d = {}
+		n = l[0]
+		#unused = l[1]
+		d["buildPower"] = l[2]
+		d["buildPoints"] = l[3]
+		d["weight"] = l[4]
+		#unused = l[5]
+		#unused = l[6]
+		d["bodyPoints"] = l[7]
+		d["sensorModel"] = l[8]
+		d["mountModel"] = l[9]
+		d["range"] = l[10]
+		d["location"] = l[11]
+		d["type"] = l[12]
+		d["time"] = l[13]
+		d["power"] = l[14]
+		d["designable"] = l[15]
+		write_ini_section(f, n, d)
+	fd.close()
+	f.close()
+
 def write_stats_weapons_ini():
 	if not os.path.isfile("stats/weapons.txt"):
 		return
@@ -447,4 +476,5 @@ write_stats_propulsion_ini()
 write_stats_propulsiontype_ini()
 write_stats_propulsionsounds_ini()
 write_stats_repair_ini()
+write_stats_sensor_ini()
 write_stats_weapons_ini()

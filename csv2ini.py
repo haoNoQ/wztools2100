@@ -607,6 +607,23 @@ def write_stats_weapons_ini():
 	fd.close()
 	f.close()
 
+def write_stats_weaponsounds_ini():
+	if not os.path.isfile("stats/weaponsounds.txt"):
+		return
+	print("W stats/weaponsounds.ini")
+	fd = open("stats/weaponsounds.txt", "rt")
+	f = open("stats/weaponsounds.ini", "wt")
+	for line in read_csv_lines(fd, False):
+		l = line.split(",")
+		d = {}
+		n = l[0]
+		d["szWeaponWav"] = l[1]
+		d["szExplosionWav"] = l[2]
+		#unused = l[3]
+		write_ini_section(f, n, d)
+	fd.close()
+	f.close()
+
 
 ##########################################################################
 # Here goes nothing.
@@ -630,3 +647,4 @@ write_stats_structure_ini()
 write_stats_structuremodifier_ini()
 write_stats_weaponmodifier_ini()
 write_stats_weapons_ini()
+write_stats_weaponsounds_ini()

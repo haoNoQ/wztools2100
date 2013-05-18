@@ -500,7 +500,7 @@ def write_stats_structuremodifier_ini():
 	fd = open("stats/structuremodifier.txt", "rt")
 	f = open("stats/structuremodifier.ini", "wt")
 	dd = {}
-	for line in read_csv_lines(fd, True):
+	for line in read_csv_lines(fd, False):
 		l = line.split(",")
 		n = l[0]
 		if not n in dd:
@@ -519,7 +519,7 @@ def write_stats_weaponmodifier_ini():
 	fd = open("stats/weaponmodifier.txt", "rt")
 	f = open("stats/weaponmodifier.ini", "wt")
 	dd = {}
-	for line in read_csv_lines(fd, True):
+	for line in read_csv_lines(fd, False):
 		l = line.split(",")
 		n = l[0]
 		if not n in dd:

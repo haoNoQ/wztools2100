@@ -103,6 +103,7 @@ def remove_c_style_comments(fd):
 
 messages_strings_names_txt = {}
 stats_functions_txt = {}
+stats_research_multiplayer_prresearch_txt = {}
 stats_structureweapons_txt = {}
 stats_structurefunctions_txt = {}
 
@@ -139,6 +140,17 @@ def load_messages_strings_names_txt():
 	for line in strlist:
 		one,two = line.split(None, 1)
 		messages_strings_names_txt[one] = two.translate(trans).strip()
+
+def load_stats_research_multiplayer_prresearch_txt():
+	print("R stats/research/multiplayer/prresearch.txt")
+	global stats_research_multiplayer_prresearch_txt
+	fd = open("stats/research/multiplayer/prresearch.txt", "rt")
+	for line in fd:
+		l = line.split(",")
+		if not l[0] in stats_research_multiplayer_prresearch_txt:
+			stats_research_multiplayer_prresearch_txt[l[0]] = []
+		stats_research_multiplayer_prresearch_txt[l[0]].append(l[1])
+	fd.close()
 
 def load_stats_structurefunctions_txt():
 	print("R stats/structurefunctions.txt")
@@ -427,6 +439,9 @@ def write_stats_research_ini():
 		#unused = l[17]
 		#unused = l[18]
 		#unused = l[19]
+		if n in stats_research_multiplayer_prresearch_txt:
+			p = stats_research_multiplayer_prresearch_txt[n]
+			d["requiredResearch"] = list_to_ini_string(p)
 		write_ini_section(f, n, d)
 	fd.close()
 	f.close()
@@ -668,8 +683,9 @@ def write_stats_weaponsounds_ini():
 ##########################################################################
 # Here goes nothing.
 
-load_stats_functions_txt()
 load_messages_strings_names_txt()
+load_stats_functions_txt()
+load_stats_research_multiplayer_prresearch_txt()
 load_stats_structurefunctions_txt()
 load_stats_structureweapons_txt()
 

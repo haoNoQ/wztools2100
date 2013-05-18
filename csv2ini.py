@@ -313,6 +313,22 @@ def write_stats_propulsionsounds_ini():
 	fd.close()
 	f.close()
 
+def write_stats_propulsiontype_ini():
+	if not os.path.isfile("stats/propulsiontype.txt"):
+		return
+	print("W stats/propulsiontype.ini")
+	fd = open("stats/propulsiontype.txt", "rt")
+	f = open("stats/propulsiontype.ini", "wt")
+	for line in read_csv_lines(fd, False):
+		l = line.split(",")
+		d = {}
+		n = l[0]
+		d["flightName"] = l[1]
+		d["multiplier"] = l[2]
+		write_ini_section(f, n, d)
+	fd.close()
+	f.close()
+
 def write_stats_weapons_ini():
 	if not os.path.isfile("stats/weapons.txt"):
 		return
@@ -400,5 +416,6 @@ write_stats_construction_ini()
 write_stats_ecm_ini()
 write_stats_features_ini()
 write_stats_propulsion_ini()
+write_stats_propulsiontype_ini()
 write_stats_propulsionsounds_ini()
 write_stats_weapons_ini()

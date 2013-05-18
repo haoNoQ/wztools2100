@@ -85,9 +85,7 @@ def remove_c_style_comments(fd):
 					comment_state = True
 					continue
 				if "//" in line:
-					# this won't affect the next line,
-					# so we're not setting comment_state
-					break
+					line = line.split("//", 1)[0]
 				# only now we can actually do our job
 				line = line.strip()
 				if len(line) > 0:

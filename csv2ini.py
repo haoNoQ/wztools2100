@@ -47,9 +47,8 @@ def write_ini_section(fd, name, dic):
 			fd.write(k + " = " + v + "\n")
 	fd.write("\n")
 
-def read_csv_lines(fd):
+def read_csv_lines(fd, skipfirst):
 	ret = []
-	skipfirst = True
 	for line in fd:
 		if skipfirst:
 			skipfirst = False
@@ -121,7 +120,7 @@ def write_stats_body_ini():
 	print("W stats/body.ini")
 	fd = open("stats/body.txt", "rt")
 	f = open("stats/body.ini", "wt")
-	for line in read_csv_lines(fd):
+	for line in read_csv_lines(fd, True):
 		l = line.split(",")
 		d = {}
 		n = l[0]
@@ -174,7 +173,7 @@ def write_stats_bodypropulsionimd_ini():
 	fd = open("stats/bodypropulsionimd.txt", "rt")
 	f = open("stats/bodypropulsionimd.ini", "wt")
 	dd = {}
-	for line in read_csv_lines(fd):
+	for line in read_csv_lines(fd, True):
 		l = line.split(",")
 		n = l[0]
 		if not n in dd:
@@ -192,7 +191,7 @@ def write_stats_construction_ini():
 	print("W stats/construction.ini")
 	fd = open("stats/construction.txt", "rt")
 	f = open("stats/construction.ini", "wt")
-	for line in read_csv_lines(fd):
+	for line in read_csv_lines(fd, False):
 		l = line.split(",")
 		d = {}
 		n = l[0]
@@ -218,7 +217,7 @@ def write_stats_ecm_ini():
 	print("W stats/ecm.ini")
 	fd = open("stats/ecm.txt", "rt")
 	f = open("stats/ecm.ini", "wt")
-	for line in read_csv_lines(fd):
+	for line in read_csv_lines(fd, False):
 		l = line.split(",")
 		d = {}
 		n = l[0]
@@ -246,7 +245,7 @@ def write_stats_features_ini():
 	print("W stats/features.ini")
 	fd = open("stats/features.txt", "rt")
 	f = open("stats/features.ini", "wt")
-	for line in read_csv_lines(fd):
+	for line in read_csv_lines(fd, True):
 		l = line.split(",")
 		d = {}
 		n = l[0]
@@ -271,7 +270,7 @@ def write_stats_propulsion_ini():
 	print("W stats/propulsion.ini")
 	fd = open("stats/propulsion.txt", "rt")
 	f = open("stats/propulsion.ini", "wt")
-	for line in read_csv_lines(fd):
+	for line in read_csv_lines(fd, False):
 		l = line.split(",")
 		d = {}
 		n = l[0]
@@ -297,7 +296,7 @@ def write_stats_propulsionsounds_ini():
 	print("W stats/propulsionsounds.ini")
 	fd = open("stats/propulsionsounds.txt", "rt")
 	f = open("stats/propulsionsounds.ini", "wt")
-	for line in read_csv_lines(fd):
+	for line in read_csv_lines(fd, False):
 		l = line.split(",")
 		d = {}
 		n = l[0]
@@ -318,7 +317,7 @@ def write_stats_weapons_ini():
 	print("W stats/weapons.ini")
 	fd = open("stats/weapons.txt", "rt")
 	f = open("stats/weapons.ini", "wt")
-	for line in read_csv_lines(fd):
+	for line in read_csv_lines(fd, True):
 		l = line.split(",")
 		d = {}
 		flags = []

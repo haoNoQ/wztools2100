@@ -329,6 +329,34 @@ def write_stats_propulsiontype_ini():
 	fd.close()
 	f.close()
 
+def write_stats_repair_ini():
+	if not os.path.isfile("stats/repair.txt"):
+		return
+	print("W stats/repair.ini")
+	fd = open("stats/repair.txt", "rt")
+	f = open("stats/repair.ini", "wt")
+	for line in read_csv_lines(fd, False):
+		l = line.split(",")
+		d = {}
+		n = l[0]
+		d["name"] = messages_strings_names_txt[n]
+		#unused = l[1]
+		d["buildPower"] = l[2]
+		d["buildPoints"] = l[3]
+		d["weight"] = l[4]
+		#unused = l[5]
+		#unused = l[6]
+		d["repairArmour"] = l[7]
+		d["location"] = l[8]
+		d["model"] = l[9]
+		d["mountModel"] = l[10]
+		d["repairPoints"] = l[11]
+		d["time"] = l[12]
+		d["designable"] = l[13]
+		write_ini_section(f, n, d)
+	fd.close()
+	f.close()
+
 def write_stats_weapons_ini():
 	if not os.path.isfile("stats/weapons.txt"):
 		return
@@ -418,4 +446,5 @@ write_stats_features_ini()
 write_stats_propulsion_ini()
 write_stats_propulsiontype_ini()
 write_stats_propulsionsounds_ini()
+write_stats_repair_ini()
 write_stats_weapons_ini()

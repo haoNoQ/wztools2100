@@ -32,6 +32,12 @@ def list_to_ini_string(l):
 			r += "," + s
 	return r
 
+def yesno_to_numeric(s):
+	if s == "YES":
+		return "1"
+	else:
+		return "0"
+
 def write_ini_section(fd, name, dic):
 	fd.write("[" + name + "]\n")
 	for k in sorted(dic.keys(), key = str.lower):
@@ -197,7 +203,7 @@ def write_stats_construction_ini():
 		#unused = l[5]
 		#unused = l[6]
 		d["bodyPoints"] = l[7]
-		d["sendorModel"] = l[8]
+		d["sensorModel"] = l[8]
 		d["mountModel"] = l[9]
 		d["constructPoints"] = l[10]
 		d["designable"] = l[11]
@@ -252,8 +258,8 @@ def write_stats_features_ini():
 		d["model"] = l[6]
 		d["type"] = l[7]
 		d["tiledraw"] = l[8]
-		d["los"] = l[9]
-		d["visible"] = l[10]
+		d["lineOfSight"] = l[9]
+		d["startVisible"] = l[10]
 		write_ini_section(f, n, d)
 	fd.close()
 	f.close()
@@ -304,7 +310,7 @@ def write_stats_weapons_ini():
 		d["radiusLife"] = l[32]
 		d["flightSpeed"] = l[33]
 		#unused = l[34]
-		d["fireOnMove"] = l[35]
+		d["fireOnMove"] = yesno_to_numeric(l[35])
 		d["weaponClass"] = l[36]
 		d["weaponSubClass"] = "\"" + l[37] + "\""
 		d["movement"] = l[38]
@@ -312,11 +318,11 @@ def write_stats_weapons_ini():
 		d["rotate"] = l[40]
 		d["maxElevation"] = l[41]
 		d["minElevation"] = l[42]
-		d["facePlayer"] = l[43]
-		d["faceInFlight"] = l[44]
+		d["facePlayer"] = yesno_to_numeric(l[43])
+		d["faceInFlight"] = yesno_to_numeric(l[44])
 		d["recoilValue"] = l[45]
 		d["minRange"] = l[46]
-		d["LightWorld"] = l[47]
+		d["LightWorld"] = yesno_to_numeric(l[47])
 		d["effectSize"] = l[48]
 		if int(l[49]) == 1:
 			flags.append("AirOnly")

@@ -391,6 +391,46 @@ def write_stats_propulsiontype_ini():
 	fd.close()
 	f.close()
 
+def write_stats_research_ini():
+	if not os.path.isfile("stats/research/multiplayer/research.txt"):
+		return
+	print("W stats/research.ini")
+	fd = open("stats/research/multiplayer/research.txt", "rt")
+	f = open("stats/research.ini", "wt")
+	for line in read_csv_lines(fd, True):
+		l = line.split(",")
+		d = {}
+		n = l[0]
+		d["name"] = messages_strings_names_txt[n]
+		#unused = l[1]
+		d["subgroupIconID"] = l[2]
+		d["techCode"] = l[3]
+		d["iconID"] = l[4]
+		#unused = l[5]
+		#unused = l[6]
+		d["msgName"] = l[7]
+		if not l[8] == "0":
+			d["statID"] = l[8]
+		if not l[9] == "0":
+			d["statID"] = l[9]
+		#unused = l[10]
+		d["researchPoints"] = l[11]
+		p = int(int(l[11]) / 32)
+		if p > 450:
+			p = 450
+		d["researchPower"] = str(p)
+		d["keyTopic"] = l[12]
+		#unused = l[13]
+		#unused = l[14]
+		#unused = l[15]
+		#unused = l[16]
+		#unused = l[17]
+		#unused = l[18]
+		#unused = l[19]
+		write_ini_section(f, n, d)
+	fd.close()
+	f.close()
+
 def write_stats_repair_ini():
 	if not os.path.isfile("stats/repair.txt"):
 		return
@@ -641,6 +681,7 @@ write_stats_features_ini()
 write_stats_propulsion_ini()
 write_stats_propulsiontype_ini()
 write_stats_propulsionsounds_ini()
+write_stats_research_ini()
 write_stats_repair_ini()
 write_stats_sensor_ini()
 write_stats_structure_ini()

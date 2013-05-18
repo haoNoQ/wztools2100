@@ -8,11 +8,12 @@
 
 
 # KNOWN ISSUES:
-# 	weapons.ini:
-# 		please review the three periodicalDamageWeapon parameters manually.
 # 	body.ini:
 # 		please review the droidType parameter manually.
-
+# 	propulsion:ini
+# 		please add the acceleration, deceleration and skidDeceleration fields manually.
+# 	weapons.ini:
+# 		please review the three periodicalDamageWeapon parameters manually.
 
 import os.path
 
@@ -264,6 +265,32 @@ def write_stats_features_ini():
 	fd.close()
 	f.close()
 
+def write_stats_propulsion_ini():
+	if not os.path.isfile("stats/propulsion.txt"):
+		return
+	print("W stats/propulsion.ini")
+	fd = open("stats/propulsion.txt", "rt")
+	f = open("stats/propulsion.ini", "wt")
+	for line in read_csv_lines(fd):
+		l = line.split(",")
+		d = {}
+		n = l[0]
+		d["name"] = messages_strings_names_txt[n]
+		#unused = l[1]
+		d["buildPower"] = l[2]
+		d["buildPoints"] = l[3]
+		d["weight"] = l[4]
+		#unused = l[5]
+		#unused = l[6]
+		d["hitpoints"] = l[7]
+		d["model"] = l[8]
+		d["type"] = l[9]
+		d["speed"] = l[10]
+		d["designable"] = l[11]
+		write_ini_section(f, n, d)
+	fd.close()
+	f.close()
+
 def write_stats_weapons_ini():
 	if not os.path.isfile("stats/weapons.txt"):
 		return
@@ -350,5 +377,5 @@ write_stats_bodypropulsionimd_ini()
 write_stats_construction_ini()
 write_stats_ecm_ini()
 write_stats_features_ini()
+write_stats_propulsion_ini()
 write_stats_weapons_ini()
-

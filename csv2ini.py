@@ -23,6 +23,15 @@ import os.path
 def is_something(s):
 	return len(s) > 0 and not s == "0"
 
+def list_to_ini_string(l):
+	r = ""
+	for (i, s) in enumerate(l):
+		if i == 0:
+			r += s
+		else:
+			r += "," + s
+	return r
+
 def write_ini_section(fd, name, dic):
 	fd.write("[" + name + "]\n")
 	for (k, v) in dic.items():
@@ -230,6 +239,7 @@ def write_stats_weapons_ini():
 	for line in read_csv_lines(fd):
 		l = line.split(",")
 		d = {}
+		flags = []
 		n = l[0]
 		d["name"] = messages_strings_names_txt[n]
 		#unused = l[1]
@@ -280,7 +290,10 @@ def write_stats_weapons_ini():
 		d["minRange"] = l[46]
 		d["LightWorld"] = l[47]
 		d["effectSize"] = l[48]
-		d["surfaceToAir"] = l[49]
+		if int(l[49]) == 1:
+			flags.append("AirOnly")
+		elif int(l[49]) == 100:
+			flags.append("ShootAir")
 		d["numAttackRuns"] = l[50]
 		d["designable"] = l[51]
 		d["penetrate"] = l[52]
@@ -288,6 +301,7 @@ def write_stats_weapons_ini():
 			d["periodicalDamageWeaponClass"] = d["weaponClass"]
 			d["periodicalDamageWeaponSubClass"] = d["weaponSubClass"]
 			d["periodicalDamageWeaponEffect"] = d["weaponEffect"]
+		d["flags"] = list_to_ini_string(flags);
 		write_ini_section(f, n, d)
 	fd.close()
 	f.close()

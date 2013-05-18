@@ -34,8 +34,8 @@ def list_to_ini_string(l):
 
 def write_ini_section(fd, name, dic):
 	fd.write("[" + name + "]\n")
-	for (k, v) in dic.items():
-		v = v.strip()
+	for k in sorted(dic.keys(), key = str.lower):
+		v = dic[k].strip()
 		if is_something(v):
 			fd.write(k + " = " + v + "\n")
 	fd.write("\n")

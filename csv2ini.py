@@ -106,6 +106,8 @@ stats_functions_txt = {}
 stats_research_multiplayer_prresearch_txt = {}
 stats_research_multiplayer_redcomponents_txt = {}
 stats_research_multiplayer_redstructure_txt = {}
+stats_research_multiplayer_resultcomponent_txt = {}
+stats_research_multiplayer_resultstructure_txt = {}
 stats_structureweapons_txt = {}
 stats_structurefunctions_txt = {}
 
@@ -174,6 +176,28 @@ def load_stats_research_multiplayer_redstructure_txt():
 		if not l[0] in stats_research_multiplayer_redstructure_txt:
 			stats_research_multiplayer_redstructure_txt[l[0]] = []
 		stats_research_multiplayer_redstructure_txt[l[0]].append(l[1])
+	fd.close()
+
+def load_stats_research_multiplayer_resultcomponent_txt():
+	print("R stats/research/multiplayer/resultcomponent.txt")
+	global stats_research_multiplayer_resultcomponent_txt
+	fd = open("stats/research/multiplayer/resultcomponent.txt", "rt")
+	for line in read_csv_lines(fd, True):
+		l = line.split(",")
+		if not l[0] in stats_research_multiplayer_resultcomponent_txt:
+			stats_research_multiplayer_resultcomponent_txt[l[0]] = []
+		stats_research_multiplayer_resultcomponent_txt[l[0]].append(l[1])
+	fd.close()
+
+def load_stats_research_multiplayer_resultstructure_txt():
+	print("R stats/research/multiplayer/resultstructure.txt")
+	global stats_research_multiplayer_resultstructure_txt
+	fd = open("stats/research/multiplayer/resultstructure.txt", "rt")
+	for line in read_csv_lines(fd, True):
+		l = line.split(",")
+		if not l[0] in stats_research_multiplayer_resultstructure_txt:
+			stats_research_multiplayer_resultstructure_txt[l[0]] = []
+		stats_research_multiplayer_resultstructure_txt[l[0]].append(l[1])
 	fd.close()
 
 def load_stats_structurefunctions_txt():
@@ -472,6 +496,12 @@ def write_stats_research_ini():
 		if n in stats_research_multiplayer_redstructure_txt:
 			p = stats_research_multiplayer_redstructure_txt[n]
 			d["redStructures"] = list_to_ini_string(p)
+		if n in stats_research_multiplayer_resultcomponent_txt:
+			p = stats_research_multiplayer_resultcomponent_txt[n]
+			d["resultComponents"] = list_to_ini_string(p)
+		if n in stats_research_multiplayer_resultstructure_txt:
+			p = stats_research_multiplayer_resultstructure_txt[n]
+			d["resultStructures"] = list_to_ini_string(p)
 		write_ini_section(f, n, d)
 	fd.close()
 	f.close()
@@ -718,6 +748,8 @@ load_stats_functions_txt()
 load_stats_research_multiplayer_prresearch_txt()
 load_stats_research_multiplayer_redcomponents_txt()
 load_stats_research_multiplayer_redstructure_txt()
+load_stats_research_multiplayer_resultcomponent_txt()
+load_stats_research_multiplayer_resultstructure_txt()
 load_stats_structurefunctions_txt()
 load_stats_structureweapons_txt()
 

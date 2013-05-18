@@ -11,9 +11,11 @@
 # 	body.ini:
 # 		please review the droidType parameter manually.
 # 	propulsion:ini
-# 		please add the acceleration, deceleration and skidDeceleration fields manually.
+# 		please add the acceleration, deceleration and
+# 		skidDeceleration fields manually.
 # 	weapons.ini:
-# 		please review the three periodicalDamageWeapon parameters manually.
+# 		please review the three periodicalDamageWeapon parameters
+# 		manually.
 
 import os.path
 

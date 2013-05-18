@@ -104,8 +104,24 @@ def remove_c_style_comments(fd):
 messages_strings_names_txt = {}
 stats_functions_txt = {}
 stats_research_multiplayer_prresearch_txt = {}
+stats_research_multiplayer_redcomponents_txt = {}
+stats_research_multiplayer_redstructure_txt = {}
 stats_structureweapons_txt = {}
 stats_structurefunctions_txt = {}
+
+def load_messages_strings_names_txt():
+	print("R messages/strings/names.txt")
+	global messages_strings_names_txt
+	fd = open("messages/strings/names.txt", "rt")
+	strlist = remove_c_style_comments(fd)
+	fd.close()
+	if sys.hexversion >= 0x03000000:
+		trans = str.maketrans("_()\"*", "     ")
+	else:
+		trans = string.maketrans("_()\"*", "     ")
+	for line in strlist:
+		one,two = line.split(None, 1)
+		messages_strings_names_txt[one] = two.translate(trans).strip()
 
 def load_stats_functions_txt():
 	print("R stats/functions.txt")
@@ -127,29 +143,37 @@ def load_stats_functions_txt():
 			stats_functions_txt[n] = ("rearmPoints", l[2])
 	fd.close()
 
-def load_messages_strings_names_txt():
-	print("R messages/strings/names.txt")
-	global messages_strings_names_txt
-	fd = open("messages/strings/names.txt", "rt")
-	strlist = remove_c_style_comments(fd)
-	fd.close()
-	if sys.hexversion >= 0x03000000:
-		trans = str.maketrans("_()\"*", "     ")
-	else:
-		trans = string.maketrans("_()\"*", "     ")
-	for line in strlist:
-		one,two = line.split(None, 1)
-		messages_strings_names_txt[one] = two.translate(trans).strip()
-
 def load_stats_research_multiplayer_prresearch_txt():
 	print("R stats/research/multiplayer/prresearch.txt")
 	global stats_research_multiplayer_prresearch_txt
 	fd = open("stats/research/multiplayer/prresearch.txt", "rt")
-	for line in fd:
+	for line in read_csv_lines(fd, False):
 		l = line.split(",")
 		if not l[0] in stats_research_multiplayer_prresearch_txt:
 			stats_research_multiplayer_prresearch_txt[l[0]] = []
 		stats_research_multiplayer_prresearch_txt[l[0]].append(l[1])
+	fd.close()
+
+def load_stats_research_multiplayer_redcomponents_txt():
+	print("R stats/research/multiplayer/redcomponents.txt")
+	global stats_research_multiplayer_redcomponents_txt
+	fd = open("stats/research/multiplayer/redcomponents.txt", "rt")
+	for line in read_csv_lines(fd, True):
+		l = line.split(",")
+		if not l[0] in stats_research_multiplayer_redcomponents_txt:
+			stats_research_multiplayer_redcomponents_txt[l[0]] = []
+		stats_research_multiplayer_redcomponents_txt[l[0]].append(l[1])
+	fd.close()
+
+def load_stats_research_multiplayer_redstructure_txt():
+	print("R stats/research/multiplayer/redstructure.txt")
+	global stats_research_multiplayer_redstructure_txt
+	fd = open("stats/research/multiplayer/redstructure.txt", "rt")
+	for line in read_csv_lines(fd, True):
+		l = line.split(",")
+		if not l[0] in stats_research_multiplayer_redstructure_txt:
+			stats_research_multiplayer_redstructure_txt[l[0]] = []
+		stats_research_multiplayer_redstructure_txt[l[0]].append(l[1])
 	fd.close()
 
 def load_stats_structurefunctions_txt():
@@ -442,6 +466,12 @@ def write_stats_research_ini():
 		if n in stats_research_multiplayer_prresearch_txt:
 			p = stats_research_multiplayer_prresearch_txt[n]
 			d["requiredResearch"] = list_to_ini_string(p)
+		if n in stats_research_multiplayer_redcomponents_txt:
+			p = stats_research_multiplayer_redcomponents_txt[n]
+			d["redComponents"] = list_to_ini_string(p)
+		if n in stats_research_multiplayer_redstructure_txt:
+			p = stats_research_multiplayer_redstructure_txt[n]
+			d["redStructures"] = list_to_ini_string(p)
 		write_ini_section(f, n, d)
 	fd.close()
 	f.close()
@@ -686,6 +716,8 @@ def write_stats_weaponsounds_ini():
 load_messages_strings_names_txt()
 load_stats_functions_txt()
 load_stats_research_multiplayer_prresearch_txt()
+load_stats_research_multiplayer_redcomponents_txt()
+load_stats_research_multiplayer_redstructure_txt()
 load_stats_structurefunctions_txt()
 load_stats_structureweapons_txt()
 

@@ -102,6 +102,7 @@ def remove_c_style_comments(fd):
 # Stuff to pre-load: files referenced from many other files.
 
 messages_strings_names_txt = {}
+stats_assignweapons_txt = {}
 stats_functions_txt = {}
 stats_research_multiplayer_prresearch_txt = {}
 stats_research_multiplayer_redcomponents_txt = {}
@@ -126,6 +127,27 @@ def load_messages_strings_names_txt():
 	for line in strlist:
 		one,two = line.split(None, 1)
 		messages_strings_names_txt[one] = two.translate(trans).strip()
+
+def load_stats_assignweapons_txt():
+	if not os.path.isfile("stats/assignweapons.txt"):
+		return
+	print("R stats/assignweapons.txt")
+	global stats_assignweapons_txt
+	fd = open("stats/assignweapons.txt", "rt")
+	for line in fd:
+		l = line.split(",")
+		r = []
+		n = l[0]
+		if not l[1] == "NULL":
+			r.append(l[1])
+		else:
+			continue
+		if not l[2] == "NULL":
+			r.append(l[2])
+		if not l[3] == "NULL":
+			r.append(l[3])
+		stats_assignweapons_txt[n] = r
+	fd.close()
 
 def load_stats_functions_txt():
 	if not os.path.isfile("stats/functions.txt"):
@@ -645,6 +667,37 @@ def write_stats_structuremodifier_ini():
 	fd.close()
 	f.close()
 
+def write_stats_templates_ini():
+	if not os.path.isfile("stats/templates.txt"):
+		return
+	print("W stats/templates.ini")
+	fd = open("stats/templates.txt", "rt")
+	f = open("stats/templates.ini", "wt")
+	for line in read_csv_lines(fd, False):
+		l = line.split(",")
+		d = {}
+		n = l[0]
+		d["name"] = messages_strings_names_txt[n]
+		#unused = l[1]
+		d["compBody"] = l[2]
+		if l[3] != "ZNULLBRAIN":
+			d["compBrain"] = l[3]
+		if l[4] != "ZNULLCONSTRUCT":
+			d["compConstruct"] = l[4]
+		#unused = l[5]
+		d["available"] = yesno_to_numeric(l[6])
+		d["compPropulsion"] = l[7]
+		if l[8] != "ZNULLREPAIR":
+			d["compRepair"] = l[8]
+		d["type"] = l[9]
+		if not l[10] == "ZNULLSENSOR":
+			d["compSensor"] = l[10]
+		if n in stats_assignweapons_txt:
+			d["weapons"] = list_to_ini_string(stats_assignweapons_txt[n])
+		write_ini_section(f, n, d)
+	fd.close()
+	f.close()
+
 def write_stats_weaponmodifier_ini():
 	if not os.path.isfile("stats/weaponmodifier.txt"):
 		return
@@ -711,8 +764,12 @@ def write_stats_weapons_ini():
 		d["flightSpeed"] = l[33]
 		#unused = l[34]
 		d["fireOnMove"] = yesno_to_numeric(l[35])
+		if l[36] == "MISC":
+			l[36] = "KINETIC"
 		d["weaponClass"] = l[36]
 		d["weaponSubClass"] = "\"" + l[37] + "\""
+		if l[38] == "ERRATIC-DIRECT":
+			l[38] = "DIRECT"
 		d["movement"] = l[38]
 		d["weaponEffect"] = "\"" + l[39] + "\""
 		d["rotate"] = l[40]
@@ -762,6 +819,7 @@ def write_stats_weaponsounds_ini():
 # Here goes nothing.
 
 load_messages_strings_names_txt()
+load_stats_assignweapons_txt()
 load_stats_functions_txt()
 load_stats_research_multiplayer_prresearch_txt()
 load_stats_research_multiplayer_redcomponents_txt()
@@ -784,6 +842,7 @@ write_stats_repair_ini()
 write_stats_sensor_ini()
 write_stats_structure_ini()
 write_stats_structuremodifier_ini()
+write_stats_templates_ini()
 write_stats_weaponmodifier_ini()
 write_stats_weapons_ini()
 write_stats_weaponsounds_ini()

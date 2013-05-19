@@ -112,6 +112,8 @@ stats_structureweapons_txt = {}
 stats_structurefunctions_txt = {}
 
 def load_messages_strings_names_txt():
+	if not os.path.isfile("messages/strings/names.txt"):
+		return
 	print("R messages/strings/names.txt")
 	global messages_strings_names_txt
 	fd = open("messages/strings/names.txt", "rt")
@@ -126,6 +128,8 @@ def load_messages_strings_names_txt():
 		messages_strings_names_txt[one] = two.translate(trans).strip()
 
 def load_stats_functions_txt():
+	if not os.path.isfile("stats/functions.txt"):
+		return
 	print("R stats/functions.txt")
 	global stats_functions_txt
 	fd = open("stats/functions.txt", "rt")
@@ -146,6 +150,8 @@ def load_stats_functions_txt():
 	fd.close()
 
 def load_stats_research_multiplayer_prresearch_txt():
+	if not os.path.isfile("stats/research/multiplayer/prresearch.txt"):
+		return
 	print("R stats/research/multiplayer/prresearch.txt")
 	global stats_research_multiplayer_prresearch_txt
 	fd = open("stats/research/multiplayer/prresearch.txt", "rt")
@@ -157,6 +163,8 @@ def load_stats_research_multiplayer_prresearch_txt():
 	fd.close()
 
 def load_stats_research_multiplayer_redcomponents_txt():
+	if not os.path.isfile("stats/research/multiplayer/redcomponents.txt"):
+		return
 	print("R stats/research/multiplayer/redcomponents.txt")
 	global stats_research_multiplayer_redcomponents_txt
 	fd = open("stats/research/multiplayer/redcomponents.txt", "rt")
@@ -168,6 +176,8 @@ def load_stats_research_multiplayer_redcomponents_txt():
 	fd.close()
 
 def load_stats_research_multiplayer_redstructure_txt():
+	if not os.path.isfile("stats/research/multiplayer/redstructure.txt"):
+		return
 	print("R stats/research/multiplayer/redstructure.txt")
 	global stats_research_multiplayer_redstructure_txt
 	fd = open("stats/research/multiplayer/redstructure.txt", "rt")
@@ -179,6 +189,8 @@ def load_stats_research_multiplayer_redstructure_txt():
 	fd.close()
 
 def load_stats_research_multiplayer_resultcomponent_txt():
+	if not os.path.isfile("stats/research/multiplayer/resultcomponent.txt"):
+		return
 	print("R stats/research/multiplayer/resultcomponent.txt")
 	global stats_research_multiplayer_resultcomponent_txt
 	fd = open("stats/research/multiplayer/resultcomponent.txt", "rt")
@@ -190,6 +202,8 @@ def load_stats_research_multiplayer_resultcomponent_txt():
 	fd.close()
 
 def load_stats_research_multiplayer_resultstructure_txt():
+	if not os.path.isfile("stats/research/multiplayer/resultstructure.txt"):
+		return
 	print("R stats/research/multiplayer/resultstructure.txt")
 	global stats_research_multiplayer_resultstructure_txt
 	fd = open("stats/research/multiplayer/resultstructure.txt", "rt")
@@ -201,6 +215,8 @@ def load_stats_research_multiplayer_resultstructure_txt():
 	fd.close()
 
 def load_stats_structurefunctions_txt():
+	if not os.path.isfile("stats/structurefunctions.txt"):
+		return
 	print("R stats/structurefunctions.txt")
 	global stats_structurefunctions_txt
 	global stats_functions_txt
@@ -215,6 +231,8 @@ def load_stats_structurefunctions_txt():
 	fd.close()
 
 def load_stats_structureweapons_txt():
+	if not os.path.isfile("stats/structureweapons.txt"):
+		return
 	print("R stats/structureweapons.txt")
 	global stats_structureweapons_txt
 	fd = open("stats/structureweapons.txt", "rt")

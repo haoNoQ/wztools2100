@@ -138,13 +138,13 @@ def load_stats_assignweapons_txt():
 		l = line.split(",")
 		r = []
 		n = l[0]
-		if not l[1] == "NULL":
+		if not l[1] == "NULL" and is_something(l[1]):
 			r.append(l[1])
 		else:
 			continue
-		if not l[2] == "NULL":
+		if not l[2] == "NULL" and is_something(l[2]):
 			r.append(l[2])
-		if not l[3] == "NULL":
+		if not l[3] == "NULL" and is_something(l[3]):
 			r.append(l[3])
 		stats_assignweapons_txt[n] = r
 	fd.close()
@@ -262,15 +262,15 @@ def load_stats_structureweapons_txt():
 		l = line.split(",")
 		r = []
 		n = l[0]
-		if not l[1] == "NULL":
+		if not l[1] == "NULL" and is_something(l[1]):
 			r.append(l[1])
 		else:
 			continue
-		if not l[2] == "NULL":
+		if not l[2] == "NULL" and is_something(l[2]):
 			r.append(l[2])
-		if not l[3] == "NULL":
+		if not l[3] == "NULL" and is_something(l[3]):
 			r.append(l[3])
-		if not l[4] == "NULL":
+		if not l[4] == "NULL" and is_something(l[4]):
 			r.append(l[4])
 		stats_structureweapons_txt[n] = r
 	fd.close()
@@ -506,7 +506,7 @@ def write_stats_research_ini():
 		d["subgroupIconID"] = l[2]
 		d["techCode"] = l[3]
 		d["iconID"] = l[4]
-		#unused = l[5]
+		d["imdName"] = l[5]
 		#unused = l[6]
 		d["msgName"] = l[7]
 		if not l[8] == "0":

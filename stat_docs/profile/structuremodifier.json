@@ -1,0 +1,18 @@
+[
+    {
+        "name":"HARD",
+        "type":"positive_int"
+    },
+    {
+        "name":"MEDIUM",
+        "type":"positive_int"
+    },
+    {
+        "name":"SOFT",
+        "type":"positive_int"
+    },
+    {
+        "name":"BUNKER",
+        "type":"positive_int"
+    }
+]

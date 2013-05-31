@@ -1,0 +1,26 @@
+[
+    {
+        "name":"szIdle",
+        "type":"ogg"
+    },
+    {
+        "name":"szStart",
+        "type":"ogg"
+    },
+    {
+        "name":"szShutDown",
+        "type":"ogg"
+    },
+    {
+        "name":"szHiss",
+        "type":"ogg"
+    },
+    {
+        "name":"szMoveOff",
+        "type":"ogg"
+    },
+    {
+        "name":"szMove",
+        "type":"ogg"
+    }
+]

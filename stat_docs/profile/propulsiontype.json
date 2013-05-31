@@ -1,0 +1,13 @@
+[
+    {
+        "name":"flightName",
+        "type":"choice",
+        "choices":["AIR", "GROUND"],
+        "required": true
+    },
+    {
+        "name":"multiplier",
+        "type":"positive_int",
+        "default" : 100
+    }
+]

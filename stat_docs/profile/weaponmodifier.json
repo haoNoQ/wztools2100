@@ -1,0 +1,32 @@
+[
+    {
+        "name":"Half-Tracked",
+        "type":"positive_int",
+        "default":100
+    },
+    {
+        "name":"Hover",
+        "type":"positive_int",
+        "default":100
+    },
+    {
+        "name":"Legged",
+        "type":"positive_int",
+        "default":100
+    },
+    {
+        "name":"Lift",
+        "type":"positive_int",
+        "default":100
+    },
+    {
+        "name":"Tracked",
+        "type":"positive_int",
+        "default":100
+    },
+    {
+        "name":"Wheeled",
+        "type":"positive_int",
+        "default":100
+    }
+]

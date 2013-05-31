@@ -1,0 +1,68 @@
+[
+    {
+        "name":"name",
+        "type":"name"
+    },
+    {
+        "name":"size",
+        "type":"choice",
+        "choices":["HEAVY", "LIGHT", "MEDIUM"],
+        "help_text": "Size of the body"
+    },
+    {
+        "name":"buildPower",
+        "type":"buildpower"
+    },
+    {
+        "name":"buildPoints",
+        "type":"buildpoints"
+    },
+
+    {
+        "name":"weight",
+        "type":"weight"
+
+    },
+    {
+        "name":"hitpoints",
+        "type":"hitpoints"
+    },
+    {
+        "name":"model",
+        "type":"pie",
+        "help_text": "Pie model of body."
+    },{
+        "name":"weaponSlots",
+        "type":"choice",
+        "choices":["1", "2"]
+    },
+    {
+        "name":"powerOutput",
+        "type":"int",
+        "help_text": "Engenie power, affects droid speed",
+        "required": true
+    },
+    {
+        "name":"armourKinetic",
+        "type":"positive_int",
+        "required": true
+    },
+    {
+        "name":"armourHeat",
+        "type":"positive_int",
+        "required": true
+    },
+    {
+        "name":"flameModel",
+        "type":"pie"
+    },
+    {
+        "name":"designable",
+        "type":"designable"
+    },
+    {
+        "name":"droidType",
+        "type":"choice",
+        "choices":["DROID", "CYBORG", "CYBORG_SUPER", "CYBORG_REPAIR", "PERSON", "TRANSPORTER", "CYBORG_CONSTRUCT"]
+    }
+]

@@ -1,0 +1,51 @@
+[
+    {
+        "name":"name",
+        "type":"name"
+    },
+    {
+        "name":"bodyPoints",
+        "type":"hitpoints"
+    },
+    {
+        "name":"designable",
+        "type":"designable"
+    },
+    {
+        "name":"power",
+        "type":"positive_int",
+        "help_text": "???",
+        "required":true
+
+    },
+    {
+        "name":"weight",
+        "type":"weight"
+    },
+    {
+        "name":"range",
+        "type":"int",
+        "required":true
+    },
+    {
+        "name":"buildPoints",
+        "type":"buildpoints"
+    },
+    {
+        "name":"sensorModel",
+        "type":"pie"
+    },
+    {
+        "name":"location",
+        "type":"choice",
+        "choices":["DEFAULT", "TURRET"]
+    },
+    {
+        "name":"buildPower",
+        "type":"buildpower"
+    },
+    {
+        "name":"mountModel",
+        "type":"pie"
+    }
+]

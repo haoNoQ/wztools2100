@@ -1,0 +1,75 @@
+[
+    {
+        "name": "requiredResearch",
+        "type": "list",
+        "help_text": "previous research that required."
+    },
+    {
+        "name": "subgroupIconID",
+        "type": "pie",
+        "help_text": "Left research icon."
+    },
+    {
+        "name": "requiredStructures", "type": "list",
+        "help_text": "This structure that should be build before making research."},
+
+    {
+        "name": "name",
+        "type": "text"
+    },
+    {
+        "name": "resultComponents",
+        "type": "list",
+        "help_text": "Components avaliable after research"},
+
+    {
+        "name": "msgName",
+        "type": "message",
+        "help_text": "Message in Intelligence screen for tech; must be zero for minor techs "},
+    {
+        "name": "iconID",
+        "type": "pie",
+        "help_text": "Right research icon."},
+    {
+        "name": "resultFunctions",
+        "type": "list",
+        "help_text": "Functions that appear after research"},
+    {
+        "name": "redStructures",
+        "type": "list",
+        "help_text": "Structure that will became unavaliable for build."},
+    {
+        "name": "statID",
+        "type": "text",
+        "help_text": ""},
+    {
+        "name": "imdName",
+        "type": "pie",
+        "help_text": " IMD to display for tech"},
+    {
+        "name": "resultStructures",
+        "type": "list",
+        "help_text": "Structure available after research"},
+    {
+        "name": "techCode",
+        "type":"choice",
+        "choices":["0", "1"],
+        "help_text": "Zero if major tech, one if minor tech. Affects whether or not 'Major research completed' is played, and whether or not it appears in Intelligence."
+    },
+    {
+        "name": "researchPoints",
+        "type": "positive_int",
+        "help_text": "time to research (14 points equal to 1 second in research facility without modules and upgrades)"
+    },
+    {
+        "name": "keyTopic",
+        "type":"choice",
+        "choices":["0", "1"],
+        "help_text": "Is it a key topic? Visual effect only."
+    },
+    {
+        "name": "researchPower",
+        "type": "buildpower"
+
+    }
+]

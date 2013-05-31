@@ -1,0 +1,39 @@
+[
+    {
+        "name":"name",
+        "type":"name"
+    },
+    {
+        "name":"buildPower",
+        "type":"buildpower"
+    },
+    {
+        "name":"buildPoints",
+        "type":"buildpoints"
+    },
+    {
+        "name":"weight",
+        "type":"weight"},
+    {
+        "name":"maxDroids",
+        "type":"positive_int",
+        "required": true
+    },
+    {
+        "name":"maxDroidsMult",
+        "type":"positive_int",
+        "required": true
+
+    },
+    {
+        "name":"turret",
+        "type":"text",
+        "default": ""
+
+    },
+    {
+        "name":"designable",
+        "type":"designable"
+        }
+]
+

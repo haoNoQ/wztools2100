@@ -1,0 +1,10 @@
+[
+    {
+        "name":"propulsionType",
+        "type":"text"
+    },
+    {
+        "name":"speedFactor",
+        "type":"text"
+    }
+]

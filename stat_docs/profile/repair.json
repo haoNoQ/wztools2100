@@ -1,0 +1,53 @@
+[
+    {
+        "name":"name",
+        "type":"name"
+    },
+    {
+        "name":"designable",
+        "type":"designable"
+    },
+    {
+        "name":"weight",
+        "type":"weight"
+    },
+    {
+        "name":"buildPoints",
+        "type":"buildpoints"
+    },
+    {
+        "name":"repairArmour",
+        "type":"boolean",
+        "required": true
+    },
+    {
+        "name":"location",
+        "type":"choice",
+        "choices":["DEFAULT", "TURRET"],
+        "required": true
+    },
+    {
+        "name":"time",
+        "type":"positive_int",
+        "min":1
+    },
+    {
+        "name":"buildPower",
+        "type":"buildpower"
+    },
+    {
+        "name":"model",
+        "type":"pie"
+    },
+    {
+        "name":"mountModel",
+        "type":"pie"
+    },
+    {
+        "name":"repairPoints",
+        "type":"positive_int",
+        "required": true
+    }
+]
+
+

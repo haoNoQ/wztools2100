@@ -20,7 +20,11 @@ oillist = []
 # gah, i do it in one line in bash
 def unzip(wzfile, directory):
   for path in wzfile.namelist():
-    (dirname, filename) = os.path.split(path)
+    if '\\' in path:
+      clean_path = path.replace('\\', '/')
+    else:
+      clean_path = path
+    (dirname, filename) = os.path.split(clean_path)
     if dirname != "":
       dirname = os.path.join(directory, dirname)
       if not os.path.exists(dirname):
@@ -28,7 +32,7 @@ def unzip(wzfile, directory):
     else:
       dirname = directory
     if filename != "":
-      fd = open(os.path.join(directory, path), "w")
+      fd = open(os.path.join(directory, clean_path), "w")
       fd.write(wzfile.read(path))
       fd.close()
 
@@ -42,7 +46,6 @@ def findfile(filename, directory):
 def add_to_list(x, y):
   global oillist
   oillist.append(str(x) + " " + str(y))
-  
 
 # parse feature.ini, take oil resource positions, add them to the list
 def parse_feature_ini(filename):
@@ -60,6 +63,7 @@ def parse_feature_ini(filename):
       add_to_list(x, y)
   fd.close()
 
+# parse struct.ini, take oil resource positions, add them to the list
 def parse_struct_ini(filename):
   if filename == "":
     return
@@ -72,6 +76,7 @@ def parse_struct_ini(filename):
       add_to_list(x, y)
   fd.close() 
 
+# parse feat.bjo, take oil resource positions, add them to the list
 def parse_feat_bjo(filename):
   if filename == "":
     return
@@ -89,6 +94,7 @@ def parse_feat_bjo(filename):
     add_to_list(x, y) 
   fd.close()  
 
+# parse struct.bjo, take oil resource positions, add them to the list
 def parse_struct_bjo(filename):
   if filename == "":
     return

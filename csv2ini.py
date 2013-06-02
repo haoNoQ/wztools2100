@@ -614,6 +614,8 @@ def write_stats_structure_ini():
 		d = {}
 		n = l[0]
 		d["name"] = messages_strings_names_txt[n]
+		if l[1] == "DOOR":
+			l[1] = "DEFENSE"
 		d["type"] = l[1]
 		#unused = l[2]
 		d["strength"] = l[3]

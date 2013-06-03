@@ -15,6 +15,7 @@ Contents:
    brain
    construction
    ecm
+   features
    propulsion
    propulsionsounds
    propulsiontype

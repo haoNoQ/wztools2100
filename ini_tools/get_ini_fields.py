@@ -21,8 +21,8 @@ def get_ini_fields(fields, path):
     cp = WZConfigParser()
     cp.load(path)
     for section in cp.sections():
-        for key, value in  cp.items(section):
-            fields.setdefault(key, set()).add(value)
+        for key, value in cp.items(section):
+            fields.setdefault(key, []).append(value)
 
 
 if __name__ == "__main__":
@@ -36,6 +36,7 @@ if __name__ == "__main__":
             get_ini_fields(fields, file_path)
             print "collectiong data from", file_path
 
+    max_size = max(map(len,  fields.values()))
     for field, values in fields.items():
-        print field, ' '.join(sorted(values))
+        print field, "requires=%s" % (len(values) == max_size), "values:", ', '.join('"%s"' % x for x in sorted(set(values)))
 

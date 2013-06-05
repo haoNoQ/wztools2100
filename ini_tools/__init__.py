@@ -1,1 +1,1 @@
-__author__ = 'sa'
+from config_parser import WZConfigParser

@@ -15,7 +15,7 @@ python get_ini_fields.py body.ini "C:/games/warzone2100"
 import os
 import sys
 from config_parser import WZConfigParser
-
+import argparse
 
 def get_ini_fields(fields, path):
     cp = WZConfigParser()
@@ -26,8 +26,14 @@ def get_ini_fields(fields, path):
 
 
 if __name__ == "__main__":
-    name = sys.argv[1]
-    path = sys.argv[2]
+    parser = argparse.ArgumentParser(description="Usage: %prog [options] filename")
+    parser.add_argument('name', metavar='<name>', help='name of ini file')
+    parser.add_argument('path', metavar='<path>', help='path to unpacked folders. Find files in all subfolders')
+    args =  parser.parse_args()
+
+
+    name = args.name
+    path = args.path
     fields = {}
 
     for base, dirs, files in os.walk(path):
@@ -37,6 +43,9 @@ if __name__ == "__main__":
             print "collectiong data from", file_path
 
     max_size = max(map(len,  fields.values()))
-    for field, values in fields.items():
+
+    items = fields.items()
+    items.sort(key=lambda x: x[0])
+    for field, values in items:
         print field, "requires=%s" % (len(values) == max_size), "values:", ', '.join('"%s"' % x for x in sorted(set(values)))
 

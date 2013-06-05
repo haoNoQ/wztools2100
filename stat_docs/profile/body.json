@@ -6,7 +6,7 @@
     {
         "name":"size",
         "type":"choice",
-        "choices":["HEAVY", "LIGHT", "MEDIUM"],
+        "choices":["LIGHT", "MEDIUM", "HEAVY", "SUPER HEAVY"],
         "help_text": "Size of the body"
     },
     {
@@ -34,7 +34,8 @@
     },{
         "name":"weaponSlots",
         "type":"choice",
-        "choices":["1", "2"]
+        "choices":["1", "2"],
+        "required": true
     },
     {
         "name":"powerOutput",

@@ -158,7 +158,17 @@
         "choices": null, 
         "max_length": 32, 
         "help_text": "???"
-    }
+    },
+    "location": {
+        "choices":["DEFAULT", "TURRET"],
+        "required":true,
+        "min": null,
+        "default": null,
+        "max": null,
+        "max_length": 32,
+        "help_text": "???"
+}
+
 
 
 }

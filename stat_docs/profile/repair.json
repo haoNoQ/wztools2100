@@ -22,9 +22,8 @@
     },
     {
         "name":"location",
-        "type":"choice",
-        "choices":["DEFAULT", "TURRET"],
-        "required": true
+        "type":"location"
+
     },
     {
         "name":"time",

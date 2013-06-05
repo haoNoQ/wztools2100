@@ -1,18 +1,22 @@
 [
     {
         "name":"HARD",
-        "type":"positive_int"
+        "type":"positive_int",
+        "required": true
     },
     {
         "name":"MEDIUM",
-        "type":"positive_int"
+        "type":"positive_int",
+        "required": true
     },
     {
         "name":"SOFT",
-        "type":"positive_int"
+        "type":"positive_int",
+        "required": true
     },
     {
         "name":"BUNKER",
-        "type":"positive_int"
+        "type":"positive_int",
+        "required": true
     }
 ]

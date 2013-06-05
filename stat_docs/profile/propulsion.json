@@ -60,7 +60,7 @@
         "type":"pie"
     },
     {
-        "name":"hitpoints",
+        "name":"bodyPoints",
         "type":"hitpoints"
     },
     {

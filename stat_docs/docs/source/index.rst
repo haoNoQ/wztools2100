@@ -22,6 +22,7 @@ Contents:
    repair
    research
    sensor
+   structure
    structuremodifier
    terraintable
    weaponmodifier

@@ -48,11 +48,20 @@
     {
         "help_text": "YES = fire on move without accuracy penalties; NO = impossible to fire on move",
         "type": "boolean",
-        "name": "fireOnMove"
+        "name": "fireOnMove",
+        "required": false
     },
     {
+        "help_text": "Flags",
+        "required": false,
+        "type": "choice",
+        "choices": ["AirOnly", "ShootAir"],
+        "name": "flags"
+    },
+
+    {
         "help_text": "Pause between shots (1/10 seconds).",
-        "required": true,
+        "required": false,
         "type": "time",
         "name": "firePause"
     },
@@ -73,24 +82,7 @@
         "type": "pie",
         "name": "hitGfx"
     },
-    {
-        "help_text": "Incendiary damage per second target takes while being on fire.",
-        "required": true,
-        "type": "positive_int",
-        "name": "incenDamage"
-    },
-    {
-        "help_text": "Splash radius of on-fire effect.",
-        "required": true,
-        "type": "positive_int",
-        "name": "incenRadius"
-    },
-    {
-        "help_text": "Time the target stays on fire (1/10 seconds).",
-        "required": true,
-        "type": "time",
-        "name": "incenTime"
-    },
+
     {
         "help_text": "Yes = Lights up terrain around where it hits ",
         "required": true,
@@ -99,13 +91,13 @@
     },
     {
         "help_text": "Hit chance of longRange shots.",
-        "required": true,
+        "required": false,
         "type": "positive_int",
         "name": "longHit"
     },
     {
         "help_text": "Range of weapon to use long-range accuracy (1/128 tiles).",
-        "required": true,
+        "required": false,
         "type": "range",
         "name": "longRange"
     },
@@ -125,9 +117,16 @@
         "help_text": "Min pitch of turret.",
         "type": "int"
     },
+
+    {
+        "name": "minimumDamage",
+        "required": false,
+        "help_text": "Minimum damage.",
+        "type": "positive_int"
+    },
     {
         "help_text": "Minimal range of indirect weapon.",
-        "required": true,
+        "required": false,
         "type": "positive_int",
         "name": "minRange"
     },
@@ -170,49 +169,92 @@
     },
     {
         "help_text": "Number of attack runs of vtol.",
-        "required": true,
+        "required": false,
         "type": "positive_int",
         "name": "numAttackRuns"
     },
     {
         "help_text": "If numExplosions is higher than 1, the projectile will scatter several explosion effects around the target on hit.",
-        "required": true,
+        "required": false,
         "type": "positive_int",
         "name": "numExplosions"
     },
     {
         "help_text": "The number of rounds of a salvo weapon. (Ripple, angel etc). 0 = not a salvo weapon",
-        "required": true,
+        "required": false,
         "type": "positive_int",
         "name": "numRounds"
     },
+
+    {
+        "help_text": "???",
+        "required": false,
+        "type": "positive_int",
+        "name": "periodicalDamage"
+    },
+
+    {
+        "help_text": "???",
+        "required": false,
+        "type": "positive_int",
+        "name": "periodicalDamageRadius"
+    },
+
+    {
+        "help_text": "???",
+        "required": false,
+        "type": "choice",
+        "choices": ["HEAT"],
+        "name": "periodicalDamageWeaponClass"
+    },
+    {
+        "help_text": "???",
+        "required": false,
+        "type": "choice",
+        "choices": ["FLAMER"],
+        "name": "periodicalDamageWeaponEffect"
+    },
+    {
+        "help_text": "???",
+        "required": false,
+        "type": "choice",
+        "choices": ["BOMB", "HOWITZERS", "MORTARS"],
+        "name": "periodicalDamageWeaponSubClass"
+    },
+
+    {
+        "help_text": "???",
+        "required": false,
+        "type": "positive_int",
+        "name": "periodicalDamageTime"
+    },
     {
         "help_text": "",
-        "required": true,
+        "required": false,
         "type": "boolean",
         "name": "penetrate"
     },
     {
         "help_text": "The splash radius of weapon.",
-        "required": true,
+        "required": false,
         "type": "positive_int",
         "name": "radius"
     },
     {
         "help_text": "Splash damage.",
-        "required": true,
+        "required": false,
         "type": "positive_int",
         "name": "radiusDamage"
     },
     {
         "help_text": "Chance to do splash damage.",
-        "required": true,
+        "required": false,
         "type": "positive_int",
         "name": "radiusHit"
     },
     {
         "help_text": "Splash's time to live after impact (flame weapon)",
-        "required": true,
+        "required": false,
         "type": "positive_int",
         "name": "radiusLife"
     },
@@ -224,7 +266,7 @@
     },
     {
         "help_text": "Time required to fully reload a salvo weapon. For non-salvo weapons, see firePause.",
-        "required": true,
+        "required": false,
         "type": "time",
         "name": "reloadTime"
     },
@@ -234,17 +276,7 @@
         "type": "positive_int",
         "name": "rotate"
     },
-    {
-        "help_text": "0 = ground only; 1 = air only; 100 = both ",
-        "required": true,
-        "type": "choice",
-        "name": "surfaceToAir",
-        "choices": [
-            "1",
-            "0",
-            "100"
-        ]
-    },
+
     {
         "help_text": "Weapon trail pie model during flight.",
         "type": "pie",
@@ -285,10 +317,11 @@
         "type": "choice",
         "name": "weaponSubClass",
         "choices": [
+            "SLOW ROCKET",
             "COMMAND",
             "ROCKET",
             "CANNON",
-            "ENERGY",
+            "A-A GUN",
             "GAUSS",
             "MISSILE",
             "BOMB",
@@ -299,7 +332,7 @@
             "MORTARS",
             "HOWITZERS",
             "ELECTRONIC",
-            "A-A GUN"
+            "ENERGY"
         ]
     },
     {

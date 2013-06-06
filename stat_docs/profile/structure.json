@@ -1,0 +1,121 @@
+[
+    {
+        "name": "armour",
+        "type": "positive_int",
+        "requiree": true,
+        "help_text": "kinecic and heat armor of structure"
+    },
+    {
+        "name": "baseModel",
+        "type": "pie",
+        "help_text": "The base pie/texture below the structure."
+    },
+    {
+        "name": "baseWidth",
+        "type": "width"
+    },
+    {
+        "name": "baseBreadth",
+        "type": "breadth"
+    },
+    {
+        "name": "bodyPoints",
+        "type": "hitpoints"
+
+    },
+    {
+        "name": "buildPoints",
+        "type": "buildpoints"
+
+    },
+    {
+        "name": "buildPower",
+        "type": "buildpower"
+    },
+    {
+        "name": "ecmID",
+        "type": "key",
+        "requiree": false,
+        "help_text": "ID of ECM turret (used for ECM tower)"
+    },
+    {
+        "name": "height",
+        "type": "height",
+        "help_text": "The height of the structure. Affects whether or not it can fire over walls."
+
+    },
+    {
+        "name": "name",
+        "type": "name"
+
+    },
+
+    {
+        "name": "powerPoints",
+        "type": "positive_int",
+        "requiree": false,
+        "help_text": "?????"
+    },
+    {
+        "name": "productionPoints",
+        "type": "positive_int",
+        "requiree": false,
+        "help_text": "????"
+    },
+    {
+        "name": "rearmPoints",
+        "type": "positive_int",
+        "requiree": false,
+        "help_text": "????"
+    },
+    {
+        "name": "repairPoints",
+        "type": "positive_int",
+        "requiree": false,
+        "help_text": "????"
+    },
+    {
+        "name": "researchPoints",
+        "type": "positive_int",
+        "requiree": false,
+        "help_text": "????"
+    },
+    {
+        "name": "resistance",
+        "type": "positive_int",
+        "requiree": false,
+        "help_text": "Resistance points to NEXUS convert/capture weapons."
+    },
+    {
+        "name": "sensorID",
+        "type": "key",
+        "requiree": false,
+        "help_text": "ID of sensor component. Affects visibility range; can be sensor turret."
+    },
+    {
+        "name": "strength",
+        "type": "choice",
+        "choices": ["HARD", "BUNKER", "MEDIUM", "SOFT"],
+        "requiree": true,
+        "help_text": "Armor type of the structure;  Controls which weapon types it's effective against."
+    },
+    {
+        "name": "structureModel",
+        "type": "pie",
+        "requiree": true,
+        "help_text": "<comma-separated string list> The pie models names used by this structure."
+    },
+    {
+        "name": "type",
+        "type": "choice",
+        "choices": ["CYBORG FACTORY", "DEMOLISH", "SAT UPLINK", "RESOURCE EXTRACTOR", "RESEARCH MODULE", "POWER MODULE", "WALL", "REPAIR FACILITY", "CORNER WALL", "HQ", "FACTORY", "COMMAND RELAY", "GENERIC", "DEFENSE", "REARM PAD", "VTOL FACTORY", "GATE", "MISSILE SILO", "RESEARCH", "FACTORY MODULE", "POWER GENERATOR"],
+        "requiree": true,
+        "help_text": "Type of the structure"
+    },
+    {
+        "name": "weapons",
+        "type": "text",
+        "help_text": "<comma-separated string list> list of weapons attached to structure"
+    }
+]
+

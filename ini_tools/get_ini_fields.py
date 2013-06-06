@@ -13,7 +13,6 @@ python get_ini_fields.py body.ini "C:/games/warzone2100"
 """
 
 import os
-import sys
 from config_parser import WZConfigParser
 import argparse
 
@@ -25,11 +24,23 @@ def get_ini_fields(fields, path):
             fields.setdefault(key, []).append(value)
 
 
+
+def values_to_string(values):
+    values = list(set(values))
+    if values:
+        if values[0].isdigit():
+            values.sort(key=lambda x: int(x))
+        else:
+            values = ['"%s"' % val.strip('''"'"''') for val in values]
+
+    return ", ".join(values)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Usage: %prog [options] filename")
     parser.add_argument('name', metavar='<name>', help='name of ini file')
     parser.add_argument('path', metavar='<path>', help='path to unpacked folders. Find files in all subfolders')
-    args =  parser.parse_args()
+    args = parser.parse_args()
 
 
     name = args.name
@@ -47,5 +58,5 @@ if __name__ == "__main__":
     items = fields.items()
     items.sort(key=lambda x: x[0])
     for field, values in items:
-        print field, "requires=%s" % (len(values) == max_size), "values:", ', '.join('"%s"' % x for x in sorted(set(values)))
+        print field, "requires=%s" % (len(values) == max_size), "values:", values_to_string(values)
 

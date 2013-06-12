@@ -40,7 +40,7 @@
     {
         "name":"powerOutput",
         "type":"int",
-        "help_text": "Engenie power, affects droid speed",
+        "help_text": "Engine power, affects droid speed",
         "required": true
     },
     {

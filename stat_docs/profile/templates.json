@@ -1,0 +1,57 @@
+[
+    {
+        "name": "available",
+        "type": "positive_int",
+        "help_text": "???"
+    },
+    {
+        "name": "compBody",
+        "type": "key",
+        "reference": "body"
+
+    },
+    {
+        "name": "compBrain",
+        "type": "key",
+        "reference": "brain",
+        "required": true
+    },
+    {
+        "name": "compConstruct",
+        "type": "key",
+        "required": true,
+        "reference": "construction"
+    },
+    {
+        "name": "compPropulsion",
+        "type": "key",
+        "required": true,
+        "reference": "propulsion"
+    }
+    ,
+    {
+        "name": "compRepair",
+        "type": "key",
+        "required": true,
+        "reference": "repair"
+    },
+    {
+        "name": "compSensor",
+        "type": "key",
+        "reference": "sensor",
+        "required": true
+    },
+    {
+        "name": "type",
+        "type": "choice",
+        "choices": ["DROID", "CYBORG_SUPER", "CYBORG_REPAIR", "CYBORG", "PERSON", "TRANSPORTER", "CYBORG_CONSTRUCT", "SUPERTRANSPORTER"],
+        "required": true,
+        "help_text": "???"
+    },
+    {
+        "name": "weapons",
+        "type": "key_list",
+        "reference": "weapons"
+    }
+
+]

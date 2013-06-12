@@ -20,7 +20,7 @@
     {
         "name": "resultComponents",
         "type": "list",
-        "help_text": "Components avaliable after research"},
+        "help_text": "Components available after research"},
 
     {
         "name": "msgName",
@@ -37,7 +37,7 @@
     {
         "name": "redStructures",
         "type": "list",
-        "help_text": "Structure that will became unavaliable for build."},
+        "help_text": "Structure that will became unavailable for build."},
     {
         "name": "statID",
         "type": "text",

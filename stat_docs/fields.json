@@ -81,7 +81,7 @@
         "max": 65535,
         "required": false,
         "choices": null,
-        "help_text": "The build points affects time to build. Buildtime = buildpoints/factory buildpoints per second."
+        "help_text": "The build points affects time to build. Build time = buildpoints/factory buildpoints per second."
     },
     "choice": {
         "min": null,
@@ -115,8 +115,19 @@
         "required": false,
         "choices": null,
         "max_length": 32,
-        "help_text": "???"
+        "help_text": "Key"
     },
+
+    "key_list": {
+        "min": null,
+        "default": 0,
+        "max": null,
+        "required": false,
+        "choices": null,
+        "max_length": 32,
+        "help_text": "Coma separated key list"
+    },
+
     "boolean": {
         "min": null,
         "default": 1,
@@ -182,7 +193,7 @@
         "max": 65535,
         "required": true,
         "choices": null,
-        "help_text": "Heigth."
+        "help_text": "Height."
     },
     "width": {
         "group": "position",

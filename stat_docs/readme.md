@@ -24,7 +24,7 @@ Editing
 
   - To edit sections fields edit profile/*.json
   - To edit type (contains general values) edit
-  - Then adding removing sections update docs/source/index.rst manualy
+  - Then adding removing sections update docs/source/index.rst manually
 
 
 Info

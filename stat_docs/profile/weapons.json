@@ -253,7 +253,7 @@
         "name": "radiusHit"
     },
     {
-        "help_text": "Splash's time to live after impact (flame weapon)",
+        "help_text": "Splash time to live after impact (flame weapon)",
         "required": false,
         "type": "positive_int",
         "name": "radiusLife"

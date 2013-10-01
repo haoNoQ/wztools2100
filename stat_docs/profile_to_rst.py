@@ -3,8 +3,6 @@ import os
 from glob import glob
 
 
-
-
 def _render(name, help_text, required, max_value, min_value, default, choices):
     res = ['- **%s.**' % name,
            '  %s\n' % help_text]
@@ -21,18 +19,34 @@ def _render(name, help_text, required, max_value, min_value, default, choices):
 
 
 def render(field):
-    return _render(field['name'], field['help_text'], field['required'], field['max'], field['min'], field['default'], field['choices'])
+    return _render(field['name'],
+                   field['help_text'],
+                   field['required'],
+                   field['max'],
+                   field['min'],
+                   field['default'],
+                   field['choices'])
 
 
 def render_key(field):
     help_text = "Key form :doc:`%s`" % field['reference']
-    return _render(field['name'], help_text, field['required'], field['max'], field['min'], field['default'], field['choices'])
+    return _render(field['name'],
+                   help_text,
+                   field['required'],
+                   field['max'],
+                   field['min'],
+                   field['default'],
+                   field['choices'])
 
 
 def render_key_list(field):
     help_text = "Coma separated keys rom :doc:`%s`" % field['reference']
-    return _render(field['name'], help_text, field['required'], field['max'], field['min'], field['default'], field['choices'])
-
+    return _render(field['name'],
+                   help_text, field['required'],
+                   field['max'],
+                   field['min'],
+                   field['default'],
+                   field['choices'])
 
 renders = {
     'key': render_key,
@@ -57,9 +71,6 @@ def collect_group(name, profile_fields):
         else:
             render_function = renders['default']
         res.extend(render_function(field))
-
-
-
     return res
 
 
@@ -88,19 +99,14 @@ def profile_to_rst(name):
     # all other groups
     for key, val in profiles.items():
         res.extend(collect_group(key, val))
-
-
-
     return "\n".join(res)
 
 
 if __name__ == '__main__':
     dirs = glob('profile/*.json')
-
     for x in dirs:
         res = profile_to_rst(x)
         name = os.path.basename(x.replace('json', 'rst'))
-        #print name
         with open('docs/source/%s' % name, 'w') as f:
             f.write(res)
 

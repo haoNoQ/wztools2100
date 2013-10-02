@@ -2,7 +2,7 @@
     "designable": {
         "group": "stats",
         "min": null,
-        "default": 1,
+        "default": 0,
         "max": null,
         "required": false,
         "choices": [
@@ -151,7 +151,6 @@
     "ogg": {
         "group": "audio",
         "min": null,
-        "default": null,
         "max": null,
         "required": false,
         "choices": null,
@@ -163,7 +162,7 @@
         "min": 0,
         "default": 0,
         "max": 65535,
-        "required": true,
+        "required": false,
         "choices": null,
         "help_text": "Hit points."
     },

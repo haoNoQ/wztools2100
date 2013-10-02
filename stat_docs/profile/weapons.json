@@ -15,7 +15,7 @@
     },
     {
         "help_text": "Weapon damage.",
-        "required": true,
+        "default": 0,
         "type": "positive_int",
         "name": "damage"
     },
@@ -81,7 +81,7 @@
     },
     {
         "help_text": "Yes = Lights up terrain around where it hits ",
-        "default": false,
+        "default": 0,
         "type": "boolean",
         "name": "lightWorld"
     },
@@ -99,7 +99,7 @@
         "name": "maxElevation",
         "min": 0,
         "max": 90,
-        "required": true,
+        "default": 0,
         "help_text": "Max pitch of turret. Range: [0,90] ",
         "type": "int"
     },
@@ -107,7 +107,7 @@
         "name": "minElevation",
         "min": -90,
         "max": 0,
-        "required": true,
+        "default": 0,
         "help_text": "Min pitch of turret.",
         "type": "int"
     },
@@ -214,6 +214,7 @@
     {
         "help_text": "",
         "type": "boolean",
+        "default": 0,
         "name": "penetrate"
     },
     {
@@ -238,7 +239,7 @@
     },
     {
         "help_text": "Recoil value of turret.",
-        "required": true,
+        "default": 0,
         "type": "positive_int",
         "name": "recoilValue"
     },
@@ -249,7 +250,7 @@
     },
     {
         "help_text": "Turret rotation limits of weapon.",
-        "required": true,
+        "default": 0,
         "type": "positive_int",
         "name": "rotate"
     },

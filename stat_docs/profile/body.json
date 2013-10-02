@@ -41,17 +41,17 @@
         "name":"powerOutput",
         "type":"int",
         "help_text": "Engine power, affects droid speed",
-        "required": true
+        "default": 0
     },
     {
         "name":"armourKinetic",
         "type":"positive_int",
-        "required": true
+        "default": 0
     },
     {
         "name":"armourHeat",
         "type":"positive_int",
-        "required": true
+        "default": 0
     },
     {
         "name":"class",

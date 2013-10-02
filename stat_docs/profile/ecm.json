@@ -12,13 +12,6 @@
         "type":"designable"
     },
     {
-        "name":"power",
-        "type":"positive_int",
-        "help_text": "???",
-        "required":true
-
-    },
-    {
         "name":"weight",
         "type":"weight"
     },

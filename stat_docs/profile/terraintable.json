@@ -1,10 +1,5 @@
 [
     {
-        "name":"propulsionType",
-        "type":"text",
-        "required":true
-    },
-    {
         "name":"speedFactor",
         "type":"text",
         "required":true

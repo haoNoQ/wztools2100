@@ -67,7 +67,6 @@
     "pie": {
         "group": "models",
         "min": null,
-        "default": null,
         "max": null,
         "required": false,
         "choices": null,

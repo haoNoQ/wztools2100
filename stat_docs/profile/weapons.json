@@ -1,6 +1,6 @@
 [
     {
-        "name": "bodyPoints",
+        "name": "body",
         "type": "hitpoints"
 
     },
@@ -48,12 +48,10 @@
     {
         "help_text": "YES = fire on move without accuracy penalties; NO = impossible to fire on move",
         "type": "boolean",
-        "name": "fireOnMove",
-        "required": false
+        "name": "fireOnMove"
     },
     {
         "help_text": "Flags",
-        "required": false,
         "type": "choice",
         "choices": ["AirOnly", "ShootAir"],
         "name": "flags"
@@ -61,7 +59,6 @@
 
     {
         "help_text": "Pause between shots (1/10 seconds).",
-        "required": false,
         "type": "time",
         "name": "firePause"
     },
@@ -82,22 +79,19 @@
         "type": "pie",
         "name": "hitGfx"
     },
-
     {
         "help_text": "Yes = Lights up terrain around where it hits ",
-        "required": true,
+        "default": false,
         "type": "boolean",
         "name": "lightWorld"
     },
     {
         "help_text": "Hit chance of longRange shots.",
-        "required": false,
         "type": "positive_int",
         "name": "longHit"
     },
     {
         "help_text": "Range of weapon to use long-range accuracy (1/128 tiles).",
-        "required": false,
         "type": "range",
         "name": "longRange"
     },
@@ -120,13 +114,11 @@
 
     {
         "name": "minimumDamage",
-        "required": false,
         "help_text": "Minimum damage.",
         "type": "positive_int"
     },
     {
         "help_text": "Minimal range of indirect weapon.",
-        "required": false,
         "type": "positive_int",
         "name": "minRange"
     },
@@ -169,54 +161,46 @@
     },
     {
         "help_text": "Number of attack runs of vtol.",
-        "required": false,
         "type": "positive_int",
         "name": "numAttackRuns"
     },
     {
         "help_text": "If numExplosions is higher than 1, the projectile will scatter several explosion effects around the target on hit.",
-        "required": false,
         "type": "positive_int",
         "name": "numExplosions"
     },
     {
         "help_text": "The number of rounds of a salvo weapon. (Ripple, angel etc). 0 = not a salvo weapon",
-        "required": false,
         "type": "positive_int",
         "name": "numRounds"
     },
 
     {
         "help_text": "???",
-        "required": false,
         "type": "positive_int",
         "name": "periodicalDamage"
     },
 
     {
         "help_text": "???",
-        "required": false,
         "type": "positive_int",
         "name": "periodicalDamageRadius"
     },
 
     {
         "help_text": "???",
-        "required": false,
         "type": "choice",
         "choices": ["HEAT"],
         "name": "periodicalDamageWeaponClass"
     },
     {
         "help_text": "???",
-        "required": false,
         "type": "choice",
         "choices": ["FLAMER"],
         "name": "periodicalDamageWeaponEffect"
     },
     {
         "help_text": "???",
-        "required": false,
         "type": "choice",
         "choices": ["BOMB", "HOWITZERS", "MORTARS"],
         "name": "periodicalDamageWeaponSubClass"
@@ -224,37 +208,31 @@
 
     {
         "help_text": "???",
-        "required": false,
         "type": "positive_int",
         "name": "periodicalDamageTime"
     },
     {
         "help_text": "",
-        "required": false,
         "type": "boolean",
         "name": "penetrate"
     },
     {
         "help_text": "The splash radius of weapon.",
-        "required": false,
         "type": "positive_int",
         "name": "radius"
     },
     {
         "help_text": "Splash damage.",
-        "required": false,
         "type": "positive_int",
         "name": "radiusDamage"
     },
     {
         "help_text": "Chance to do splash damage.",
-        "required": false,
         "type": "positive_int",
         "name": "radiusHit"
     },
     {
         "help_text": "Splash time to live after impact (flame weapon)",
-        "required": false,
         "type": "positive_int",
         "name": "radiusLife"
     },
@@ -266,7 +244,6 @@
     },
     {
         "help_text": "Time required to fully reload a salvo weapon. For non-salvo weapons, see firePause.",
-        "required": false,
         "type": "time",
         "name": "reloadTime"
     },

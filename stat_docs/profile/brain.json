@@ -17,12 +17,12 @@
     {
         "name":"maxDroids",
         "type":"positive_int",
-        "required": true
+        "default": 0
     },
     {
         "name":"maxDroidsMult",
         "type":"positive_int",
-        "required": true
+        "default": 0
 
     },
     {

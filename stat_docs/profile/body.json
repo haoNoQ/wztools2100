@@ -17,7 +17,6 @@
         "name":"buildPoints",
         "type":"buildpoints"
     },
-
     {
         "name":"weight",
         "type":"weight"
@@ -31,7 +30,8 @@
         "name":"model",
         "type":"pie",
         "help_text": "Pie model of body."
-    },{
+    },
+    {
         "name":"weaponSlots",
         "type":"choice",
         "choices":["1", "2"],

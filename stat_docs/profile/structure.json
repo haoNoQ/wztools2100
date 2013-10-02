@@ -35,7 +35,6 @@
     {
         "name": "ecmID",
         "type": "key",
-        "required": false,
         "reference": "ecm"
     },
     {
@@ -49,52 +48,44 @@
         "type": "name"
 
     },
-
     {
         "name": "powerPoints",
         "type": "positive_int",
-        "required": false,
         "group": "stats",
         "help_text": "Power output (for Power Generators)"
     },
     {
         "name": "productionPoints",
         "type": "positive_int",
-        "required": false,
         "group": "stats",
         "help_text": "Production of units (for Factories)"
     },
     {
         "name": "rearmPoints",
         "type": "positive_int",
-        "required": false,
         "group": "stats",
         "help_text": "Rearm speed for rearm pads"
     },
     {
         "name": "repairPoints",
         "type": "positive_int",
-        "required": false,
         "group": "stats",
         "help_text": "Repair speed"
     },
     {
         "name": "researchPoints",
         "type": "positive_int",
-        "required": false,
         "group": "stats",
         "help_text": "Research speed"
     },
     {
         "name": "resistance",
         "type": "positive_int",
-        "required": false,
         "help_text": "Resistance points to NEXUS convert/capture weapons."
     },
     {
         "name": "sensorID",
         "type": "key",
-        "required": false,
         "reference": "sensor"
 
     },

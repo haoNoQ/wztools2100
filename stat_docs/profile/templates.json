@@ -13,33 +13,27 @@
     {
         "name": "compBrain",
         "type": "key",
-        "reference": "brain",
-        "required": true
+        "reference": "brain"
     },
     {
         "name": "compConstruct",
         "type": "key",
-        "required": true,
         "reference": "construction"
     },
     {
         "name": "compPropulsion",
         "type": "key",
-        "required": true,
         "reference": "propulsion"
-    }
-    ,
+    },
     {
         "name": "compRepair",
         "type": "key",
-        "required": true,
         "reference": "repair"
     },
     {
         "name": "compSensor",
         "type": "key",
-        "reference": "sensor",
-        "required": true
+        "reference": "sensor"
     },
     {
         "name": "type",

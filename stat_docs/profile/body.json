@@ -65,6 +65,7 @@
     {
         "name":"droidType",
         "type":"choice",
-        "choices":["DROID", "CYBORG", "CYBORG_SUPER", "CYBORG_REPAIR", "PERSON", "TRANSPORTER", "CYBORG_CONSTRUCT"]
+        "choices":["DROID", "CYBORG", "CYBORG_SUPER", "CYBORG_REPAIR", "PERSON", "TRANSPORTER", "CYBORG_CONSTRUCT"],
+        "default": "DROID"
     }
 ]

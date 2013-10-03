@@ -11,7 +11,7 @@
         ],
         "max_length": 32,
         "help_text": "Whether appears in design screen.",
-        "convert_to": "bool"
+        "convert_to": "boolean"
     },
     "name": {
         "min": null,
@@ -158,7 +158,7 @@
         ],
         "max_length": 32,
         "help_text": "Choose yes or no.",
-        "convert_to": "bool"
+        "convert_to": "boolean"
 
     },
     "buildpower": {

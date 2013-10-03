@@ -4,7 +4,7 @@
         "type":"name"
     },
     {
-        "name":"body",
+        "name":"hitpoints",
         "type":"hitpoints"
     },
     {

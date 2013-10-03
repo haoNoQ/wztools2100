@@ -8,7 +8,6 @@
         "name": "compBody",
         "type": "key",
         "reference": "body"
-
     },
     {
         "name": "compBrain",

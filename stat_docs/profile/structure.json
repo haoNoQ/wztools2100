@@ -19,7 +19,7 @@
         "type": "breadth"
     },
     {
-        "name": "bodyPoints",
+        "name": "hitpoints",
         "type": "hitpoints",
         "default": 1
     },

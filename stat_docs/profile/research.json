@@ -31,7 +31,7 @@
 
     {
         "name": "msgName",
-        "type": "message",
+        "type": "text",
         "help_text": "Message in Intelligence screen for tech; must be zero for minor techs "},
     {
         "name": "iconID",

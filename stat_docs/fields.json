@@ -10,7 +10,8 @@
             "0"
         ],
         "max_length": 32,
-        "help_text": "Whether appears in design screen."
+        "help_text": "Whether appears in design screen.",
+        "convert_to": "bool"
     },
     "name": {
         "min": null,
@@ -19,7 +20,9 @@
         "required": false,
         "choices": null,
         "max_length": 32,
-        "help_text": "Verbose model name."
+        "help_text": "Verbose model name.",
+        "convert_to": "str"
+
     },
     "weight": {
         "group": "stats",
@@ -28,7 +31,8 @@
         "max": 65535,
         "required": false,
         "choices": null,
-        "help_text": "Weight of weapon; may affect droid speed."
+        "help_text": "Weight of weapon; may affect droid speed.",
+        "convert_to": "int"
     },
     "int": {
         "min": 0,
@@ -36,7 +40,9 @@
         "max": 65535,
         "required": false,
         "choices": null,
-        "help_text": "???"
+        "help_text": "???",
+        "convert_to": "int"
+
     },
     "text": {
         "min": null,
@@ -45,7 +51,8 @@
         "required": false,
         "choices": null,
         "max_length": 32,
-        "help_text": "???"
+        "help_text": "???",
+        "convert_to": "str"
     },
     "time": {
         "min": 0,
@@ -53,7 +60,8 @@
         "max": 65535,
         "required": false,
         "choices": null,
-        "help_text": "Time in 1/10 seconds."
+        "help_text": "Time in 1/10 seconds.",
+        "convert_to": "int"
     },
     "list": {
         "min": null,
@@ -62,7 +70,8 @@
         "required": false,
         "choices": null,
         "max_length": 32,
-        "help_text": "???"
+        "help_text": "???",
+        "convert_to": "string_list"
     },
     "pie": {
         "group": "models",
@@ -71,7 +80,8 @@
         "required": false,
         "choices": null,
         "max_length": 32,
-        "help_text": "Pie file."
+        "help_text": "Pie file.",
+        "convert_to": "string_list"
     },
     "buildpoints": {
         "group": "stats",
@@ -80,7 +90,8 @@
         "max": 65535,
         "required": false,
         "choices": null,
-        "help_text": "The build points affects time to build. Build time = buildpoints/factory buildpoints per second."
+        "help_text": "The build points affects time to build. Build time = buildpoints/factory buildpoints per second.",
+        "convert_to": "int"
     },
     "choice": {
         "min": null,
@@ -89,7 +100,9 @@
         "required": false,
         "choices": null,
         "max_length": 32,
-        "help_text": "???"
+        "help_text": "???",
+        "convert_to": "str"
+
     },
     "range": {
         "min": 0,
@@ -97,7 +110,8 @@
         "max": 65535,
         "required": false,
         "choices": null,
-        "help_text": "Distance (1/128 tiles)."
+        "help_text": "Distance (1/128 tiles).",
+        "convert_to": "str"
     },
     "positive_int": {
         "min": 0,
@@ -105,7 +119,9 @@
         "max": 65535,
         "required": false,
         "choices": null,
-        "help_text": "Positive integer."
+        "help_text": "Positive integer.",
+        "convert_to": "int"
+
     },
     "key": {
         "min": null,
@@ -114,7 +130,9 @@
         "required": false,
         "choices": null,
         "max_length": 32,
-        "help_text": "Key"
+        "help_text": "Key",
+        "convert_to": "str"
+
     },
 
     "key_list": {
@@ -124,7 +142,9 @@
         "required": false,
         "choices": null,
         "max_length": 32,
-        "help_text": "Coma separated key list"
+        "help_text": "Coma separated key list",
+        "convert_to": "string_list"
+
     },
 
     "boolean": {
@@ -137,7 +157,9 @@
             "0"
         ],
         "max_length": 32,
-        "help_text": "Choose yes or no."
+        "help_text": "Choose yes or no.",
+        "convert_to": "bool"
+
     },
     "buildpower": {
         "group": "stats",
@@ -146,7 +168,8 @@
         "max": 65535,
         "required": false,
         "choices": null,
-        "help_text": "The price."
+        "help_text": "The price.",
+        "convert_to": "int"
     },
     "ogg": {
         "group": "audio",
@@ -155,7 +178,9 @@
         "required": false,
         "choices": null,
         "max_length": 32,
-        "help_text": "Ogg file."
+        "help_text": "Ogg file.",
+        "convert_to": "str"
+
     },
     "hitpoints": {
         "group": "stats",
@@ -164,17 +189,10 @@
         "max": 65535,
         "required": false,
         "choices": null,
-        "help_text": "Hit points."
+        "help_text": "Hit points.",
+        "convert_to": "int"
     },
-    "message": {
-        "min": null,
-        "default": 0,
-        "max": null,
-        "required": false,
-        "choices": null,
-        "max_length": 32,
-        "help_text": "???"
-    },
+
     "location": {
         "choices": ["DEFAULT", "TURRET"],
         "required": true,
@@ -182,7 +200,9 @@
         "default": null,
         "max": null,
         "max_length": 32,
-        "help_text": "???"
+        "help_text": "???",
+        "convert_to": "str"
+
     },
     "height": {
         "group": "position",
@@ -191,7 +211,8 @@
         "max": 65535,
         "required": true,
         "choices": null,
-        "help_text": "Height."
+        "help_text": "Height.",
+        "convert_to": "int"
     },
     "width": {
         "group": "position",
@@ -200,7 +221,8 @@
         "max": 100,
         "required": true,
         "choices": null,
-        "help_text": "Number of Y tiles used by this structure."
+        "help_text": "Number of Y tiles used by this structure.",
+        "convert_to": "int"
     },
     "breadth": {
         "group": "position",
@@ -209,8 +231,10 @@
         "max": 65535,
         "required": false,
         "choices": null,
-        "help_text": "Number of X tiles used by this structure."
-}
+        "help_text": "Number of X tiles used by this structure.",
+        "convert_to": "int"
+
+    }
 
 
 

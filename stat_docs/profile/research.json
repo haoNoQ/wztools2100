@@ -1,7 +1,8 @@
 [
     {
         "name": "requiredResearch",
-        "type": "list",
+        "type": "key_list",
+        "reference": "research",
         "help_text": "previous research that required."
     },
     {
@@ -10,12 +11,18 @@
         "help_text": "Left research icon."
     },
     {
-        "name": "requiredStructures", "type": "list",
+        "name": "requiredStructures",
+        "type": "key_list",
+        "reference": "structure",
         "help_text": "This structure that should be build before making research."},
 
     {
         "name": "name",
         "type": "text"
+    },
+    {
+        "name": "results",
+        "type": "list"
     },
     {
         "name": "resultComponents",
@@ -29,14 +36,12 @@
     {
         "name": "iconID",
         "type": "pie",
-        "help_text": "Right research icon."},
-    {
-        "name": "resultFunctions",
-        "type": "list",
-        "help_text": "Functions that appear after research"},
+        "help_text": "Right research icon."
+    },
     {
         "name": "redStructures",
-        "type": "list",
+        "type": "key_list",
+        "reference": "structure",
         "help_text": "Structure that will became unavailable for build."},
     {
         "name": "statID",
@@ -48,7 +53,8 @@
         "help_text": " IMD to display for tech"},
     {
         "name": "resultStructures",
-        "type": "list",
+        "type": "key_list",
+        "reference": "structure",
         "help_text": "Structure available after research"},
     {
         "name": "techCode",

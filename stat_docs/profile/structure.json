@@ -11,11 +11,11 @@
         "help_text": "The base pie/texture below the structure."
     },
     {
-        "name": "baseWidth",
+        "name": "width",
         "type": "width"
     },
     {
-        "name": "baseBreadth",
+        "name": "breadth",
         "type": "breadth"
     },
     {

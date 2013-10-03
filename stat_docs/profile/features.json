@@ -58,7 +58,7 @@
 
     },
     {
-        "name":"tiledraw",
+        "name":"tileDraw",
         "type":"positive_int"
 
     }

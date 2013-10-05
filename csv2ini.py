@@ -525,7 +525,7 @@ def write_stats_features_ini():
 		d["hitpoints"] = l[5]
 		d["model"] = l[6]
 		d["type"] = l[7]
-		d["tiledraw"] = l[8]
+		d["tileDraw"] = l[8]
 		d["lineOfSight"] = l[9]
 		d["startVisible"] = l[10]
 		write_ini_section(f, n, d)

@@ -10,6 +10,7 @@
 # KNOWN ISSUES:
 # 	body.ini:
 # 	*	please review the droidType parameter manually.
+# 	*	please review the class parameter manually.
 # 	propulsion:ini
 # 	*	please add the acceleration, deceleration and
 # 		skidDeceleration fields manually.
@@ -417,19 +418,25 @@ def write_stats_body_ini():
 		#unused = l[22]
 		d["flameModel"] = l[23]
 		d["designable"] = l[24]
+		d["class"] = "Droids"
 		if "Person" in n:
-			d["droidType"] = "BODY"
+			d["droidType"] = "PERSON"
+			d["class"] = "Babas"
 		if "Cyb" in n:
 			if "Hvy" in n:
 				d["droidType"] = "CYBORG_SUPER"
 			else:
 				d["droidType"] = "CYBORG"
+			d["class"] = "Cyborgs"
 		if "Mechanic" in d["name"]:
 			d["droidType"] = "CYBORG_REPAIR"
+			d["class"] = "Cyborgs"
 		if "Engineer" in d["name"]:
 			d["droidType"] = "CYBORG_CONSTRUCT"
+			d["class"] = "Cyborgs"
 		if "Transport" in d["name"]:
 			d["droidType"] = "TRANSPORTER"
+			d["class"] = "Transports"
 		write_ini_section(f, n, d)
 	fd.close()
 	f.close()

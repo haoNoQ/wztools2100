@@ -130,9 +130,9 @@ def load_messages_strings_names_txt():
 	strlist = remove_c_style_comments(fd)
 	fd.close()
 	if sys.hexversion >= 0x03000000:
-		trans = str.maketrans("_()\"*", "     ")
+		trans = str.maketrans("_()\"", "    ")
 	else:
-		trans = string.maketrans("_()\"*", "     ")
+		trans = string.maketrans("_()\"", "    ")
 	for line in strlist:
 		one,two = line.split(None, 1)
 		messages_strings_names_txt[one] = two.translate(trans).strip()

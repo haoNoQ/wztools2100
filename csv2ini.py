@@ -430,7 +430,6 @@ def write_stats_body_ini():
 		#unused = l[20]
 		#unused = l[21]
 		#unused = l[22]
-		d["flameModel"] = l[23]
 		d["designable"] = l[24]
 		d["class"] = "Droids"
 		if "Person" in n:
@@ -929,8 +928,12 @@ def write_stats_weapons_ini():
 		d["designable"] = l[51]
 		d["penetrate"] = l[52]
 		if n in stats_weaponsounds_txt:
-			d["weaponWav"] = stats_weaponsounds_txt[n][0]
-			d["explosionWav"] = stats_weaponsounds_txt[n][1]
+			s = stats_weaponsounds_txt[n][0].strip()
+			if s != "-1":
+				d["weaponWav"] = s
+			s = stats_weaponsounds_txt[n][1].strip()
+			if s != "-1":
+				d["explosionWav"] = s
 		if is_something(d["periodicalDamage"]):
 			d["periodicalDamageWeaponClass"] = d["weaponClass"]
 			d["periodicalDamageWeaponSubClass"] = d["weaponSubClass"]

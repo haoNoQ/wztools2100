@@ -1,7 +1,8 @@
 [
     {
         "name": "requiredResearch",
-        "type": "list",
+        "type": "key_list",
+        "reference": "research",
         "help_text": "previous research that required."
     },
     {
@@ -10,7 +11,9 @@
         "help_text": "Left research icon."
     },
     {
-        "name": "requiredStructures", "type": "list",
+        "name": "requiredStructures",
+        "type": "key_list",
+        "reference": "structure",
         "help_text": "This structure that should be build before making research."},
 
     {
@@ -18,26 +21,28 @@
         "type": "text"
     },
     {
+        "name": "results",
+        "type": "list"
+    },
+    {
         "name": "resultComponents",
         "type": "list",
-        "help_text": "Components avaliable after research"},
+        "help_text": "Components available after research"},
 
     {
         "name": "msgName",
-        "type": "message",
+        "type": "text",
         "help_text": "Message in Intelligence screen for tech; must be zero for minor techs "},
     {
         "name": "iconID",
         "type": "pie",
-        "help_text": "Right research icon."},
-    {
-        "name": "resultFunctions",
-        "type": "list",
-        "help_text": "Functions that appear after research"},
+        "help_text": "Right research icon."
+    },
     {
         "name": "redStructures",
-        "type": "list",
-        "help_text": "Structure that will became unavaliable for build."},
+        "type": "key_list",
+        "reference": "structure",
+        "help_text": "Structure that will became unavailable for build."},
     {
         "name": "statID",
         "type": "text",
@@ -48,7 +53,8 @@
         "help_text": " IMD to display for tech"},
     {
         "name": "resultStructures",
-        "type": "list",
+        "type": "key_list",
+        "reference": "structure",
         "help_text": "Structure available after research"},
     {
         "name": "techCode",

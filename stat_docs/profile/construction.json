@@ -12,7 +12,7 @@
         "type":"weight"
     },
     {
-        "name":"bodyPoints",
+        "name":"hitpoints",
         "type":"hitpoints"
     },
     {

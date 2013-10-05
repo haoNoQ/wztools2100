@@ -5,7 +5,7 @@
         "help_text":"Breadth/length of the feature (z-axis)"
     },
     {
-        "name":"pieFile",
+        "name":"model",
         "type":"pie"
 
     },
@@ -16,38 +16,41 @@
     {
         "name":"damageable",
         "type":"boolean",
-        "help_text":"Whether or not the feature is damagable, if set to 0, the 'x' cursor will appear instead of the 'attack' cursor."
+        "help_text":"Whether or not the feature is damageable, if set to 0, the 'x' cursor will appear instead of the 'attack' cursor."
+    },
+
+    {
+        "name":"lineOfSight",
+        "type":"boolean",
+        "help_text":"Line Of Sight. Whether of not units and structures can see through them and shoot at objects behind them",
+        "default": 1
+    },
+    {
+        "name":"startVisible",
+        "type":"boolean",
+        "help_text":"Whether or not the feature is visible even if you haven't explored that area of terrain yet",
+        "default": 1
     },
 
     {
         "name":"armour",
         "type":"positive_int",
-        "help_text": "Armour of the feature, similar to armour used on buildings."
-
+        "help_text": "Armour of the feature, similar to armour used on buildings.",
+        "default": 1
     },
     {
-        "name":"bodyPoints",
-        "type":"hitpoints"
-
+        "name":"hitpoints",
+        "type":"hitpoints",
+        "default": 1
     },
-    {
-        "name":"visible",
-        "type":"boolean",
-        "help_text":"Whether or not the feature is visible even if you haven't explored that area of terrain yet"
 
-    },
     {
         "name":"width",
         "type":"positive_int",
         "help_text":" Width of the feature (x-axis)"
 
     },
-    {
-        "name":"allowLOS",
-        "type":"boolean",
-        "help_text":"Line Of Sight. Whether of not units and structures can see through them and shoot at objects behind them"
 
-    },
     {
         "name":"type",
         "type":"choice",
@@ -59,5 +62,4 @@
         "type":"positive_int"
 
     }
-
 ]

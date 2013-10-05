@@ -2,8 +2,8 @@
     {
         "name": "armour",
         "type": "positive_int",
-        "requiree": true,
-        "help_text": "kinecic and heat armor of structure"
+        "required": true,
+        "help_text": "Kinetic and heat armor of structure"
     },
     {
         "name": "baseModel",
@@ -11,17 +11,17 @@
         "help_text": "The base pie/texture below the structure."
     },
     {
-        "name": "baseWidth",
+        "name": "width",
         "type": "width"
     },
     {
-        "name": "baseBreadth",
+        "name": "breadth",
         "type": "breadth"
     },
     {
-        "name": "bodyPoints",
-        "type": "hitpoints"
-
+        "name": "hitpoints",
+        "type": "hitpoints",
+        "default": 1
     },
     {
         "name": "buildPoints",
@@ -35,8 +35,7 @@
     {
         "name": "ecmID",
         "type": "key",
-        "requiree": false,
-        "help_text": "ID of ECM turret (used for ECM tower)"
+        "reference": "ecm"
     },
     {
         "name": "height",
@@ -49,73 +48,71 @@
         "type": "name"
 
     },
-
     {
         "name": "powerPoints",
         "type": "positive_int",
-        "requiree": false,
-        "help_text": "?????"
+        "group": "stats",
+        "help_text": "Power output (for Power Generators)"
     },
     {
         "name": "productionPoints",
         "type": "positive_int",
-        "requiree": false,
-        "help_text": "????"
+        "group": "stats",
+        "help_text": "Production of units (for Factories)"
     },
     {
         "name": "rearmPoints",
         "type": "positive_int",
-        "requiree": false,
-        "help_text": "????"
+        "group": "stats",
+        "help_text": "Rearm speed for rearm pads"
     },
     {
         "name": "repairPoints",
         "type": "positive_int",
-        "requiree": false,
-        "help_text": "????"
+        "group": "stats",
+        "help_text": "Repair speed"
     },
     {
         "name": "researchPoints",
         "type": "positive_int",
-        "requiree": false,
-        "help_text": "????"
+        "group": "stats",
+        "help_text": "Research speed"
     },
     {
         "name": "resistance",
         "type": "positive_int",
-        "requiree": false,
         "help_text": "Resistance points to NEXUS convert/capture weapons."
     },
     {
         "name": "sensorID",
         "type": "key",
-        "requiree": false,
-        "help_text": "ID of sensor component. Affects visibility range; can be sensor turret."
+        "reference": "sensor"
+
     },
     {
         "name": "strength",
         "type": "choice",
         "choices": ["HARD", "BUNKER", "MEDIUM", "SOFT"],
-        "requiree": true,
+        "required": true,
         "help_text": "Armor type of the structure;  Controls which weapon types it's effective against."
     },
     {
         "name": "structureModel",
         "type": "pie",
-        "requiree": true,
-        "help_text": "<comma-separated string list> The pie models names used by this structure."
+        "required": true,
+        "help_text": "Comma-separated string list. The pie models names used by this structure."
     },
     {
         "name": "type",
         "type": "choice",
         "choices": ["CYBORG FACTORY", "DEMOLISH", "SAT UPLINK", "RESOURCE EXTRACTOR", "RESEARCH MODULE", "POWER MODULE", "WALL", "REPAIR FACILITY", "CORNER WALL", "HQ", "FACTORY", "COMMAND RELAY", "GENERIC", "DEFENSE", "REARM PAD", "VTOL FACTORY", "GATE", "MISSILE SILO", "RESEARCH", "FACTORY MODULE", "POWER GENERATOR"],
-        "requiree": true,
+        "required": true,
         "help_text": "Type of the structure"
     },
     {
         "name": "weapons",
         "type": "text",
-        "help_text": "<comma-separated string list> list of weapons attached to structure"
+        "help_text": "Comma-separated string list. List of weapons attached to structure"
     }
 ]
 

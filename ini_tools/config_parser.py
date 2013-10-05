@@ -11,10 +11,9 @@ class WZConfigParser(ConfigParser):
     header = None
 
     def optionxform(self, optionstr):
-        """default emplementation makes it lowercase"""
+        """default implementation makes it lowercase"""
         return optionstr
 
-    # def pre_read(self):
     def load(self, path):
         with open(path) as f:
             lines = f.readlines()
@@ -31,7 +30,6 @@ class WZConfigParser(ConfigParser):
                     else:
                         is_header = False
                 new_lines.append(line)
-
         fp = StringIO('\n'.join(new_lines))
         self.readfp(fp)
 

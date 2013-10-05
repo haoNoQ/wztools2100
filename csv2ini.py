@@ -837,6 +837,25 @@ def write_stats_templates_ini():
 	fd.close()
 	f.close()
 
+def write_stats_terraintable_ini():
+	if not os.path.isfile("stats/terraintable.txt"):
+		return
+	print("W stats/terraintable.ini")
+	fd = open("stats/terraintable.txt", "rt")
+	f = open("stats/terraintable.ini", "wt")
+	dd = {}
+	for line in read_csv_lines(fd, False):
+		l = line.split(",")
+		n = l[0]
+		if not n in dd:
+			dd[n] = l[2].strip()
+		else:
+			dd[n] += "," + l[2].strip()
+	for (k, v) in dd.items():
+		write_ini_section(f, k, {"speedFactor": v})
+	fd.close()
+	f.close()
+
 def write_stats_weaponmodifier_ini():
 	if not os.path.isfile("stats/weaponmodifier.txt"):
 		return
@@ -974,5 +993,6 @@ if __name__ == "__main__":
 	write_stats_structure_ini()
 	write_stats_structuremodifier_ini()
 	write_stats_templates_ini()
+	write_stats_terraintable_ini()
 	write_stats_weaponmodifier_ini()
 	write_stats_weapons_ini()

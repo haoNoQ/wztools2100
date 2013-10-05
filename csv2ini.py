@@ -893,7 +893,7 @@ def write_stats_weapons_ini():
 		d["reloadTime"] = l[23]
 		d["damage"] = l[24]
 		d["radius"] = l[25]
-		d["radiusHit"] = l[26]
+		#unused = l[26]
 		d["radiusDamage"] = l[27]
 		d["periodicalDamageTime"] = l[28]
 		d["periodicalDamage"] = l[29]

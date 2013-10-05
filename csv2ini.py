@@ -938,6 +938,7 @@ def write_stats_weapons_ini():
 			d["periodicalDamageWeaponClass"] = d["weaponClass"]
 			d["periodicalDamageWeaponSubClass"] = d["weaponSubClass"]
 			d["periodicalDamageWeaponEffect"] = d["weaponEffect"]
+		d["minimumDamage"] = "33"
 		d["flags"] = list_to_ini_string(flags);
 		write_ini_section(f, n, d)
 	fd.close()

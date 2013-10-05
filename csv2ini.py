@@ -9,13 +9,19 @@
 
 # KNOWN ISSUES:
 # 	body.ini:
-# 		please review the droidType parameter manually.
+# 	*	please review the droidType parameter manually.
+# 	*	please review the class parameter manually.
 # 	propulsion:ini
-# 		please add the acceleration, deceleration and
+# 	*	please add the acceleration, deceleration and
 # 		skidDeceleration fields manually.
 # 	weapons.ini:
-# 		please review the three periodicalDamageWeapon parameters
+# 	*	please review the three periodicalDamageWeapon parameters
 # 		manually.
+# 	research.ini:
+# 	*	we no longer support separate upgrades for factories,
+# 		cyborg and VTOL factories; upgrade functions for cyborg
+# 		and vtol factories are ignored by this script.
+# 	*	replacedComponents are unavailable on CSV side.
 
 
 from __future__ import print_function
@@ -23,6 +29,21 @@ import os.path
 import string
 import sys
 
+##########################################################################
+# Globals for storing stats that will not be used instantly.
+
+messages_strings_names_txt = {}
+stats_assignweapons_txt = {}
+stats_functions_txt = {}
+stats_research_multiplayer_prresearch_txt = {}
+stats_research_multiplayer_redcomponents_txt = {}
+stats_research_multiplayer_redstructure_txt = {}
+stats_research_multiplayer_researchfunctions_txt = {}
+stats_research_multiplayer_resultcomponent_txt = {}
+stats_research_multiplayer_resultstructure_txt = {}
+stats_structureweapons_txt = {}
+stats_structurefunctions_txt = {}
+stats_weaponsounds_txt = {}
 
 ##########################################################################
 # Routines for reading and writing different file formats.
@@ -97,20 +118,8 @@ def remove_c_style_comments(fd):
 				break
 	return ret
 
-
 ##########################################################################
 # Stuff to pre-load: files referenced from many other files.
-
-messages_strings_names_txt = {}
-stats_assignweapons_txt = {}
-stats_functions_txt = {}
-stats_research_multiplayer_prresearch_txt = {}
-stats_research_multiplayer_redcomponents_txt = {}
-stats_research_multiplayer_redstructure_txt = {}
-stats_research_multiplayer_resultcomponent_txt = {}
-stats_research_multiplayer_resultstructure_txt = {}
-stats_structureweapons_txt = {}
-stats_structurefunctions_txt = {}
 
 def load_messages_strings_names_txt():
 	if not os.path.isfile("messages/strings/names.txt"):
@@ -121,9 +130,9 @@ def load_messages_strings_names_txt():
 	strlist = remove_c_style_comments(fd)
 	fd.close()
 	if sys.hexversion >= 0x03000000:
-		trans = str.maketrans("_()\"*", "     ")
+		trans = str.maketrans("_()\"", "    ")
 	else:
-		trans = string.maketrans("_()\"*", "     ")
+		trans = string.maketrans("_()\"", "    ")
 	for line in strlist:
 		one,two = line.split(None, 1)
 		messages_strings_names_txt[one] = two.translate(trans).strip()
@@ -155,6 +164,13 @@ def load_stats_functions_txt():
 	print("R stats/functions.txt")
 	global stats_functions_txt
 	fd = open("stats/functions.txt", "rt")
+
+	stats_upgrades = {}
+	def throw_in_upgrade(key, func, val):
+		if not key in stats_upgrades:
+			stats_upgrades[key] = []
+		stats_upgrades[key].append((func, int(val)))
+
 	for line in fd:
 		l = line.split(",")
 		g = l[0]
@@ -169,6 +185,82 @@ def load_stats_functions_txt():
 			stats_functions_txt[n] = ("repairPoints", l[2])
 		elif g == "ReArm":
 			stats_functions_txt[n] = ("rearmPoints", l[2])
+		elif g == "Research Upgrade":
+			throw_in_upgrade("ResearchPoints", n, l[2])
+		elif g == "Production Upgrade":
+			if l[2].strip() == "1":
+				throw_in_upgrade("ProductionPoints", n, l[5])
+		elif g == "Weapon Upgrade":
+			t = l[2]
+			if int(l[3]) > 0:
+				throw_in_upgrade(t + ":FirePause", n, l[3])
+			if int(l[4]) > 0:
+				throw_in_upgrade(t + ":HitChance", n, l[4])
+			if int(l[6]) > 0:
+				throw_in_upgrade(t + ":Damage", n, l[6])
+			if int(l[7]) > 0:
+				throw_in_upgrade(t + ":RadiusDamage", n, l[7])
+			if int(l[8]) > 0:
+				throw_in_upgrade(t + ":RepeatDamage", n, l[8])
+		elif g == "Structure Upgrade":
+			if int(l[3]) > 0:
+				throw_in_upgrade("Structure:HitPoints", n, l[3])
+			if int(l[2]) > 0:
+				throw_in_upgrade("Structure:Armour", n, l[2])
+			if int(l[4]) > 0:
+				throw_in_upgrade("Structure:Resistance", n, l[4])
+				throw_in_upgrade("Droids:Resistance", n, l[4])
+		elif g == "WallDefence Upgrade":
+			if int(l[2]) > 0:
+				throw_in_upgrade("Wall:Armour", n, l[2])
+			if int(l[3]) > 0:
+				throw_in_upgrade("Wall:HitPoints", n, l[3])
+		elif g == "Repair Upgrade":
+			throw_in_upgrade("RepairPoints", n, l[2])
+		elif g == "Power Upgrade":
+			throw_in_upgrade("PowerPoints", n, l[2])
+		elif g == "VehicleBody Upgrade":
+			applies = []
+			if l[6].strip() == "1":
+				applies.append("Droids")
+			if l[7].strip() == "1":
+				applies.append("Cyborgs")
+			for t in applies:
+				if int(l[2]) > 0:
+					throw_in_upgrade(t + ":Power", n, l[2])
+				if int(l[4]) > 0:
+					throw_in_upgrade(t + ":Armour", n, l[4])
+				if int(l[3]) > 0:
+					throw_in_upgrade(t + ":HitPoints", n, l[3])
+				if int(l[5]) > 0:
+					throw_in_upgrade(t + ":Thermal", n, l[5])
+		elif g == "VehicleConst Upgrade":
+			throw_in_upgrade("Construct:ConstructorPoints", n, l[2])
+		elif g == "VehicleECM Upgrade":
+			throw_in_upgrade("ECM:Range", n, l[2])
+		elif g == "VehicleSensor Upgrade":
+			throw_in_upgrade("Sensor:Range", n, l[3])
+		elif g == "ReArm Upgrade":
+			throw_in_upgrade("RearmPoints", n, l[2])
+
+	def throw_in_function(key, func, value):
+		if not func in stats_functions_txt:
+			stats_functions_txt[func] = []
+		if "FirePause" in key:
+			stats_functions_txt[func].append((key, str(-value)))
+		else:
+			stats_functions_txt[func].append((key, str(value)))
+
+	for k in stats_upgrades.keys():
+		if len(stats_upgrades[k]) == 0:
+			continue
+		lst = sorted(stats_upgrades[k], key=lambda x: x[1])
+		throw_in_function(k, lst[0][0], lst[0][1])
+		i = 1
+		while i < len(lst):
+			throw_in_function(k, lst[i][0], lst[i][1] - lst[i - 1][1])
+			i += 1
+
 	fd.close()
 
 def load_stats_research_multiplayer_prresearch_txt():
@@ -208,6 +300,19 @@ def load_stats_research_multiplayer_redstructure_txt():
 		if not l[0] in stats_research_multiplayer_redstructure_txt:
 			stats_research_multiplayer_redstructure_txt[l[0]] = []
 		stats_research_multiplayer_redstructure_txt[l[0]].append(l[1])
+	fd.close()
+
+def load_stats_research_multiplayer_researchfunctions_txt():
+	if not os.path.isfile("stats/research/multiplayer/researchfunctions.txt"):
+		return
+	print("R stats/research/multiplayer/researchfunctions.txt")
+	global stats_research_multiplayer_researchfunctions_txt
+	fd = open("stats/research/multiplayer/researchfunctions.txt")
+	for line in read_csv_lines(fd, True):
+		l = line.split(",")
+		if not l[0] in stats_research_multiplayer_researchfunctions_txt:
+			stats_research_multiplayer_researchfunctions_txt[l[0]] = []
+		stats_research_multiplayer_researchfunctions_txt[l[0]].append(l[1])
 	fd.close()
 
 def load_stats_research_multiplayer_resultcomponent_txt():
@@ -275,6 +380,20 @@ def load_stats_structureweapons_txt():
 		stats_structureweapons_txt[n] = r
 	fd.close()
 
+def load_stats_weaponsounds_txt():
+	if not os.path.isfile("stats/weaponsounds.txt"):
+		return
+	print("R stats/weaponsounds.txt")
+	global stats_weaponsounds_txt
+	fd = open("stats/weaponsounds.txt", "rt")
+	for line in read_csv_lines(fd, False):
+		l = line.split(",")
+		d = {}
+		n = l[0]
+		stats_weaponsounds_txt[n] = (l[1], l[2])
+	fd.close()
+
+
 ##########################################################################
 # Routines to write out specific ini files.
 
@@ -311,21 +430,26 @@ def write_stats_body_ini():
 		#unused = l[20]
 		#unused = l[21]
 		#unused = l[22]
-		d["flameModel"] = l[23]
 		d["designable"] = l[24]
+		d["class"] = "Droids"
 		if "Person" in n:
-			d["droidType"] = "BODY"
+			d["droidType"] = "PERSON"
+			d["class"] = "Babas"
 		if "Cyb" in n:
 			if "Hvy" in n:
 				d["droidType"] = "CYBORG_SUPER"
 			else:
 				d["droidType"] = "CYBORG"
+			d["class"] = "Cyborgs"
 		if "Mechanic" in d["name"]:
 			d["droidType"] = "CYBORG_REPAIR"
+			d["class"] = "Cyborgs"
 		if "Engineer" in d["name"]:
 			d["droidType"] = "CYBORG_CONSTRUCT"
+			d["class"] = "Cyborgs"
 		if "Transport" in d["name"]:
 			d["droidType"] = "TRANSPORTER"
+			d["class"] = "Transports"
 		write_ini_section(f, n, d)
 	fd.close()
 	f.close()
@@ -366,7 +490,7 @@ def write_stats_construction_ini():
 		d["weight"] = l[4]
 		#unused = l[5]
 		#unused = l[6]
-		d["bodyPoints"] = l[7]
+		d["hitpoints"] = l[7]
 		d["sensorModel"] = l[8]
 		d["mountModel"] = l[9]
 		d["constructPoints"] = l[10]
@@ -392,7 +516,7 @@ def write_stats_ecm_ini():
 		d["weight"] = l[4]
 		#unused = l[5]
 		#unused = l[6]
-		d["body"] = l[7]
+		d["hitpoints"] = l[7]
 		d["sensorModel"] = l[8]
 		d["mountModel"] = l[9]
 		d["location"] = l[10]
@@ -421,7 +545,7 @@ def write_stats_features_ini():
 		d["hitpoints"] = l[5]
 		d["model"] = l[6]
 		d["type"] = l[7]
-		d["tiledraw"] = l[8]
+		d["tileDraw"] = l[8]
 		d["lineOfSight"] = l[9]
 		d["startVisible"] = l[10]
 		write_ini_section(f, n, d)
@@ -542,6 +666,19 @@ def write_stats_research_ini():
 		if n in stats_research_multiplayer_resultstructure_txt:
 			p = stats_research_multiplayer_resultstructure_txt[n]
 			d["resultStructures"] = list_to_ini_string(p)
+		if n in stats_research_multiplayer_researchfunctions_txt:
+			lst = []
+			for g in stats_research_multiplayer_researchfunctions_txt[n]:
+				if g in stats_functions_txt:
+					lst += stats_functions_txt[g]
+			i = 0
+			s = ""
+			while i < len(lst):
+				if i > 0:
+					s += ", "
+				s += "\"" + lst[i][0] + ":" + lst[i][1] + "\""
+				i += 1
+			d["results"] = s
 		write_ini_section(f, n, d)
 	fd.close()
 	f.close()
@@ -590,7 +727,7 @@ def write_stats_sensor_ini():
 		d["weight"] = l[4]
 		#unused = l[5]
 		#unused = l[6]
-		d["bodyPoints"] = l[7]
+		d["hitpoints"] = l[7]
 		d["sensorModel"] = l[8]
 		d["mountModel"] = l[9]
 		d["range"] = l[10]
@@ -620,13 +757,13 @@ def write_stats_structure_ini():
 		#unused = l[2]
 		d["strength"] = l[3]
 		#unused = l[4]
-		d["baseWidth"] = l[5]
-		d["baseBreadth"] = l[6]
+		d["width"] = l[5]
+		d["breadth"] = l[6]
 		#unused = l[7]
 		d["buildPoints"] = l[8]
 		d["height"] = l[9]
 		d["armour"] = l[10]
-		d["bodyPoints"] = l[11]
+		d["hitpoints"] = l[11]
 		#unused = l[12]
 		d["buildPower"] = l[13]
 		#unused = l[14]
@@ -700,6 +837,25 @@ def write_stats_templates_ini():
 	fd.close()
 	f.close()
 
+def write_stats_terraintable_ini():
+	if not os.path.isfile("stats/terraintable.txt"):
+		return
+	print("W stats/terraintable.ini")
+	fd = open("stats/terraintable.txt", "rt")
+	f = open("stats/terraintable.ini", "wt")
+	dd = {}
+	for line in read_csv_lines(fd, False):
+		l = line.split(",")
+		n = l[0]
+		if not n in dd:
+			dd[n] = l[2].strip()
+		else:
+			dd[n] += "," + l[2].strip()
+	for (k, v) in dd.items():
+		write_ini_section(f, k, {"speedFactor": v})
+	fd.close()
+	f.close()
+
 def write_stats_weaponmodifier_ini():
 	if not os.path.isfile("stats/weaponmodifier.txt"):
 		return
@@ -737,7 +893,7 @@ def write_stats_weapons_ini():
 		d["weight"] = l[4]
 		#unused = l[5]
 		#unused = l[6]
-		d["body"] = l[7]
+		d["hitpoints"] = l[7]
 		d["model"] = l[8]
 		d["mountModel"] = l[9]
 		d["muzzleGfx"] = l[10]
@@ -756,7 +912,7 @@ def write_stats_weapons_ini():
 		d["reloadTime"] = l[23]
 		d["damage"] = l[24]
 		d["radius"] = l[25]
-		d["radiusHit"] = l[26]
+		#unused = l[26]
 		d["radiusDamage"] = l[27]
 		d["periodicalDamageTime"] = l[28]
 		d["periodicalDamage"] = l[29]
@@ -781,7 +937,7 @@ def write_stats_weapons_ini():
 		d["faceInFlight"] = yesno_to_numeric(l[44])
 		d["recoilValue"] = l[45]
 		d["minRange"] = l[46]
-		d["LightWorld"] = yesno_to_numeric(l[47])
+		d["lightWorld"] = yesno_to_numeric(l[47])
 		d["effectSize"] = l[48]
 		if int(l[49]) == 1:
 			flags.append("AirOnly")
@@ -790,61 +946,53 @@ def write_stats_weapons_ini():
 		d["numAttackRuns"] = l[50]
 		d["designable"] = l[51]
 		d["penetrate"] = l[52]
+		if n in stats_weaponsounds_txt:
+			s = stats_weaponsounds_txt[n][0].strip()
+			if s != "-1":
+				d["weaponWav"] = s
+			s = stats_weaponsounds_txt[n][1].strip()
+			if s != "-1":
+				d["explosionWav"] = s
 		if is_something(d["periodicalDamage"]):
 			d["periodicalDamageWeaponClass"] = d["weaponClass"]
 			d["periodicalDamageWeaponSubClass"] = d["weaponSubClass"]
 			d["periodicalDamageWeaponEffect"] = d["weaponEffect"]
+		d["minimumDamage"] = "33"
 		d["flags"] = list_to_ini_string(flags);
 		write_ini_section(f, n, d)
 	fd.close()
 	f.close()
 
-def write_stats_weaponsounds_ini():
-	if not os.path.isfile("stats/weaponsounds.txt"):
-		return
-	print("W stats/weaponsounds.ini")
-	fd = open("stats/weaponsounds.txt", "rt")
-	f = open("stats/weaponsounds.ini", "wt")
-	for line in read_csv_lines(fd, False):
-		l = line.split(",")
-		d = {}
-		n = l[0]
-		d["szWeaponWav"] = l[1]
-		d["szExplosionWav"] = l[2]
-		#unused = l[3]
-		write_ini_section(f, n, d)
-	fd.close()
-	f.close()
-
-
 ##########################################################################
 # Here goes nothing.
 
-load_messages_strings_names_txt()
-load_stats_assignweapons_txt()
-load_stats_functions_txt()
-load_stats_research_multiplayer_prresearch_txt()
-load_stats_research_multiplayer_redcomponents_txt()
-load_stats_research_multiplayer_redstructure_txt()
-load_stats_research_multiplayer_resultcomponent_txt()
-load_stats_research_multiplayer_resultstructure_txt()
-load_stats_structurefunctions_txt()
-load_stats_structureweapons_txt()
-
-write_stats_body_ini()
-write_stats_bodypropulsionimd_ini()
-write_stats_construction_ini()
-write_stats_ecm_ini()
-write_stats_features_ini()
-write_stats_propulsion_ini()
-write_stats_propulsiontype_ini()
-write_stats_propulsionsounds_ini()
-write_stats_research_ini()
-write_stats_repair_ini()
-write_stats_sensor_ini()
-write_stats_structure_ini()
-write_stats_structuremodifier_ini()
-write_stats_templates_ini()
-write_stats_weaponmodifier_ini()
-write_stats_weapons_ini()
-write_stats_weaponsounds_ini()
+if __name__ == "__main__":
+	load_messages_strings_names_txt()
+	load_stats_assignweapons_txt()
+	load_stats_functions_txt()
+	load_stats_research_multiplayer_prresearch_txt()
+	load_stats_research_multiplayer_redcomponents_txt()
+	load_stats_research_multiplayer_redstructure_txt()
+	load_stats_research_multiplayer_researchfunctions_txt()
+	load_stats_research_multiplayer_resultcomponent_txt()
+	load_stats_research_multiplayer_resultstructure_txt()
+	load_stats_structurefunctions_txt()
+	load_stats_structureweapons_txt()
+	load_stats_weaponsounds_txt()
+	write_stats_body_ini()
+	write_stats_bodypropulsionimd_ini()
+	write_stats_construction_ini()
+	write_stats_ecm_ini()
+	write_stats_features_ini()
+	write_stats_propulsion_ini()
+	write_stats_propulsiontype_ini()
+	write_stats_propulsionsounds_ini()
+	write_stats_research_ini()
+	write_stats_repair_ini()
+	write_stats_sensor_ini()
+	write_stats_structure_ini()
+	write_stats_structuremodifier_ini()
+	write_stats_templates_ini()
+	write_stats_terraintable_ini()
+	write_stats_weaponmodifier_ini()
+	write_stats_weapons_ini()

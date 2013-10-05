@@ -9,13 +9,16 @@
 
 # KNOWN ISSUES:
 # 	body.ini:
-# 		please review the droidType parameter manually.
+# 	*	please review the droidType parameter manually.
 # 	propulsion:ini
-# 		please add the acceleration, deceleration and
+# 	*	please add the acceleration, deceleration and
 # 		skidDeceleration fields manually.
 # 	weapons.ini:
-# 		please review the three periodicalDamageWeapon parameters
+# 	*	please review the three periodicalDamageWeapon parameters
 # 		manually.
+# 	research.ini:
+# 	*	we no longer support separate upgrades for factories,
+# 		cyborg factories and VTOL factories.
 
 
 from __future__ import print_function
@@ -820,31 +823,32 @@ def write_stats_weaponsounds_ini():
 ##########################################################################
 # Here goes nothing.
 
-load_messages_strings_names_txt()
-load_stats_assignweapons_txt()
-load_stats_functions_txt()
-load_stats_research_multiplayer_prresearch_txt()
-load_stats_research_multiplayer_redcomponents_txt()
-load_stats_research_multiplayer_redstructure_txt()
-load_stats_research_multiplayer_resultcomponent_txt()
-load_stats_research_multiplayer_resultstructure_txt()
-load_stats_structurefunctions_txt()
-load_stats_structureweapons_txt()
+if __name__ == "__main__":
+	load_messages_strings_names_txt()
+	load_stats_assignweapons_txt()
+	load_stats_functions_txt()
+	load_stats_research_multiplayer_prresearch_txt()
+	load_stats_research_multiplayer_redcomponents_txt()
+	load_stats_research_multiplayer_redstructure_txt()
+	load_stats_research_multiplayer_resultcomponent_txt()
+	load_stats_research_multiplayer_resultstructure_txt()
+	load_stats_structurefunctions_txt()
+	load_stats_structureweapons_txt()
 
-write_stats_body_ini()
-write_stats_bodypropulsionimd_ini()
-write_stats_construction_ini()
-write_stats_ecm_ini()
-write_stats_features_ini()
-write_stats_propulsion_ini()
-write_stats_propulsiontype_ini()
-write_stats_propulsionsounds_ini()
-write_stats_research_ini()
-write_stats_repair_ini()
-write_stats_sensor_ini()
-write_stats_structure_ini()
-write_stats_structuremodifier_ini()
-write_stats_templates_ini()
-write_stats_weaponmodifier_ini()
-write_stats_weapons_ini()
-write_stats_weaponsounds_ini()
+	write_stats_body_ini()
+	write_stats_bodypropulsionimd_ini()
+	write_stats_construction_ini()
+	write_stats_ecm_ini()
+	write_stats_features_ini()
+	write_stats_propulsion_ini()
+	write_stats_propulsiontype_ini()
+	write_stats_propulsionsounds_ini()
+	write_stats_research_ini()
+	write_stats_repair_ini()
+	write_stats_sensor_ini()
+	write_stats_structure_ini()
+	write_stats_structuremodifier_ini()
+	write_stats_templates_ini()
+	write_stats_weaponmodifier_ini()
+	write_stats_weapons_ini()
+	write_stats_weaponsounds_ini()

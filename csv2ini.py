@@ -43,7 +43,7 @@ stats_research_multiplayer_resultcomponent_txt = {}
 stats_research_multiplayer_resultstructure_txt = {}
 stats_structureweapons_txt = {}
 stats_structurefunctions_txt = {}
-stats_upgrades = {}
+stats_weaponsounds_txt = {}
 
 ##########################################################################
 # Routines for reading and writing different file formats.
@@ -379,6 +379,20 @@ def load_stats_structureweapons_txt():
 			r.append(l[4])
 		stats_structureweapons_txt[n] = r
 	fd.close()
+
+def load_stats_weaponsounds_txt():
+	if not os.path.isfile("stats/weaponsounds.txt"):
+		return
+	print("R stats/weaponsounds.txt")
+	global stats_weaponsounds_txt
+	fd = open("stats/weaponsounds.txt", "rt")
+	for line in read_csv_lines(fd, False):
+		l = line.split(",")
+		d = {}
+		n = l[0]
+		stats_weaponsounds_txt[n] = (l[1], l[2])
+	fd.close()
+
 
 ##########################################################################
 # Routines to write out specific ini files.
@@ -914,6 +928,9 @@ def write_stats_weapons_ini():
 		d["numAttackRuns"] = l[50]
 		d["designable"] = l[51]
 		d["penetrate"] = l[52]
+		if n in stats_weaponsounds_txt:
+			d["weaponWav"] = stats_weaponsounds_txt[n][0]
+			d["explosionWav"] = stats_weaponsounds_txt[n][1]
 		if is_something(d["periodicalDamage"]):
 			d["periodicalDamageWeaponClass"] = d["weaponClass"]
 			d["periodicalDamageWeaponSubClass"] = d["weaponSubClass"]
@@ -922,24 +939,6 @@ def write_stats_weapons_ini():
 		write_ini_section(f, n, d)
 	fd.close()
 	f.close()
-
-def write_stats_weaponsounds_ini():
-	if not os.path.isfile("stats/weaponsounds.txt"):
-		return
-	print("W stats/weaponsounds.ini")
-	fd = open("stats/weaponsounds.txt", "rt")
-	f = open("stats/weaponsounds.ini", "wt")
-	for line in read_csv_lines(fd, False):
-		l = line.split(",")
-		d = {}
-		n = l[0]
-		d["szWeaponWav"] = l[1]
-		d["szExplosionWav"] = l[2]
-		#unused = l[3]
-		write_ini_section(f, n, d)
-	fd.close()
-	f.close()
-
 
 ##########################################################################
 # Here goes nothing.
@@ -956,6 +955,7 @@ if __name__ == "__main__":
 	load_stats_research_multiplayer_resultstructure_txt()
 	load_stats_structurefunctions_txt()
 	load_stats_structureweapons_txt()
+	load_stats_weaponsounds_txt()
 	write_stats_body_ini()
 	write_stats_bodypropulsionimd_ini()
 	write_stats_construction_ini()
@@ -972,4 +972,3 @@ if __name__ == "__main__":
 	write_stats_templates_ini()
 	write_stats_weaponmodifier_ini()
 	write_stats_weapons_ini()
-	write_stats_weaponsounds_ini()

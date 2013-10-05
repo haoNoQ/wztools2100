@@ -918,7 +918,7 @@ def write_stats_weapons_ini():
 		d["faceInFlight"] = yesno_to_numeric(l[44])
 		d["recoilValue"] = l[45]
 		d["minRange"] = l[46]
-		d["LightWorld"] = yesno_to_numeric(l[47])
+		d["lightWorld"] = yesno_to_numeric(l[47])
 		d["effectSize"] = l[48]
 		if int(l[49]) == 1:
 			flags.append("AirOnly")

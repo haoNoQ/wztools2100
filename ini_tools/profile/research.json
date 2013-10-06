@@ -15,7 +15,6 @@
         "type": "key_list",
         "reference": "structure",
         "help_text": "This structure that should be build before making research."},
-
     {
         "name": "name",
         "type": "text"
@@ -28,11 +27,17 @@
         "name": "resultComponents",
         "type": "list",
         "help_text": "Components available after research"},
-
     {
         "name": "msgName",
         "type": "text",
-        "help_text": "Message in Intelligence screen for tech; must be zero for minor techs "},
+        "help_text": "Message in Intelligence screen for tech; must be zero for minor techs "
+    },
+    {
+        "name": "replacedComponents",
+        "type": "list",
+        "help_text": "Replaced components",
+
+    },
     {
         "name": "iconID",
         "type": "pie",

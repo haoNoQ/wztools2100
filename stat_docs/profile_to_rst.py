@@ -55,7 +55,7 @@ renders = {
 }
 
 
-with open('fields.json') as f:
+with open('../ini_tools/fields.json') as f:
     fields = json.load(f)
 
 

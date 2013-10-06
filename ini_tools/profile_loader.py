@@ -17,10 +17,10 @@ class Profile(dict):
     Convert profile json files to dict with params
     """
     def __init__(self, file_name):
-        with open(os.path.join(this_dir, 'fields.json')) as f:
+        with open(os.path.join(this_dir, '../ini_tools/fields.json')) as f:
             fields = json.load(f)
 
-        with open(os.path.join(this_dir, 'profile', '%s.json' % file_name)) as f:
+        with open(os.path.join(this_dir, '../ini_tools/profile', '%s.json' % file_name)) as f:
             data = json.load(f)
 
         for field in data:
@@ -31,4 +31,4 @@ class Profile(dict):
 
 
 def get_profiles_name_list():
-    return [name[:-5] for name in os.listdir(os.path.join(this_dir, 'profile')) if name.endswith('.json')]
+    return [name[:-5] for name in os.listdir(os.path.join(this_dir, '../ini_tools/profile')) if name.endswith('.json')]

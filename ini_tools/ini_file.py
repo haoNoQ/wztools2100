@@ -1,5 +1,5 @@
 import os
-from ini_tools import WZConfigParser
+from config_parser import WZConfigParser
 from profile_loader import Profile, get_profiles_name_list
 
 

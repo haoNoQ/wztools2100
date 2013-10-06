@@ -1,11 +1,7 @@
 import os
 from ini_file import IniFile, WZException
 
-
 stats_paths = ['G:\\warzone2100\\data\\base\\stats', 'G:\\warzone2100\\data\\mp\\stats']
-
-
-
 
 if __name__ == '__main__':
     for stats_dir in stats_paths:

@@ -30,18 +30,15 @@
     },
     {
         "name": "power",
-        "type": "positive_int",
-        "required": true
+        "type": "positive_int"
     },
     {
         "name": "range",
-        "type": "positive_int",
-        "required": true
+        "type": "positive_int"
     },
     {
         "name": "time",
-        "type": "positive_int",
-        "required": true
+        "type": "positive_int"
     },
     {
         "name": "type",

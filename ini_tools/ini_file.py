@@ -1,5 +1,5 @@
 import os
-from ini_tools import WZConfigParser
+from config_parser import WZConfigParser
 from profile_loader import Profile, get_profiles_name_list
 
 
@@ -50,7 +50,7 @@ class IniFile(dict):
             if show_warnings:
                 for key, val in self._warnings.items():
                     self._errors.setdefault(key, []).extend(val)
-            print "... Failed has errors in %s sections" % len(self._errors)
+            print "... Failed. Has %s in %s sections" % ('errors or warnings' if show_warnings else "errors", len(self._errors))
             for key, error in self._errors.items():
                 print "\t", key
                 print '\n'.join(error)

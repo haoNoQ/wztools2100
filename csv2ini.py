@@ -48,7 +48,13 @@ stats_weaponsounds_txt = {}
 ##########################################################################
 # Routines for reading and writing different file formats.
 
-def is_something(s):
+default_overrides = {
+	"fireOnMove" : "1",
+}
+
+def is_something(s, k = ""):
+	if k in default_overrides:
+		return s.strip() != default_overrides[k]
 	return len(s) > 0 and not s == "0"
 
 def list_to_ini_string(l):
@@ -70,7 +76,7 @@ def write_ini_section(fd, name, dic):
 	fd.write("[" + name + "]\n")
 	for k in sorted(dic.keys(), key = str.lower):
 		v = dic[k].strip()
-		if is_something(v):
+		if is_something(v, k):
 			fd.write(k + " = " + v + "\n")
 	fd.write("\n")
 

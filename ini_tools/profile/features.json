@@ -7,7 +7,6 @@
     {
         "name":"model",
         "type":"pie"
-
     },
     {
         "name":"name",
@@ -18,7 +17,6 @@
         "type":"boolean",
         "help_text":"Whether or not the feature is damageable, if set to 0, the 'x' cursor will appear instead of the 'attack' cursor."
     },
-
     {
         "name":"lineOfSight",
         "type":"boolean",
@@ -31,7 +29,6 @@
         "help_text":"Whether or not the feature is visible even if you haven't explored that area of terrain yet",
         "default": 1
     },
-
     {
         "name":"armour",
         "type":"positive_int",
@@ -43,23 +40,18 @@
         "type":"hitpoints",
         "default": 1
     },
-
     {
         "name":"width",
         "type":"positive_int",
         "help_text":" Width of the feature (x-axis)"
-
     },
-
     {
         "name":"type",
         "type":"choice",
         "choices": ["BOULDER", "BUILDING", "GENERIC ARTEFACT", "OIL DRUM", "OIL RESOURCE", "SKYSCRAPER", "TANK WRECK", "TREE", "VEHICLE"]
-
     },
     {
         "name":"tileDraw",
         "type":"positive_int"
-
     }
 ]

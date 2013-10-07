@@ -16,7 +16,6 @@
     {
         "name":"name",
         "type":"text"
-
     },
     {
         "name":"weight",

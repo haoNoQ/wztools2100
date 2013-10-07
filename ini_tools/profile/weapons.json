@@ -2,12 +2,10 @@
     {
         "name": "hitpoints",
         "type": "hitpoints"
-
     },
     {
         "name": "buildPoints",
         "type": "buildpoints"
-
     },
     {
         "type": "buildpower",
@@ -174,13 +172,11 @@
         "type": "positive_int",
         "name": "numRounds"
     },
-
     {
         "help_text": "???",
         "type": "positive_int",
         "name": "periodicalDamage"
     },
-
     {
         "help_text": "???",
         "type": "positive_int",
@@ -205,7 +201,6 @@
         "choices": ["BOMB", "HOWITZERS", "MORTARS"],
         "name": "periodicalDamageWeaponSubClass"
     },
-
     {
         "help_text": "???",
         "type": "positive_int",

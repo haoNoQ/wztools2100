@@ -26,7 +26,6 @@
     {
         "name": "buildPoints",
         "type": "buildpoints"
-
     },
     {
         "name": "buildPower",
@@ -41,7 +40,6 @@
         "name": "height",
         "type": "height",
         "help_text": "The height of the structure. Affects whether or not it can fire over walls."
-
     },
     {
         "name": "name",

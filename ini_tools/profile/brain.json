@@ -23,13 +23,11 @@
         "name":"maxDroidsMult",
         "type":"positive_int",
         "default": 0
-
     },
     {
         "name":"turret",
         "type":"text",
         "default": ""
-
     },
     {
         "name":"designable",

@@ -68,10 +68,10 @@ class IniFile(dict):
             value = section.get(field_name)
             if value is None:
                 if profile_data.get('required'):
-                    missed_keys.append('has missed key %s' % section_name)
+                    missed_keys.append(field_name)
                 continue
             elif value == str(profile_data.get('default')):  # int from ini came as str
-                self._warn(section_name, '%s use default value(%s)' % (field_name, value))
+                self._warn(section_name, 'default value: %s = %s' % (field_name, value))
 
             field_type = profile_data['type']
 

@@ -34,7 +34,7 @@
     {
         "name":"speed",
         "type":"positive_int",
-        "required":true
+        "default":0
     },
     {
         "name":"skidDeceleration",

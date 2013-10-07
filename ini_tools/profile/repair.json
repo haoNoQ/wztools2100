@@ -16,19 +16,13 @@
         "type":"buildpoints"
     },
     {
-        "name":"repairArmour",
-        "type":"boolean",
-        "required": true
-    },
-    {
         "name":"location",
         "type":"location"
-
     },
     {
         "name":"time",
         "type":"positive_int",
-        "min":1
+        "default":0
     },
     {
         "name":"buildPower",
@@ -45,7 +39,7 @@
     {
         "name":"repairPoints",
         "type":"positive_int",
-        "required": true
+        "default":0
     }
 ]
 

@@ -38,7 +38,8 @@
     },
     {
         "name": "time",
-        "type": "positive_int"
+        "type": "positive_int",
+        "default":0
     },
     {
         "name": "type",

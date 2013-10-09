@@ -42,9 +42,9 @@ class Profile(dict):
         lines = [self._get_field_header_line(key) for key in fields]
 
         len_name = max([len(x[0]) for x in lines])
-        #len_type = min(max([len(x[1]) for x in lines]), 40)
+        len_type = min(max([len(x[1]) for x in lines]), 40)
 
-        template = ';  %-{0}s   %s'.format(len_name)
+        template = ';  %-{0}s   %-{1}s  %s'.format(len_name, len_type)
 
         result += (template % x for x in lines)
         return '\n'.join(result)
@@ -54,8 +54,13 @@ class Profile(dict):
         item_type = item['type']
         if item_type == 'choice':
             return 'one of: %s' % '|'.join([str(x) for x in item['choices']])
+
+        if item_type == 'key':
+            return 'ID for %s' % item['reference']
+        if item_type == 'key_list':
+            return 'comma-separated list of %s IDs' % item['reference']
         if convert_to == 'string_list':
-            return 'comma-separated string list'
+            return 'comma-separated list'
         if convert_to == 'boolean':
             return '1 - True,  2 - False'
         if convert_to == 'pie':
@@ -69,7 +74,7 @@ class Profile(dict):
     def _get_field_header_line(self, key):
         item = self[key]
         value_type = '<%s>' % self._get_field_value_type(item)
-        return item['name'], value_type
+        return item['name'], value_type, item['help_text']
 
 
 def get_profiles_name_list():

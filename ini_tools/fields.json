@@ -20,7 +20,7 @@
         "required": false,
         "choices": null,
         "max_length": 32,
-        "help_text": "Verbose model name",
+        "help_text": "verbose model name",
         "convert_to": "str"
 
     },

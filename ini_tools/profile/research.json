@@ -1,91 +1,96 @@
 [
     {
-        "name": "requiredResearch",
-        "type": "key_list",
-        "reference": "research",
-        "help_text": "previous research that required."
-    },
-    {
-        "name": "subgroupIconID",
-        "type": "pie",
-        "help_text": "Left research icon."
-    },
-    {
-        "name": "requiredStructures",
-        "type": "key_list",
-        "reference": "structure",
-        "help_text": "This structure that should be build before making research."
-    },
-    {
-        "name": "name",
-        "type": "text"
-    },
-    {
-        "name": "results",
-        "type": "list"
-    },
-    {
-        "name": "resultComponents",
-        "type": "list",
-        "help_text": "Components available after research"
-    },
-    {
-        "name": "msgName",
-        "type": "text",
-        "help_text": "Message in Intelligence screen for tech; must be zero for minor techs "
-    },
-    {
-        "name": "replacedComponents",
-        "type": "list",
-        "help_text": "Replaced components"
-    },
-    {
-        "name": "redComponents",
-        "type": "list",
-        "help_text": "Components that will became unavailable for build."
-    },
-    {
-        "name": "iconID",
-        "type": "pie",
-        "help_text": "Right research icon."
-    },
-    {
-        "name": "redStructures",
-        "type": "key_list",
-        "reference": "structure",
-        "help_text": "Structure that will became unavailable for build."},
-    {
-        "name": "statID",
-        "type": "text",
-        "help_text": ""},
-    {
-        "name": "imdName",
-        "type": "pie",
-        "help_text": " IMD to display for tech"},
-    {
-        "name": "resultStructures",
-        "type": "key_list",
-        "reference": "structure",
-        "help_text": "Structure available after research"},
-    {
-        "name": "techCode",
-        "type":"choice",
-        "choices":["0", "1"],
-        "help_text": "Zero if major tech, one if minor tech. Affects whether or not 'Major research completed' is played, and whether or not it appears in Intelligence."
-    },
-    {
         "name": "researchPoints",
         "type": "positive_int",
         "help_text": "time to research (14 points equal to 1 second in research facility without modules and upgrades)"
     },
     {
-        "name": "keyTopic",
-        "type":"choice",
-        "choices":["0", "1"],
-        "help_text": "Is it a key topic? Visual effect only."
-    },
-    {
         "name": "researchPower",
         "type": "buildpower"
+    },
+    {
+        "name": "keyTopic",
+        "type": "choice",
+        "choices": ["0", "1"],
+        "help_text": "is it a key topic? Visual effect only"
+    },
+    {
+        "name": "msgName",
+        "type": "text",
+        "help_text": "message in Intelligence screen for tech; must be zero for minor techs"
+    },
+    {
+        "name": "techCode",
+        "type": "choice",
+        "choices": ["0", "1"],
+        "help_text": "zero if major tech, one if minor tech. Affects whether or not 'Major research completed' is played, and whether or not it appears in Intelligence"
+    },
+    {
+        "name": "iconID",
+        "type": "pie",
+        "help_text": "right research icon"
+    },
+    {
+        "name": "statID",
+        "type": "text",
+        "help_text": "???"
+    },
+    {
+        "name": "imdName",
+        "type": "pie",
+        "help_text": "IMD to display for tech"
+    },
+    {
+        "name": "name",
+        "type": "name"
+    },
+    {
+        "name": "subgroupIconID",
+        "type": "pie",
+        "help_text": "left research icon"
+    },
+    {
+        "name": "requiredResearch",
+        "type": "key_list",
+        "reference": "research",
+        "help_text": "previous research that required"
+    },
+    {
+        "name": "redComponents",
+        "type": "list",
+        "help_text": "components that will became unavailable for build"
+    },
+    {
+        "name": "resultStructures",
+        "type": "key_list",
+        "reference": "structure",
+        "help_text": "structures available after research"
+    },
+    {
+        "name": "resultComponents",
+        "type": "list",
+        "help_text": "components available after research"
+    },
+    {
+        "name": "redStructures",
+        "type": "key_list",
+        "reference": "structure",
+        "help_text": "structures that will became unavailable for build"
+    },
+    {
+        "name": "requiredStructures",
+        "type": "key_list",
+        "reference": "structure",
+        "help_text": "structures that should be build before making research"
+    },
+    {
+        "name": "results",
+        "type": "list",
+        "help_text": "list of hints to rules.js"
+    },
+    {
+        "name": "replacedComponents",
+        "type": "list",
+        "help_text": "replaced components <oldComponentID:newComponentID>"
     }
 ]

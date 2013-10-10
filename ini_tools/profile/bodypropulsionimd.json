@@ -1,0 +1,78 @@
+[
+   {
+        "name": "wheeled03",
+        "type": "pie"
+    },
+    {
+        "name": "wheeled02",
+        "type": "pie"
+    },
+    {
+        "name": "wheeled01",
+        "type": "pie"
+    },
+    {
+        "name": "tracked03",
+        "type": "pie"
+    },
+    {
+        "name": "tracked02",
+        "type": "pie"
+    },
+    {
+        "name": "tracked01",
+        "type": "pie"
+    },
+    {
+        "name": "hover03",
+        "type": "pie"
+    },
+    {
+        "name": "hover02",
+        "type": "pie"
+    },
+    {
+        "name": "hover01",
+        "type": "pie"
+    },
+    {
+        "name": "V-Tol03",
+        "type": "pie"
+    },
+    {
+        "name": "V-Tol02",
+        "type": "pie"
+    },
+    {
+        "name": "V-Tol",
+        "type": "pie"
+    },
+    {
+        "name": "HalfTrack03",
+        "type": "pie"
+    },
+    {
+        "name": "HalfTrack02",
+        "type": "pie"
+    },
+    {
+        "name": "HalfTrack",
+        "type": "pie"
+    },
+    {
+        "name": "Helicopter",
+        "type": "pie"
+    },
+    {
+        "name": "Naval",
+        "type": "pie"
+    },
+    {
+        "name": "ZNULLPROP",
+         "type": "pie"
+    }
+]
+
+
+
+

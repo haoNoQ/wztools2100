@@ -63,8 +63,7 @@ class IniFile(dict):
             self._err(section_name, 'has additional keys %s' % list(section_additional_keys))
         missed_keys = []
 
-        for field_name in self.profile.keys():
-            profile_data = self.profile[field_name]
+        for field_name, profile_data in self.profile.items():
             value = section.get(field_name)
             if value is None:
                 if profile_data.get('required'):
@@ -81,6 +80,13 @@ class IniFile(dict):
             elif field_type == 'boolean':
                 if value not in ['0', '1']:
                     self._err(section_name, "wrong boolean value %s for %s" % (value, field_name))
+            elif field_type == 'pie':
+                pies = [x.strip() for x in value.split(';') if x]
+                for pie in pies:
+                    if not pie.lower() == pie:
+                        self._warn(section_name, "pie names must be in lowercase %s" % pie)
+                    elif not pie.endswith('.pie'):
+                        self._warn(section_name, "wrong pie extension for %s" % pie)
 
         if missed_keys:
             self._err(section_name, 'missed keys %s' % list(missed_keys))

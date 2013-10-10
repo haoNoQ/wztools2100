@@ -27,8 +27,8 @@
     },
     {
         "name": "iconID",
-        "type": "pie",
-        "help_text": "right research icon"
+        "type": "text",
+        "help_text": "key name for icon (key names is hardcoded in c++ code)"
     },
     {
         "name": "statID",
@@ -46,8 +46,8 @@
     },
     {
         "name": "subgroupIconID",
-        "type": "pie",
-        "help_text": "left research icon"
+        "type": "text",
+        "help_text": "left research icon. key name for icon (key names is hardcoded in c++ code)"
     },
     {
         "name": "requiredResearch",

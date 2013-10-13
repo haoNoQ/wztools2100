@@ -49,45 +49,32 @@ stats_weaponsounds_txt = {}
 # Routines for reading and writing different file formats.
 
 default_overrides = {
-	"fireOnMove" : "1",
+	"fireOnMove": "1",
 }
 
-def is_something(s, k = ""):
+def is_something(s, k=""):
 	if k in default_overrides:
 		return s.strip() != default_overrides[k]
 	return len(s) > 0 and not s == "0"
 
 def list_to_ini_string(l):
-	r = ""
-	for (i, s) in enumerate(l):
-		if i == 0:
-			r += s
-		else:
-			r += "," + s
-	return r
+	return ",".join(l)
 
 def yesno_to_numeric(s):
-	if s == "YES":
-		return "1"
-	else:
-		return "0"
+	return s == "YES" and "1" or "0"
 
 def write_ini_section(fd, name, dic):
 	fd.write("[" + name + "]\n")
-	for k in sorted(dic.keys(), key = str.lower):
+	for k in sorted(dic.keys(), key=str.lower):
 		v = dic[k].strip()
 		if is_something(v, k):
-			fd.write(k + " = " + v + "\n")
+			fd.write('{0} = {1}\n'.format(k, v))
 	fd.write("\n")
 
 def read_csv_lines(fd, skipfirst):
-	ret = []
-	for line in fd:
-		if skipfirst:
-			skipfirst = False
-			continue
-		ret.append(line)
-	return ret
+	# TODO strip each line before adding to list, and check if something present
+	# ret = [line.strip() for line in fd if line(strip)]
+	return list(fd)[skipfirst:]  # True works like 1
 
 # returns a list of strings which represent non-empty lines of file fd
 # with all C-style comments eliminated
@@ -99,14 +86,14 @@ def remove_c_style_comments(fd):
 			# seems we have nothing left
 			if len(line) < 2:
 				break
-			# we're still inside a comment
+				# we're still inside a comment
 			if comment_state:
 				idx = line.find("*/")
 				if idx > -1:
 					line = line[idx + 2:]
 					comment_state = False
 					continue
-				# comment doesn't seem to end on this line
+					# comment doesn't seem to end on this line
 				break
 			# we're not inside any comment
 			else:
@@ -117,7 +104,7 @@ def remove_c_style_comments(fd):
 					continue
 				if "//" in line:
 					line = line.split("//", 1)[0]
-				# only now we can actually do our job
+					# only now we can actually do our job
 				line = line.strip()
 				if len(line) > 0:
 					ret.append(line)
@@ -131,23 +118,22 @@ def load_messages_strings_names_txt():
 	if not os.path.isfile("messages/strings/names.txt"):
 		return
 	print("R messages/strings/names.txt")
-	global messages_strings_names_txt
+	# global messages_strings_names_txt  You are not assigning this variable. You can mutate object with out global
 	fd = open("messages/strings/names.txt", "rt")
 	strlist = remove_c_style_comments(fd)
 	fd.close()
 	if sys.hexversion >= 0x03000000:
-		trans = str.maketrans("_()\"", "    ")
+		trans = str.maketrans("_()\"", "	")
 	else:
-		trans = string.maketrans("_()\"", "    ")
+		trans = string.maketrans("_()\"", "	")
 	for line in strlist:
-		one,two = line.split(None, 1)
+		one, two = line.split(None, 1)
 		messages_strings_names_txt[one] = two.translate(trans).strip()
 
 def load_stats_assignweapons_txt():
 	if not os.path.isfile("stats/assignweapons.txt"):
 		return
 	print("R stats/assignweapons.txt")
-	global stats_assignweapons_txt
 	fd = open("stats/assignweapons.txt", "rt")
 	for line in fd:
 		l = line.split(",")
@@ -168,7 +154,6 @@ def load_stats_functions_txt():
 	if not os.path.isfile("stats/functions.txt"):
 		return
 	print("R stats/functions.txt")
-	global stats_functions_txt
 	fd = open("stats/functions.txt", "rt")
 
 	stats_upgrades = {}
@@ -269,11 +254,11 @@ def load_stats_functions_txt():
 
 	fd.close()
 
+
 def load_stats_research_multiplayer_prresearch_txt():
 	if not os.path.isfile("stats/research/multiplayer/prresearch.txt"):
 		return
 	print("R stats/research/multiplayer/prresearch.txt")
-	global stats_research_multiplayer_prresearch_txt
 	fd = open("stats/research/multiplayer/prresearch.txt", "rt")
 	for line in read_csv_lines(fd, False):
 		l = line.split(",")
@@ -282,11 +267,11 @@ def load_stats_research_multiplayer_prresearch_txt():
 		stats_research_multiplayer_prresearch_txt[l[0]].append(l[1])
 	fd.close()
 
+
 def load_stats_research_multiplayer_redcomponents_txt():
 	if not os.path.isfile("stats/research/multiplayer/redcomponents.txt"):
 		return
 	print("R stats/research/multiplayer/redcomponents.txt")
-	global stats_research_multiplayer_redcomponents_txt
 	fd = open("stats/research/multiplayer/redcomponents.txt", "rt")
 	for line in read_csv_lines(fd, True):
 		l = line.split(",")
@@ -295,11 +280,11 @@ def load_stats_research_multiplayer_redcomponents_txt():
 		stats_research_multiplayer_redcomponents_txt[l[0]].append(l[1])
 	fd.close()
 
+
 def load_stats_research_multiplayer_redstructure_txt():
 	if not os.path.isfile("stats/research/multiplayer/redstructure.txt"):
 		return
 	print("R stats/research/multiplayer/redstructure.txt")
-	global stats_research_multiplayer_redstructure_txt
 	fd = open("stats/research/multiplayer/redstructure.txt", "rt")
 	for line in read_csv_lines(fd, True):
 		l = line.split(",")
@@ -308,11 +293,11 @@ def load_stats_research_multiplayer_redstructure_txt():
 		stats_research_multiplayer_redstructure_txt[l[0]].append(l[1])
 	fd.close()
 
+
 def load_stats_research_multiplayer_researchfunctions_txt():
 	if not os.path.isfile("stats/research/multiplayer/researchfunctions.txt"):
 		return
 	print("R stats/research/multiplayer/researchfunctions.txt")
-	global stats_research_multiplayer_researchfunctions_txt
 	fd = open("stats/research/multiplayer/researchfunctions.txt")
 	for line in read_csv_lines(fd, True):
 		l = line.split(",")
@@ -321,11 +306,11 @@ def load_stats_research_multiplayer_researchfunctions_txt():
 		stats_research_multiplayer_researchfunctions_txt[l[0]].append(l[1])
 	fd.close()
 
+
 def load_stats_research_multiplayer_resultcomponent_txt():
 	if not os.path.isfile("stats/research/multiplayer/resultcomponent.txt"):
 		return
 	print("R stats/research/multiplayer/resultcomponent.txt")
-	global stats_research_multiplayer_resultcomponent_txt
 	fd = open("stats/research/multiplayer/resultcomponent.txt", "rt")
 	for line in read_csv_lines(fd, True):
 		l = line.split(",")
@@ -334,11 +319,11 @@ def load_stats_research_multiplayer_resultcomponent_txt():
 		stats_research_multiplayer_resultcomponent_txt[l[0]].append(l[1])
 	fd.close()
 
+
 def load_stats_research_multiplayer_resultstructure_txt():
 	if not os.path.isfile("stats/research/multiplayer/resultstructure.txt"):
 		return
 	print("R stats/research/multiplayer/resultstructure.txt")
-	global stats_research_multiplayer_resultstructure_txt
 	fd = open("stats/research/multiplayer/resultstructure.txt", "rt")
 	for line in read_csv_lines(fd, True):
 		l = line.split(",")
@@ -347,12 +332,11 @@ def load_stats_research_multiplayer_resultstructure_txt():
 		stats_research_multiplayer_resultstructure_txt[l[0]].append(l[1])
 	fd.close()
 
+
 def load_stats_structurefunctions_txt():
 	if not os.path.isfile("stats/structurefunctions.txt"):
 		return
 	print("R stats/structurefunctions.txt")
-	global stats_structurefunctions_txt
-	global stats_functions_txt
 	fd = open("stats/structurefunctions.txt")
 	for line in fd:
 		l = line.split(",")
@@ -363,11 +347,11 @@ def load_stats_structurefunctions_txt():
 			stats_structurefunctions_txt[l[0]].append(g)
 	fd.close()
 
+
 def load_stats_structureweapons_txt():
 	if not os.path.isfile("stats/structureweapons.txt"):
 		return
 	print("R stats/structureweapons.txt")
-	global stats_structureweapons_txt
 	fd = open("stats/structureweapons.txt", "rt")
 	for line in fd:
 		l = line.split(",")
@@ -386,11 +370,11 @@ def load_stats_structureweapons_txt():
 		stats_structureweapons_txt[n] = r
 	fd.close()
 
+
 def load_stats_weaponsounds_txt():
 	if not os.path.isfile("stats/weaponsounds.txt"):
 		return
 	print("R stats/weaponsounds.txt")
-	global stats_weaponsounds_txt
 	fd = open("stats/weaponsounds.txt", "rt")
 	for line in read_csv_lines(fd, False):
 		l = line.split(",")

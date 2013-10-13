@@ -1,21 +1,21 @@
 [
-    {
-        "name":"acceleration",
-        "type":"positive_int",
-        "default":250
+     {
+        "name":"name",
+        "type":"text"
     },
     {
-        "name":"spinAngle",
-        "type":"positive_int",
-        "default":180
+        "name":"type",
+        "type":"choice",
+        "choices":["Hover", "Tracked", "Half-Tracked", "Legged", "Lift", "Propellor", "Wheeled", "Ski", "Jump"]
     },
     {
         "name":"designable",
         "type":"designable"
     },
     {
-        "name":"name",
-        "type":"text"
+        "name":"spinAngle",
+        "type":"positive_int",
+        "default":180
     },
     {
         "name":"weight",
@@ -46,6 +46,11 @@
         "type":"buildpoints"
     },
     {
+        "name":"acceleration",
+        "type":"positive_int",
+        "default":250
+    },
+    {
         "name":"deceleration",
         "type":"positive_int",
         "default":800
@@ -61,10 +66,5 @@
     {
         "name":"hitpoints",
         "type":"hitpoints"
-    },
-    {
-        "name":"type",
-        "type":"choice",
-        "choices":["Hover", "Tracked", "Half-Tracked", "Legged", "Lift", "Propellor", "Wheeled", "Ski", "Jump"]
     }
 ]

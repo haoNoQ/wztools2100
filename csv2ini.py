@@ -29,6 +29,7 @@ import os.path
 import string
 import sys
 
+
 ##########################################################################
 # Globals for storing stats that will not be used instantly.
 
@@ -45,6 +46,7 @@ stats_structureweapons_txt = {}
 stats_structurefunctions_txt = {}
 stats_weaponsounds_txt = {}
 
+
 ##########################################################################
 # Routines for reading and writing different file formats.
 
@@ -52,16 +54,20 @@ default_overrides = {
 	"fireOnMove": "1",
 }
 
+
 def is_something(s, k=""):
 	if k in default_overrides:
 		return s.strip() != default_overrides[k]
 	return len(s) > 0 and not s == "0"
 
+
 def list_to_ini_string(l):
 	return ",".join(l)
 
+
 def yesno_to_numeric(s):
 	return s == "YES" and "1" or "0"
+
 
 def write_ini_section(fd, name, dic):
 	fd.write("[" + name + "]\n")
@@ -71,10 +77,12 @@ def write_ini_section(fd, name, dic):
 			fd.write('{0} = {1}\n'.format(k, v))
 	fd.write("\n")
 
+
 def read_csv_lines(fd, skipfirst):
 	# TODO strip each line before adding to list, and check if something present
 	# ret = [line.strip() for line in fd if line(strip)]
 	return list(fd)[skipfirst:]  # True works like 1
+
 
 # returns a list of strings which represent non-empty lines of file fd
 # with all C-style comments eliminated
@@ -86,14 +94,14 @@ def remove_c_style_comments(fd):
 			# seems we have nothing left
 			if len(line) < 2:
 				break
-				# we're still inside a comment
+			# we're still inside a comment
 			if comment_state:
 				idx = line.find("*/")
 				if idx > -1:
 					line = line[idx + 2:]
 					comment_state = False
 					continue
-					# comment doesn't seem to end on this line
+				# comment doesn't seem to end on this line
 				break
 			# we're not inside any comment
 			else:
@@ -104,12 +112,13 @@ def remove_c_style_comments(fd):
 					continue
 				if "//" in line:
 					line = line.split("//", 1)[0]
-					# only now we can actually do our job
+				# only now we can actually do our job
 				line = line.strip()
 				if len(line) > 0:
 					ret.append(line)
 				break
 	return ret
+
 
 ##########################################################################
 # Stuff to pre-load: files referenced from many other files.
@@ -118,17 +127,17 @@ def load_messages_strings_names_txt():
 	if not os.path.isfile("messages/strings/names.txt"):
 		return
 	print("R messages/strings/names.txt")
-	# global messages_strings_names_txt  You are not assigning this variable. You can mutate object with out global
 	fd = open("messages/strings/names.txt", "rt")
 	strlist = remove_c_style_comments(fd)
 	fd.close()
 	if sys.hexversion >= 0x03000000:
-		trans = str.maketrans("_()\"", "	")
+		trans = str.maketrans("_()\"", "    ")
 	else:
-		trans = string.maketrans("_()\"", "	")
+		trans = string.maketrans("_()\"", "    ")
 	for line in strlist:
 		one, two = line.split(None, 1)
 		messages_strings_names_txt[one] = two.translate(trans).strip()
+
 
 def load_stats_assignweapons_txt():
 	if not os.path.isfile("stats/assignweapons.txt"):
@@ -149,6 +158,7 @@ def load_stats_assignweapons_txt():
 			r.append(l[3])
 		stats_assignweapons_txt[n] = r
 	fd.close()
+
 
 def load_stats_functions_txt():
 	if not os.path.isfile("stats/functions.txt"):
@@ -444,6 +454,7 @@ def write_stats_body_ini():
 	fd.close()
 	f.close()
 
+
 def write_stats_bodypropulsionimd_ini():
 	if not os.path.isfile("stats/bodypropulsionimd.txt"):
 		return
@@ -462,6 +473,7 @@ def write_stats_bodypropulsionimd_ini():
 		write_ini_section(f, k, v)
 	fd.close()
 	f.close()
+
 
 def write_stats_construction_ini():
 	if not os.path.isfile("stats/construction.txt"):
@@ -488,6 +500,7 @@ def write_stats_construction_ini():
 		write_ini_section(f, n, d)
 	fd.close()
 	f.close()
+
 
 def write_stats_ecm_ini():
 	if not os.path.isfile("stats/ecm.txt"):
@@ -517,6 +530,7 @@ def write_stats_ecm_ini():
 	fd.close()
 	f.close()
 
+
 def write_stats_features_ini():
 	if not os.path.isfile("stats/features.txt"):
 		return
@@ -541,6 +555,7 @@ def write_stats_features_ini():
 		write_ini_section(f, n, d)
 	fd.close()
 	f.close()
+
 
 def write_stats_propulsion_ini():
 	if not os.path.isfile("stats/propulsion.txt"):
@@ -568,6 +583,7 @@ def write_stats_propulsion_ini():
 	fd.close()
 	f.close()
 
+
 def write_stats_propulsionsounds_ini():
 	if not os.path.isfile("stats/propulsionsounds.txt"):
 		return
@@ -589,6 +605,7 @@ def write_stats_propulsionsounds_ini():
 	fd.close()
 	f.close()
 
+
 def write_stats_propulsiontype_ini():
 	if not os.path.isfile("stats/propulsiontype.txt"):
 		return
@@ -604,6 +621,7 @@ def write_stats_propulsiontype_ini():
 		write_ini_section(f, n, d)
 	fd.close()
 	f.close()
+
 
 def write_stats_research_ini():
 	if not os.path.isfile("stats/research/multiplayer/research.txt"):
@@ -673,6 +691,7 @@ def write_stats_research_ini():
 	fd.close()
 	f.close()
 
+
 def write_stats_repair_ini():
 	if not os.path.isfile("stats/repair.txt"):
 		return
@@ -700,6 +719,7 @@ def write_stats_repair_ini():
 		write_ini_section(f, n, d)
 	fd.close()
 	f.close()
+
 
 def write_stats_sensor_ini():
 	if not os.path.isfile("stats/sensor.txt"):
@@ -729,6 +749,7 @@ def write_stats_sensor_ini():
 		write_ini_section(f, n, d)
 	fd.close()
 	f.close()
+
 
 def write_stats_structure_ini():
 	if not os.path.isfile("stats/structures.txt"):
@@ -777,6 +798,7 @@ def write_stats_structure_ini():
 	fd.close()
 	f.close()
 
+
 def write_stats_structuremodifier_ini():
 	if not os.path.isfile("stats/structuremodifier.txt"):
 		return
@@ -795,6 +817,7 @@ def write_stats_structuremodifier_ini():
 		write_ini_section(f, k, v)
 	fd.close()
 	f.close()
+
 
 def write_stats_templates_ini():
 	if not os.path.isfile("stats/templates.txt"):
@@ -827,6 +850,7 @@ def write_stats_templates_ini():
 	fd.close()
 	f.close()
 
+
 def write_stats_terraintable_ini():
 	if not os.path.isfile("stats/terraintable.txt"):
 		return
@@ -846,6 +870,7 @@ def write_stats_terraintable_ini():
 	fd.close()
 	f.close()
 
+
 def write_stats_weaponmodifier_ini():
 	if not os.path.isfile("stats/weaponmodifier.txt"):
 		return
@@ -864,6 +889,7 @@ def write_stats_weaponmodifier_ini():
 		write_ini_section(f, k, v)
 	fd.close()
 	f.close()
+
 
 def write_stats_weapons_ini():
 	if not os.path.isfile("stats/weapons.txt"):
@@ -952,6 +978,7 @@ def write_stats_weapons_ini():
 		write_ini_section(f, n, d)
 	fd.close()
 	f.close()
+
 
 ##########################################################################
 # Here goes nothing.

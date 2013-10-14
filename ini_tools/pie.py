@@ -51,15 +51,6 @@ def validate(stats_dir, pie_dict):
 if __name__ == '__main__':
     base = get_base_path()
     mp = get_mp_path()
-<<<<<<< HEAD
-    check_mp_intersect_base(base, mp)
-
-
-    #parser = argparse.ArgumentParser()
-    #parser.add_argument('stats_folders', help='list of folders with ini files', nargs='+')
-    #parser.add_argument('--no-warnings', dest='no_warnings', action='store_true',
-    #                    help="don't show warnings")
-    #args = parser.parse_args()
     mp.update(base)
 
     unused_pies = (validate(BASE_PATH, base), validate(MP_PATH, mp))

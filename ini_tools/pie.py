@@ -1,9 +1,7 @@
 import os
-from ini_file import IniFile, WZException
+from ini_file import IniFile
 from enviroment import BASE_PATH, MP_PATH
 # hardcoded
-base_path = 'g:/warzone2100/data/base'
-mp_path = 'g:/warzone2100/data/mp'
 
 pie_load_paths = ["structs/", "misc/", "effects/", "components/prop/", "components/weapons/", "components/bodies/",
                   "features/", "misc/micnum/", "misc/minum/", "misc/mivnum/", "misc/researchimds/"]
@@ -53,9 +51,26 @@ def validate(stats_dir, pie_dict):
 if __name__ == '__main__':
     base = get_base_path()
     mp = get_mp_path()
+    mp_only = mp.copy()
     mp.update(base)
+    base_unused_pies = validate(BASE_PATH, base)
+    mp_unused_pies = validate(MP_PATH, mp)
 
-    unused_pies = (validate(BASE_PATH, base), validate(MP_PATH, mp))
-    for key in unused_pies[0]:
-        if key in unused_pies[1]:
-            print "Unused key:", key
+    print
+    print "Pie from BASE folder not mentioned in BASE stats"
+    for k, v in sorted(base_unused_pies.items(), key=lambda x: x[1]):
+        if k in mp_unused_pies:
+            usage = 'Not used by BASE and MP'
+        else:
+            if k in mp_only:
+                usage = "MP overrides this file"
+            else:
+                usage = "This file used by MP"
+
+        print '%s %s' % (os.path.join(v, k), usage)
+
+    print
+    print "Pie from MP + BASE folders not mentioned in MP stats"
+    for k, v in sorted(mp_unused_pies.items(), key=lambda x: x[1]):
+        if k in mp_only:
+            print '%s %s' % (os.path.join(v, k), 'Not used')

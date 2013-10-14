@@ -2,6 +2,8 @@ import os
 from ini_file import IniFile, WZException
 from enviroment import BASE_PATH, MP_PATH
 # hardcoded
+base_path = 'g:/warzone2100/data/base'
+mp_path = 'g:/warzone2100/data/mp'
 
 pie_load_paths = ["structs/", "misc/", "effects/", "components/prop/", "components/weapons/", "components/bodies/",
                   "features/", "misc/micnum/", "misc/minum/", "misc/mivnum/", "misc/researchimds/"]
@@ -57,7 +59,3 @@ if __name__ == '__main__':
     for key in unused_pies[0]:
         if key in unused_pies[1]:
             print "Unused key:", key
-
-
-
-

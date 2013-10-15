@@ -20,7 +20,7 @@
         "required": false,
         "choices": null,
         "max_length": 32,
-        "help_text": "verbose model name",
+        "help_text": "Verbose name",
         "convert_to": "str"
 
     },
@@ -80,7 +80,7 @@
         "required": false,
         "choices": null,
         "max_length": 32,
-        "help_text": "Pie file",
+        "help_text": "Pie file list",
         "convert_to": "string_list"
     },
     "buildpoints": {
@@ -142,7 +142,7 @@
         "required": false,
         "choices": null,
         "max_length": 32,
-        "help_text": "Coma separated key list",
+        "help_text": "Comma separated list of IDs",
         "convert_to": "string_list"
 
     },

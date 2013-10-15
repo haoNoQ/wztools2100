@@ -27,7 +27,8 @@
     },
     {
         "name": "iconID",
-        "type": "text",
+        "type": "choice",
+        "choices": ["IMAGE_ROCKET", "IMAGE_CANNON", "IMAGE_HOVERCRAFT", "IMAGE_ECM", "IMAGE_PLASCRETE", "IMAGE_TRACKS", "IMAGE_RES_DROIDTECH", "IMAGE_RES_WEAPONTECH", "IMAGE_RES_COMPUTERTECH", "IMAGE_RES_POWERTECH", "IMAGE_RES_SYSTEMTECH", "IMAGE_RES_STRUCTURETECH", "IMAGE_RES_CYBORGTECH", "IMAGE_RES_DEFENCE", "IMAGE_RES_QUESTIONMARK", "IMAGE_RES_GRPACC", "IMAGE_RES_GRPUPG", "IMAGE_RES_GRPREP", "IMAGE_RES_GRPROF", "IMAGE_RES_GRPDAM"],
         "help_text": "Key name for icon (key names is hardcoded in c++ code)"
     },
     {
@@ -46,8 +47,9 @@
     },
     {
         "name": "subgroupIconID",
-        "type": "text",
-        "help_text": "Lft research icon. key name for icon (key names is hardcoded in c++ code)"
+        "type": "choice",
+        "choices": ["IMAGE_ROCKET", "IMAGE_CANNON", "IMAGE_HOVERCRAFT", "IMAGE_ECM", "IMAGE_PLASCRETE", "IMAGE_TRACKS", "IMAGE_RES_DROIDTECH", "IMAGE_RES_WEAPONTECH", "IMAGE_RES_COMPUTERTECH", "IMAGE_RES_POWERTECH", "IMAGE_RES_SYSTEMTECH", "IMAGE_RES_STRUCTURETECH", "IMAGE_RES_CYBORGTECH", "IMAGE_RES_DEFENCE", "IMAGE_RES_QUESTIONMARK", "IMAGE_RES_GRPACC", "IMAGE_RES_GRPUPG", "IMAGE_RES_GRPREP", "IMAGE_RES_GRPROF", "IMAGE_RES_GRPDAM"],
+        "help_text": "Left research icon. Key name for icon"
     },
     {
         "name": "requiredResearch",

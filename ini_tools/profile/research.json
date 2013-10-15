@@ -2,7 +2,7 @@
     {
         "name": "researchPoints",
         "type": "positive_int",
-        "help_text": "time to research (14 points equal to 1 second in research facility without modules and upgrades)"
+        "help_text": "Time to research (14 points equal to 1 second in research facility without modules and upgrades)"
     },
     {
         "name": "researchPower",
@@ -12,23 +12,23 @@
         "name": "keyTopic",
         "type": "choice",
         "choices": ["0", "1"],
-        "help_text": "is it a key topic? Visual effect only"
+        "help_text": "Is it a key topic? Visual effect only"
     },
     {
         "name": "msgName",
         "type": "text",
-        "help_text": "message in Intelligence screen for tech; must be zero for minor techs"
+        "help_text": "Message in Intelligence screen for tech; must be zero for minor techs"
     },
     {
         "name": "techCode",
         "type": "choice",
         "choices": ["0", "1"],
-        "help_text": "zero if major tech, one if minor tech. Affects whether or not 'Major research completed' is played, and whether or not it appears in Intelligence"
+        "help_text": "Zero if major tech, one if minor tech. Affects whether or not 'Major research completed' is played, and whether or not it appears in Intelligence"
     },
     {
         "name": "iconID",
         "type": "text",
-        "help_text": "key name for icon (key names is hardcoded in c++ code)"
+        "help_text": "Key name for icon (key names is hardcoded in c++ code)"
     },
     {
         "name": "statID",
@@ -47,50 +47,50 @@
     {
         "name": "subgroupIconID",
         "type": "text",
-        "help_text": "left research icon. key name for icon (key names is hardcoded in c++ code)"
+        "help_text": "Lft research icon. key name for icon (key names is hardcoded in c++ code)"
     },
     {
         "name": "requiredResearch",
         "type": "key_list",
         "reference": "research",
-        "help_text": "previous research that required"
+        "help_text": "Previous research that required"
     },
     {
         "name": "redComponents",
         "type": "list",
-        "help_text": "components that will became unavailable for build"
+        "help_text": "Components that will became unavailable for build"
     },
     {
         "name": "resultStructures",
         "type": "key_list",
         "reference": "structure",
-        "help_text": "structures available after research"
+        "help_text": "Structures available after research"
     },
     {
         "name": "resultComponents",
         "type": "list",
-        "help_text": "components available after research"
+        "help_text": "Components available after research"
     },
     {
         "name": "redStructures",
         "type": "key_list",
         "reference": "structure",
-        "help_text": "structures that will became unavailable for build"
+        "help_text": "Structures that will became unavailable for build"
     },
     {
         "name": "requiredStructures",
         "type": "key_list",
         "reference": "structure",
-        "help_text": "structures that should be build before making research"
+        "help_text": "Structures that should be build before making research"
     },
     {
         "name": "results",
         "type": "list",
-        "help_text": "list of hints to rules.js"
+        "help_text": "List of hints to rules.js"
     },
     {
         "name": "replacedComponents",
         "type": "list",
-        "help_text": "replaced components <oldComponentID:newComponentID>"
+        "help_text": "Replaced components <oldComponentID:newComponentID>"
     }
 ]

@@ -2,6 +2,7 @@ from profile_loader import get_profiles
 
 MAX_ITEM_TYPE_LENGTH = 40
 
+
 def get_header(profile):
     result = [
         "; Section headers in brackets [...] is system ID of %s items. This IDs should be unique." % profile.file_name,

@@ -1,7 +1,7 @@
 import os
 from ini_file import IniFile
 from enviroment import BASE_PATH, MP_PATH
-# hardcoded
+
 
 pie_load_paths = ["structs/", "misc/", "effects/", "components/prop/", "components/weapons/", "components/bodies/",
                   "features/", "misc/micnum/", "misc/minum/", "misc/mivnum/", "misc/researchimds/"]

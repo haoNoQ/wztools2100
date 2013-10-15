@@ -1,7 +1,7 @@
 import os
 from config_parser import WZConfigParser
 from profile_loader import Profile, get_profiles_name_list
-
+from generate_ini_header import get_header
 
 class WZException(Exception):
     pass
@@ -32,7 +32,7 @@ class IniFile(dict):
             self[section_name] = dict(config.items(section_name))
 
     def save(self, fd):
-        text_list = [self.profile.get_header()]
+        text_list = [get_header(self.profile)]
         for section_name, section_items in self.items():
             section_list = ['', '[%s]' % section_name]
             for item in sorted(section_items.items(),  key=lambda x: self.profile.field_order.index(x[0])):

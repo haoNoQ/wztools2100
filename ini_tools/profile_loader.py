@@ -39,4 +39,5 @@ def get_profiles_name_list():
 
 
 def get_profiles():
-    return [Profile(name[:-5]) for name in os.listdir(os.path.join(this_dir, '../ini_tools/profile')) if name.endswith('.json')]
+    return [Profile(name[:-5]) for name in
+            os.listdir(os.path.join(this_dir, '../ini_tools/profile')) if name.endswith('.json')]

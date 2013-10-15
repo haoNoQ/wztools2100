@@ -24,7 +24,8 @@ class ValidationResult(object):
         if show_warnings:
             for key, val in self.warnings.items():
                 self.errors.setdefault(key, []).extend(val)
-        print "... Failed. Has %s in %s sections" % ('errors or warnings' if show_warnings else "errors", len(error_list))
+        print "... Failed. Has %s in %s sections" % ('errors or warnings' if show_warnings else "errors",
+                                                     len(error_list))
         for key, errors in error_list.items():
             print "\t", key
             print '\n'.join('\t\t%s' % err for err in errors)
@@ -61,7 +62,7 @@ def validate(ini_file, show_warnings=False):
         result = ValidationResult(ini_file.path)
 
         for section_name, section in ini_file.items():
-            validate_section(ini_file, section_name, section, result) # did we need ini file as argument
+            validate_section(ini_file, section_name, section, result)  # did we need ini file as argument
 
         print "validating %s(%s)" % (os.path.basename(ini_file.path), ini_file.path),  # string beginning
 

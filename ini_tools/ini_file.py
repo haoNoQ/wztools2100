@@ -36,7 +36,6 @@ class IniFile(dict):
         for section_name, section_items in self.items():
             section_list = ['', '[%s]' % section_name]
             for item in sorted(section_items.items(),  key=lambda x: self.profile.field_order.index(x[0])):
-                print item
                 prepared_value = self.prepare_value(item)
                 if prepared_value:
                     section_list.append(prepared_value)

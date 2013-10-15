@@ -20,15 +20,17 @@ class ValidationResult(object):
         return not (self.errors or show_warnings and self.warnings)
 
     def get_errors(self, show_warnings):
+        result = []
         error_list = self.errors.copy()
         if show_warnings:
             for key, val in self.warnings.items():
                 self.errors.setdefault(key, []).extend(val)
-        print "... Failed. Has %s in %s sections" % ('errors or warnings' if show_warnings else "errors",
-                                                     len(error_list))
+        result.append("... Failed. Has %s in %s sections" % ('errors or warnings' if show_warnings else "errors",
+                                                             len(error_list)))
         for key, errors in error_list.items():
-            print "\t", key
-            print '\n'.join('\t\t%s' % err for err in errors)
+            result.append("\t%s" % key)
+            result.append('\n'.join('\t\t%s' % err for err in errors))
+        return '\n'.join(result)
 
 
 def validate_section(init_file, section_name, section, result):
@@ -68,7 +70,6 @@ def validate(ini_file, show_warnings=False):
 
         if not result.passed(show_warnings):
             print result.get_errors(show_warnings)
-
         else:
             print "... OK"
 

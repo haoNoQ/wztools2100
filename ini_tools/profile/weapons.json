@@ -12,7 +12,7 @@
         "name": "buildPower"
     },
     {
-        "help_text": "Weapon damage.",
+        "help_text": "Weapon damage",
         "default": 0,
         "type": "positive_int",
         "name": "damage"
@@ -22,7 +22,7 @@
         "name": "designable"
     },
     {
-        "help_text": "Size(scale) of special/particle effects of weapon.",
+        "help_text": "Size(scale) of special/particle effects of weapon",
         "required": true,
         "type": "positive_int",
         "name": "effectSize"
@@ -56,24 +56,24 @@
     },
 
     {
-        "help_text": "Pause between shots (1/10 seconds).",
+        "help_text": "Pause between shots (1/10 seconds)",
         "type": "time",
         "name": "firePause"
     },
     {
-        "help_text": "Projectile pie model used by weapon.",
+        "help_text": "Projectile pie model used by weapon",
         "type": "pie",
         "name": "flightGfx"
     },
     {
-        "help_text": "Velocity of weapon project (1/128 tiles per 1/10 second).",
+        "help_text": "Velocity of weapon project (1/128 tiles per 1/10 second)",
         "default": 1,
         "type": "positive_int",
         "name": "flightSpeed",
         "min": 1
     },
     {
-        "help_text": "Impact pie model when it hits objects.",
+        "help_text": "Impact pie model when it hits objects",
         "type": "pie",
         "name": "hitGfx"
     },
@@ -84,12 +84,12 @@
         "name": "lightWorld"
     },
     {
-        "help_text": "Hit chance of longRange shots.",
+        "help_text": "Hit chance of longRange shots",
         "type": "positive_int",
         "name": "longHit"
     },
     {
-        "help_text": "Range of weapon to use long-range accuracy (1/128 tiles).",
+        "help_text": "Range of weapon to use long-range accuracy (1/128 tiles)",
         "type": "range",
         "name": "longRange"
     },
@@ -106,22 +106,22 @@
         "min": -90,
         "max": 0,
         "default": 0,
-        "help_text": "Min pitch of turret.",
+        "help_text": "Min pitch of turret",
         "type": "int"
     },
 
     {
         "name": "minimumDamage",
-        "help_text": "Minimum damage.",
+        "help_text": "Minimum damage",
         "type": "positive_int"
     },
     {
-        "help_text": "Minimal range of indirect weapon.",
+        "help_text": "Minimal range of indirect weapon",
         "type": "positive_int",
         "name": "minRange"
     },
     {
-        "help_text": "Miss pie model when it misses and hits ground.",
+        "help_text": "Miss pie model when it misses and hits ground",
         "type": "pie",
         "name": "missGfx"
     },
@@ -130,7 +130,7 @@
         "name": "model"
     },
     {
-        "help_text": "Pie model of weapon barrel.",
+        "help_text": "Pie model of weapon barrel",
         "type": "pie",
         "name": "mountModel"
     },
@@ -149,7 +149,7 @@
         ]
     },
     {
-        "help_text": "Muzzle flash pie model displayed upon firing.",
+        "help_text": "Muzzle flash pie model displayed upon firing",
         "type": "pie",
         "name": "muzzleGfx"
     },
@@ -158,12 +158,12 @@
         "name": "name"
     },
     {
-        "help_text": "Number of attack runs of vtol.",
+        "help_text": "Number of attack runs of vtol",
         "type": "positive_int",
         "name": "numAttackRuns"
     },
     {
-        "help_text": "If numExplosions is higher than 1, the projectile will scatter several explosion effects around the target on hit.",
+        "help_text": "If numExplosions is higher than 1, the projectile will scatter several explosion effects around the target on hit",
         "type": "positive_int",
         "name": "numExplosions"
     },
@@ -213,17 +213,17 @@
         "name": "penetrate"
     },
     {
-        "help_text": "The splash radius of weapon.",
+        "help_text": "The splash radius of weapon",
         "type": "positive_int",
         "name": "radius"
     },
     {
-        "help_text": "Splash damage.",
+        "help_text": "Splash damage",
         "type": "positive_int",
         "name": "radiusDamage"
     },
     {
-        "help_text": "Chance to do splash damage.",
+        "help_text": "Chance to do splash damage",
         "type": "positive_int",
         "name": "radiusHit"
     },
@@ -233,35 +233,35 @@
         "name": "radiusLife"
     },
     {
-        "help_text": "Recoil value of turret.",
+        "help_text": "Recoil value of turret",
         "default": 0,
         "type": "positive_int",
         "name": "recoilValue"
     },
     {
-        "help_text": "Time required to fully reload a salvo weapon. For non-salvo weapons, see firePause.",
+        "help_text": "Time required to fully reload a salvo weapon. For non-salvo weapons, see firePause",
         "type": "time",
         "name": "reloadTime"
     },
     {
-        "help_text": "Turret rotation limits of weapon.",
+        "help_text": "Turret rotation limits of weapon",
         "default": 0,
         "type": "positive_int",
         "name": "rotate"
     },
 
     {
-        "help_text": "Weapon trail pie model during flight.",
+        "help_text": "Weapon trail pie model during flight",
         "type": "pie",
         "name": "trailGfx"
     },
     {
-        "help_text": "Water pie model when it misses and hits water.",
+        "help_text": "Water pie model when it misses and hits water",
         "type": "pie",
         "name": "waterGfx"
     },
     {
-        "help_text": "Weapon class. HEAT or KINETIC. Controls which armor type the damage is reduced by.",
+        "help_text": "Weapon class. HEAT or KINETIC. Controls which armor type the damage is reduced by",
         "type": "choice",
         "name": "weaponClass",
         "choices": [
@@ -271,7 +271,7 @@
         ]
     },
     {
-        "help_text": "Weapon type. Controls what targets it's effective against (modifiers).",
+        "help_text": "Weapon type. Controls what targets it's effective against (modifiers)",
         "required": true,
         "type": "choice",
         "name": "weaponEffect",
@@ -286,7 +286,7 @@
         ]
     },
     {
-        "help_text": "Weapon subclass. Controls which upgrades the weapon is affected by.",
+        "help_text": "Weapon subclass. Controls which upgrades the weapon is affected by",
         "type": "choice",
         "name": "weaponSubClass",
         "choices": [

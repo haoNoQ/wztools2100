@@ -15,7 +15,7 @@
     {
         "name":"damageable",
         "type":"boolean",
-        "help_text":"Whether or not the feature is damageable, if set to 0, the 'x' cursor will appear instead of the 'attack' cursor."
+        "help_text":"Whether or not the feature is damageable, if set to 0, the 'x' cursor will appear instead of the 'attack' cursor"
     },
     {
         "name":"lineOfSight",
@@ -32,7 +32,7 @@
     {
         "name":"armour",
         "type":"positive_int",
-        "help_text": "Armour of the feature, similar to armour used on buildings.",
+        "help_text": "Armour of the feature, similar to armour used on buildings",
         "default": 1
     },
     {

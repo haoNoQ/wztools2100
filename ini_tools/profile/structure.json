@@ -8,7 +8,7 @@
     {
         "name": "baseModel",
         "type": "pie",
-        "help_text": "The base pie/texture below the structure."
+        "help_text": "The base pie/texture below the structure"
     },
     {
         "name": "width",
@@ -39,7 +39,7 @@
     {
         "name": "height",
         "type": "height",
-        "help_text": "The height of the structure. Affects whether or not it can fire over walls."
+        "help_text": "The height of the structure. Affects whether or not it can fire over walls"
     },
     {
         "name": "name",
@@ -79,7 +79,7 @@
     {
         "name": "resistance",
         "type": "positive_int",
-        "help_text": "Resistance points to NEXUS convert/capture weapons."
+        "help_text": "Resistance points to NEXUS convert/capture weapons"
     },
     {
         "name": "sensorID",
@@ -92,13 +92,13 @@
         "type": "choice",
         "choices": ["HARD", "BUNKER", "MEDIUM", "SOFT"],
         "required": true,
-        "help_text": "Armor type of the structure;  Controls which weapon types it's effective against."
+        "help_text": "Armor type of the structure;  Controls which weapon types it's effective against"
     },
     {
         "name": "structureModel",
         "type": "pie",
         "required": true,
-        "help_text": "Comma-separated string list. The pie models names used by this structure."
+        "help_text": "Comma-separated string list. The pie models names used by this structure"
     },
     {
         "name": "type",

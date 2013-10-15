@@ -49,7 +49,7 @@ def get_header(profile):
     result += (template % x for x in lines)
     return '\n'.join(result)
 
-
-for profile in get_profiles():
-    print "\n" * 3
-    print get_header(profile)
+if __name__ == "__main__":
+    for profile in get_profiles():
+        print "\n" * 3
+        print get_header(profile)

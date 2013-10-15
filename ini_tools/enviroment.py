@@ -3,6 +3,7 @@ try:
     import settings
 except ImportError:
     print "You must create settings file "
+    exit(1)
 
 REPO_PATH = settings.REPO_PATH
 assert os.path.exists(REPO_PATH), '%s does not exists' % REPO_PATH

@@ -15,7 +15,8 @@ def _get_pies(folder_path):
                 continue
             for pie_path in os.listdir(result_path):
                 if pie_path in pie_paths:
-                    print "Has duplicate pie file names", '%s%s %s%s' % (path, pie_path, pie_paths[pie_path], pie_path)
+                    print "Has duplicate pie file names in %s:" % folder_path,
+                    print '%s%s %s%s' % (path, pie_path, pie_paths[pie_path], pie_path)
                     continue
                 pie_paths[pie_path] = path
         return pie_paths
@@ -65,12 +66,12 @@ if __name__ == '__main__':
             if k in mp_only:
                 usage = "MP overrides this file"
             else:
-                usage = "This file used by MP"
+                usage = "This file not used by BASE but used by MP"
 
         print '%s %s' % (os.path.join(v, k), usage)
 
     print
-    print "Pie from MP + BASE folders not mentioned in MP stats"
+    print "Pie from MP folders not mentioned in MP stats"
     for k, v in sorted(mp_unused_pies.items(), key=lambda x: x[1]):
         if k in mp_only:
             print '%s %s' % (os.path.join(v, k), 'Not used')

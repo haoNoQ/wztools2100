@@ -6,12 +6,12 @@ MAX_ITEM_TYPE_LENGTH = 40
 def get_header(profile):
     result = [
         "; Section headers in brackets [...] is system ID of %s items. This IDs should be unique." % profile.file_name,
-        '; Following properties can be used in %s items:' % profile.file_name]
+        ]
 
     fields = profile.keys()
     fields.sort(key=lambda x: profile.field_order.index(x))
     lines = []
-    for key, item in profile.items():
+    for key, item in sorted(profile.items(), key=lambda x: profile.field_order.index(x[0])):
         convert_to = item['convert_to']
         item_type = item['type']
         help_text = item.get('help_text', 'unknown!!!')
@@ -19,7 +19,7 @@ def get_header(profile):
 
         value_type = item_type
 
-        if item_type in ('choice', 'boolean'):
+        if item.get('choices'):
             text = '|'.join(str(x) for x in item['choices'])
             if len(text) < MAX_ITEM_TYPE_LENGTH - 2:
                 value_type = text

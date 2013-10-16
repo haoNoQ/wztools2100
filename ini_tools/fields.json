@@ -80,7 +80,7 @@
         "required": false,
         "choices": null,
         "max_length": 32,
-        "help_text": "Pie file list",
+        "help_text": "Pie models",
         "convert_to": "string_list"
     },
     "buildpoints": {
@@ -200,7 +200,7 @@
         "default": null,
         "max": null,
         "max_length": 32,
-        "help_text": "???",
+        "help_text": "Location",
         "convert_to": "str"
 
     },

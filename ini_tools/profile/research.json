@@ -1,5 +1,9 @@
 [
     {
+        "name": "name",
+        "type": "name"
+    },
+    {
         "name": "researchPoints",
         "type": "positive_int",
         "help_text": "Time to research (14 points equal to 1 second in research facility without modules and upgrades)"
@@ -29,7 +33,7 @@
         "name": "iconID",
         "type": "choice",
         "choices": ["IMAGE_ROCKET", "IMAGE_CANNON", "IMAGE_HOVERCRAFT", "IMAGE_ECM", "IMAGE_PLASCRETE", "IMAGE_TRACKS", "IMAGE_RES_DROIDTECH", "IMAGE_RES_WEAPONTECH", "IMAGE_RES_COMPUTERTECH", "IMAGE_RES_POWERTECH", "IMAGE_RES_SYSTEMTECH", "IMAGE_RES_STRUCTURETECH", "IMAGE_RES_CYBORGTECH", "IMAGE_RES_DEFENCE", "IMAGE_RES_QUESTIONMARK", "IMAGE_RES_GRPACC", "IMAGE_RES_GRPUPG", "IMAGE_RES_GRPREP", "IMAGE_RES_GRPROF", "IMAGE_RES_GRPDAM"],
-        "help_text": "Key name for icon (key names is hardcoded in c++ code)"
+        "help_text": "Key name for icon"
     },
     {
         "name": "statID",
@@ -41,10 +45,7 @@
         "type": "pie",
         "help_text": "IMD to display for tech"
     },
-    {
-        "name": "name",
-        "type": "name"
-    },
+
     {
         "name": "subgroupIconID",
         "type": "choice",

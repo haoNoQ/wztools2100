@@ -1,4 +1,8 @@
 [
+        {
+        "name": "name",
+        "type": "name"
+    },
     {
         "name": "hitpoints",
         "type": "hitpoints"
@@ -21,14 +25,6 @@
 
     },
     {
-        "name": "mountModel",
-        "type": "pie"
-    },
-    {
-        "name": "name",
-        "type": "name"
-    },
-    {
         "name": "power",
         "type": "positive_int"
     },
@@ -45,11 +41,16 @@
         "name": "type",
         "type": "choice",
         "choices": ["STANDARD", "RADAR DETECTOR", "VTOL INTERCEPT", "VTOL CB", "INDIRECT CB", "SUPER"],
-        "required": true
+        "required": true,
+        "help_text": "Sensor type"
     },
     {
         "name": "weight",
         "type": "weight"
+    },
+     {
+        "name": "mountModel",
+        "type": "pie"
     },
     {
         "name": "sensorModel",

@@ -24,7 +24,7 @@ class ValidationResult(object):
         error_list = self.errors.copy()
         if show_warnings:
             for key, val in self.warnings.items():
-                self.errors.setdefault(key, []).extend(val)
+                error_list.setdefault(key, []).extend(val)
         result.append("... Failed. Has %s in %s sections" % ('errors or warnings' if show_warnings else "errors",
                                                              len(error_list)))
         for key, errors in error_list.items():

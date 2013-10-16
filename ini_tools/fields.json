@@ -221,7 +221,7 @@
         "max": 100,
         "required": true,
         "choices": null,
-        "help_text": "Number of Y tiles used by this structure",
+        "help_text": "Number of Y tiles",
         "convert_to": "int"
     },
     "breadth": {

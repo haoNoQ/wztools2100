@@ -86,7 +86,8 @@
     {
         "help_text": "Hit chance of longRange shots",
         "type": "positive_int",
-        "name": "longHit"
+        "name": "longHit",
+        "default": 100
     },
     {
         "help_text": "Range of weapon to use long-range accuracy (1/128 tiles)",
@@ -219,11 +220,6 @@
         "help_text": "Splash damage",
         "type": "positive_int",
         "name": "radiusDamage"
-    },
-    {
-        "help_text": "Chance to do splash damage",
-        "type": "positive_int",
-        "name": "radiusHit"
     },
     {
         "help_text": "Splash time to live after impact (flame weapon)",

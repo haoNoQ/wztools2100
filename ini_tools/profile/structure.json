@@ -12,11 +12,13 @@
     },
     {
         "name": "width",
-        "type": "width"
+        "type": "width",
+        "default": 0
     },
     {
         "name": "breadth",
-        "type": "breadth"
+        "type": "breadth",
+        "default": 0
     },
     {
         "name": "hitpoints",
@@ -39,7 +41,8 @@
     {
         "name": "height",
         "type": "height",
-        "help_text": "The height of the structure. Affects whether or not it can fire over walls"
+        "help_text": "The height of the structure. Affects whether or not it can fire over walls",
+        "default": 0
     },
     {
         "name": "name",

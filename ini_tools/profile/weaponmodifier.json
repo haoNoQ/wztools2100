@@ -2,31 +2,31 @@
     {
         "name":"Half-Tracked",
         "type":"positive_int",
-        "default":100
+        "required":true
     },
     {
         "name":"Hover",
         "type":"positive_int",
-        "default":100
+        "required":true
     },
     {
         "name":"Legged",
         "type":"positive_int",
-        "default":100
+        "required":true
     },
     {
         "name":"Lift",
         "type":"positive_int",
-        "default":100
+        "required":true
     },
     {
         "name":"Tracked",
         "type":"positive_int",
-        "default":100
+        "required":true
     },
     {
         "name":"Wheeled",
         "type":"positive_int",
-        "default":100
+        "required":true
     }
 ]

@@ -143,9 +143,7 @@
             "HOMING-INDIRECT",
             "INDIRECT",
             "DIRECT",
-            "ERRATIC-DIRECT",
-            "HOMING-DIRECT",
-            "SWEEP"
+            "HOMING-DIRECT"
         ]
     },
     {
@@ -266,7 +264,6 @@
         "name": "weaponClass",
         "choices": [
             "KINETIC",
-            "MISC",
             "HEAT"
         ]
     },

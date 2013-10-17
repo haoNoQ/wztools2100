@@ -4,6 +4,10 @@
         "type":"name"
     },
     {
+        "name":"designable",
+        "type":"designable"
+    },
+    {
         "name":"buildPower",
         "type":"buildpower"
     },
@@ -26,12 +30,8 @@
     },
     {
         "name":"turret",
-        "type":"text",
-        "default": ""
-    },
-    {
-        "name":"designable",
-        "type":"designable"
-        }
+        "type":"key",
+        "reference": "weapons"
+    }
 ]
 

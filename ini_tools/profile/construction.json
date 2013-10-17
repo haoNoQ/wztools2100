@@ -20,20 +20,20 @@
         "type":"buildpoints"
     },
     {
-        "name":"sensorModel",
-        "type":"pie"
-    },
-    {
         "name":"buildPower",
         "type":"buildpower"
-    },
-    {
-        "name":"mountModel",
-        "type":"pie"
     },
     {
         "name":"constructPoints",
         "type":"positive_int",
         "help_text": "Construction power output"
+    },
+    {
+        "name":"sensorModel",
+        "type":"pie"
+    },
+    {
+        "name":"mountModel",
+        "type":"pie"
     }
 ]

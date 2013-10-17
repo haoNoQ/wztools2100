@@ -1,7 +1,8 @@
 [
     {
         "name":"speedFactor",
-        "type":"text",
-        "required":true
+        "type":"list",
+        "required":true,
+        "help_text": "List of modifiers for propulsion (number of items should be same as number of propulsion)"
     }
 ]

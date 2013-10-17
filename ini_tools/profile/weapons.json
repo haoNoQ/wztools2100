@@ -1,5 +1,12 @@
 [
     {
+        "type": "name",
+        "name": "name"
+    },
+    {
+        "type": "designable",
+        "name": "designable"
+    },{
         "name": "hitpoints",
         "type": "hitpoints"
     },
@@ -12,24 +19,20 @@
         "name": "buildPower"
     },
     {
+        "type": "weight",
+        "name": "weight"
+    },
+    {
         "help_text": "Weapon damage",
         "default": 0,
         "type": "positive_int",
         "name": "damage"
     },
     {
-        "type": "designable",
-        "name": "designable"
-    },
-    {
         "help_text": "Size(scale) of special/particle effects of weapon",
         "required": true,
         "type": "positive_int",
         "name": "effectSize"
-    },
-    {
-        "type": "ogg",
-        "name": "explosionWav"
     },
     {
         "help_text": "YES = projectile always face player view; NO = projectile always not face player view",
@@ -61,21 +64,11 @@
         "name": "firePause"
     },
     {
-        "help_text": "Projectile pie model used by weapon",
-        "type": "pie",
-        "name": "flightGfx"
-    },
-    {
         "help_text": "Velocity of weapon project (1/128 tiles per 1/10 second)",
         "default": 1,
         "type": "positive_int",
         "name": "flightSpeed",
         "min": 1
-    },
-    {
-        "help_text": "Impact pie model when it hits objects",
-        "type": "pie",
-        "name": "hitGfx"
     },
     {
         "help_text": "Yes = Lights up terrain around where it hits ",
@@ -122,20 +115,6 @@
         "name": "minRange"
     },
     {
-        "help_text": "Miss pie model when it misses and hits ground",
-        "type": "pie",
-        "name": "missGfx"
-    },
-    {
-        "type": "pie",
-        "name": "model"
-    },
-    {
-        "help_text": "Pie model of weapon barrel",
-        "type": "pie",
-        "name": "mountModel"
-    },
-    {
         "help_text": "Weapon's movement type",
         "required": true,
         "type": "choice",
@@ -146,15 +125,6 @@
             "DIRECT",
             "HOMING-DIRECT"
         ]
-    },
-    {
-        "help_text": "Muzzle flash pie model displayed upon firing",
-        "type": "pie",
-        "name": "muzzleGfx"
-    },
-    {
-        "type": "name",
-        "name": "name"
     },
     {
         "help_text": "Number of attack runs of vtol",
@@ -243,17 +213,6 @@
         "type": "positive_int",
         "name": "rotate"
     },
-
-    {
-        "help_text": "Weapon trail pie model during flight",
-        "type": "pie",
-        "name": "trailGfx"
-    },
-    {
-        "help_text": "Water pie model when it misses and hits water",
-        "type": "pie",
-        "name": "waterGfx"
-    },
     {
         "help_text": "Weapon class. HEAT or KINETIC. Controls which armor type the damage is reduced by",
         "type": "choice",
@@ -306,7 +265,46 @@
         "name": "weaponWav"
     },
     {
-        "type": "weight",
-        "name": "weight"
+        "type": "ogg",
+        "name": "explosionWav"
+    },
+    {
+        "type": "pie",
+        "name": "model"
+    },
+    {
+        "help_text": "Pie model of weapon barrel",
+        "type": "pie",
+        "name": "mountModel"
+    },
+    {
+        "help_text": "Water pie model when it misses and hits water",
+        "type": "pie",
+        "name": "waterGfx"
+    },
+    {
+        "help_text": "Impact pie model when it hits objects",
+        "type": "pie",
+        "name": "hitGfx"
+    },
+    {
+        "help_text": "Projectile pie model used by weapon",
+        "type": "pie",
+        "name": "flightGfx"
+    },
+    {
+        "help_text": "Weapon trail pie model during flight",
+        "type": "pie",
+        "name": "trailGfx"
+    },
+    {
+        "help_text": "Muzzle flash pie model displayed upon firing",
+        "type": "pie",
+        "name": "muzzleGfx"
+    },
+    {
+        "help_text": "Miss pie model when it misses and hits ground",
+        "type": "pie",
+        "name": "missGfx"
     }
 ]

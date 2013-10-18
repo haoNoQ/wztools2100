@@ -1,16 +1,12 @@
 [
-    {
-        "name":"breadth",
-        "type":"positive_int",
-        "help_text":"Breadth/length of the feature (z-axis)"
-    },
-    {
-        "name":"model",
-        "type":"pie"
-    },
+
     {
         "name":"name",
         "type":"name"
+    },{
+        "name":"breadth",
+        "type":"positive_int",
+        "help_text":"Breadth/length of the feature (z-axis)"
     },
     {
         "name":"damageable",
@@ -53,5 +49,9 @@
     {
         "name":"tileDraw",
         "type":"positive_int"
+    },
+    {
+        "name":"model",
+        "type":"pie"
     }
 ]

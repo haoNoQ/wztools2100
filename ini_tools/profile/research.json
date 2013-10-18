@@ -37,15 +37,15 @@
     },
     {
         "name": "statID",
-        "type": "text",
-        "help_text": "???"
+        "type": "key",
+        "help_text": "IMDs used in the interface",
+        "reference": "structure|component"
     },
     {
         "name": "imdName",
         "type": "pie",
         "help_text": "IMD to display for tech"
     },
-
     {
         "name": "subgroupIconID",
         "type": "choice",
@@ -59,9 +59,10 @@
         "help_text": "Previous research that required"
     },
     {
-        "name": "redComponents",
-        "type": "list",
-        "help_text": "Components that will became unavailable for build"
+        "name": "requiredStructures",
+        "type": "key_list",
+        "reference": "structure",
+        "help_text": "Structures that should be build before making research"
     },
     {
         "name": "resultStructures",
@@ -70,30 +71,31 @@
         "help_text": "Structures available after research"
     },
     {
-        "name": "resultComponents",
-        "type": "list",
-        "help_text": "Components available after research"
-    },
-    {
         "name": "redStructures",
         "type": "key_list",
         "reference": "structure",
         "help_text": "Structures that will became unavailable for build"
     },
     {
-        "name": "requiredStructures",
+        "name": "redComponents",
         "type": "key_list",
-        "reference": "structure",
-        "help_text": "Structures that should be build before making research"
+        "help_text": "Components that will became unavailable for build",
+        "reference": "component"
     },
     {
-        "name": "results",
-        "type": "list",
-        "help_text": "List of hints to rules.js"
+        "name": "resultComponents",
+        "type": "key_list",
+        "help_text": "Components available after research",
+        "reference": "component"
     },
     {
         "name": "replacedComponents",
         "type": "list",
         "help_text": "Replaced components <oldComponentID:newComponentID>"
+    },
+    {
+        "name": "results",
+        "type": "list",
+        "help_text": "List of hints to rules.js"
     }
 ]

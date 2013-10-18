@@ -29,17 +29,17 @@
         "type":"buildpower"
     },
     {
+        "name":"repairPoints",
+        "type":"positive_int",
+        "default":0
+    },
+    {
         "name":"model",
         "type":"pie"
     },
     {
         "name":"mountModel",
         "type":"pie"
-    },
-    {
-        "name":"repairPoints",
-        "type":"positive_int",
-        "default":0
     }
 ]
 

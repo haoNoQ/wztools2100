@@ -4,12 +4,12 @@
         "type":"name"
     },
     {
-        "name":"hitpoints",
-        "type":"hitpoints"
-    },
-    {
         "name":"designable",
         "type":"designable"
+    },
+    {
+        "name":"hitpoints",
+        "type":"hitpoints"
     },
     {
         "name":"weight",
@@ -25,10 +25,6 @@
         "type":"buildpoints"
     },
     {
-        "name":"sensorModel",
-        "type":"pie"
-    },
-    {
         "name":"location",
         "type":"choice",
         "choices":["DEFAULT", "TURRET"]
@@ -36,6 +32,10 @@
     {
         "name":"buildPower",
         "type":"buildpower"
+    },
+    {
+        "name":"sensorModel",
+        "type":"pie"
     },
     {
         "name":"mountModel",

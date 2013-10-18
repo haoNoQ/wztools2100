@@ -1,16 +1,17 @@
 [
      {
         "name":"name",
-        "type":"text"
-    },
-    {
-        "name":"type",
-        "type":"choice",
-        "choices":["Hover", "Tracked", "Half-Tracked", "Legged", "Lift", "Propellor", "Wheeled", "Ski", "Jump"]
+        "type":"name"
     },
     {
         "name":"designable",
         "type":"designable"
+    },
+    {
+        "name":"type",
+        "type":"choice",
+        "choices":["Hover", "Tracked", "Half-Tracked", "Legged", "Lift", "Propellor", "Wheeled"],
+        "help_text": "Propulsion type"
     },
     {
         "name":"spinAngle",
@@ -60,11 +61,11 @@
         "type":"buildpower"
     },
     {
-        "name":"model",
-        "type":"pie"
-    },
-    {
         "name":"hitpoints",
         "type":"hitpoints"
+    },
+    {
+        "name":"model",
+        "type":"pie"
     }
 ]

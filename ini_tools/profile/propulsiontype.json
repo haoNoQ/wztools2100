@@ -3,7 +3,8 @@
         "name":"flightName",
         "type":"choice",
         "choices":["AIR", "GROUND"],
-        "required": true
+        "required": true,
+        "help_text": "???"
     },
     {
         "name":"multiplier",

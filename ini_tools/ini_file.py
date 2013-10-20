@@ -25,6 +25,7 @@ class IniFile(dict):
         self._errors = {}
 
         self.path = path
+        self.name = os.path.basename(path)[:-4]
         self.profile = self.get_profile_for_ini()
         config = WZConfigParser()
         config.load(path)

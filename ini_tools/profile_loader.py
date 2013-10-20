@@ -16,6 +16,8 @@ class Profile(dict):
     """
     Convert profile json files to dict with params
     """
+    COMPONENTS = ['brain', 'ecm', 'repair', 'sensor', 'weapons', 'body', 'propulsion', 'construction']
+
     def __init__(self, file_name):
         self.file_name = file_name
         with open(os.path.join(this_dir, '../ini_tools/fields.json')) as f:
@@ -32,6 +34,19 @@ class Profile(dict):
             profile = fields[field_type].copy()
             profile.update(**field)
             self[field['name']] = profile
+
+    def get_reference_keys(self, field_name):
+        field = self[field_name]
+        assert 'reference' in field, "%s field '%s' has missed reference" % (self.file_name, field_name)
+        reference = field['reference']
+        items = reference.split('|')
+        result_keys = []
+        for item in items:
+            if item == 'component':
+                result_keys.extend(self.COMPONENTS)
+            else:
+                result_keys.append(item)
+        return result_keys
 
 
 def get_profiles_name_list():

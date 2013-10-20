@@ -1,77 +1,119 @@
 import os
-from ini_file import IniFile, WZException
+from ini_file import IniFile
 import argparse
 from enviroment import ALL_PATHS
+from pie import get_pies
 
 
-class ValidationResult(object):
-    def __init__(self, path):
-        self.errors = {}
-        self.warnings = {}
-        self.path = path
+class Validator(object):
+    ERROR, WARNING = 1, 2
 
-    def err(self, section_name, msg):
-        self.errors.setdefault(section_name, []).append(msg)
+    def add_section(self, name):
+        self.messages.append([name, []])
 
-    def warn(self, section_name, msg):
-        self.warnings.setdefault(section_name, []).append(msg)
+    def err(self, header, text):
+        self.messages[-1][1].append([self.ERROR, header, text])
 
-    def passed(self, show_warnings):
-        return not (self.errors or show_warnings and self.warnings)
+    def warn(self, header, text):
+        self.messages[-1][1].append([self.WARNING, header, text])
 
-    def get_errors(self, show_warnings):
-        result = []
-        error_list = self.errors.copy()
-        if show_warnings:
-            for key, val in self.warnings.items():
-                error_list.setdefault(key, []).extend(val)
-        result.append("... Failed. Has %s in %s sections" % ('errors or warnings' if show_warnings else "errors",
-                                                             len(error_list)))
-        for key, errors in error_list.items():
-            result.append("\t%s" % key)
-            result.append('\n'.join('\t\t%s' % err for err in errors))
-        return '\n'.join(result)
+    def __init__(self, mod_folder, show_warnings=True):
+        self.messages = []
 
+        stats_dir = os.path.join(mod_folder, 'stats')
+        self.pies, errros = get_pies(mod_folder)
 
-def validate_section(init_file, section_name, section, result):
-        section_additional_keys = set(section.keys()).difference(set(init_file.profile.keys()))
+        if errros:
+            self.add_section("Pie errors")
+            [self.err("Pie missed", err) for err in errros]
+        self.show_warnings = show_warnings
+
+        self.ini_files = {}
+        files = [path for path in os.listdir(stats_dir) if path.endswith('.ini')]
+        for path in files:
+            ini_file = IniFile(os.path.join(stats_dir, path))
+            self.ini_files[ini_file.name] = ini_file
+
+    def validate(self):
+        for ini_file in self.ini_files.values():
+            self.add_section('File: %s (%s)' % (ini_file.name, ini_file.path))
+            self.validate_file(ini_file)
+        self.print_error_message()
+
+    def validate_file(self, ini_file):
+        for section_name in ini_file:
+            self.validate_section(ini_file, section_name)
+
+    def validate_section(self, ini_file, section_name):
+        section = ini_file[section_name]
+
+        # check keys present in section and missed in profile
+        section_additional_keys = set(section.keys()).difference(set(ini_file.profile.keys()))
         if section_additional_keys:
-            result.err(section_name, 'has additional keys %s' % list(section_additional_keys))
+            self.err(section_name, 'has additional keys %s' % list(section_additional_keys))
+
         missed_keys = []
-        for field_name in init_file.profile.keys():
-            profile_data = init_file.profile[field_name]
+        for field_name in ini_file.profile.keys():
+            profile_field = ini_file.profile[field_name]
             value = section.get(field_name)
             if value is None:
-                if profile_data.get('required'):
+                if profile_field.get('required'):
                     missed_keys.append(field_name)
                 continue
-            elif value == str(profile_data.get('default')):  # int from ini came as str
-                result.warn(section_name, 'default value: %s = %s' % (field_name, value))
+            elif value == str(profile_field.get('default')):  # int from ini came as str
+                self.warn(section_name, 'default value: %s = %s' % (field_name, value))
 
-            field_type = profile_data['type']
-
+            # validate by field type
+            field_type = profile_field['type']
             if field_type == 'choice':
-                if value.strip('"') not in profile_data['choices']:
-                    result.err(section_name, 'wrong choice %s expect one of %s' % field_name, profile_data['choices'])
+                if value.strip('"') not in profile_field['choices']:
+                    self.err(section_name, 'wrong choice %s expect one of %s' % field_name, profile_field['choices'])
             elif field_type == 'boolean':
                 if value not in ['0', '1']:
-                    result.err(section_name, "wrong boolean value %s for %s" % (value, field_name))
+                    self.err(section_name, "wrong boolean value %s for %s" % (value, field_name))
+            elif field_type in ['key', 'key_list']:
+                reference_list = ini_file.profile.get_reference_keys(field_name)
+                keys = value.strip().split(',')
+
+                def key_in_reference(key, reference_list):
+                    for reference_name in reference_list:
+                        if reference_name.startswith('research'):
+                            reference_source = ini_file
+                        else:
+                            reference_source = self.ini_files[reference_name]
+                        if key in reference_source:
+                            return True
+
+                for key_id in keys:
+                    if key_in_reference(key_id.strip(), reference_list):
+                        continue
+                    self.err(section_name, "Key <%s> in filed <%s> is missed for section <%s>" % (key_id,
+                                                                                                  field_name,
+                                                                                                  section_name))
         if missed_keys:
-            result.err(section_name, 'missed keys %s' % list(missed_keys))
+            self.err(section_name, 'missed keys %s' % list(missed_keys))
 
+    def print_error_message(self):
+        result = []
 
-def validate(ini_file, show_warnings=False):
-        result = ValidationResult(ini_file.path)
+        max_header_length = 0
 
-        for section_name, section in ini_file.items():
-            validate_section(ini_file, section_name, section, result)  # did we need ini file as argument
+        for __, values in self.messages:
+            for __, header, __ in values:
+                max_header_length = max(len(header), max_header_length)
 
-        print "validating %s(%s)" % (os.path.basename(ini_file.path), ini_file.path),  # string beginning
-
-        if not result.passed(show_warnings):
-            print result.get_errors(show_warnings)
-        else:
-            print "... OK"
+        for section_name, values in self.messages:
+            error_types = self.show_warnings and [self.ERROR, self.WARNING] or [self.ERROR]
+            values = filter(lambda x: x[0] in error_types, values)  # remove warnings
+            if not values:
+                continue
+            result.append('%s, number of %s: %s' % (section_name,
+                                                    self.show_warnings and 'errors and warnings' or 'errors',
+                                                    len(values)))
+            for err_type, header, text in values:
+                template = '\t%-{0}s  %s'.format(max_header_length)
+                result.append(template % (header, text))
+        print "\n".join(result)
 
 
 if __name__ == '__main__':
@@ -80,15 +122,10 @@ if __name__ == '__main__':
                         help="don't show warnings")
     args = parser.parse_args()
 
-    stats_paths = [os.path.join(path, 'stats') for path in ALL_PATHS]
-    if not all([os.path.exists(path) for path in stats_paths]):
-        print "Invalid paths:", [path for path in stats_paths if not os.path.exists(path)]
+    if not all([os.path.exists(path) for path in ALL_PATHS]):
+        print "Invalid paths:", [path for path in ALL_PATHS if not os.path.exists(path)]
         exit(1)
 
-    for stats_dir in stats_paths:
-        files = [path for path in os.listdir(stats_dir) if path.endswith('.ini')]
-        for path in files:
-            try:
-                validate(IniFile(os.path.join(stats_dir, path)), show_warnings=not args.no_warnings)
-            except WZException, e:
-                print e
+    for mod_dir in ALL_PATHS:
+        validator = Validator(mod_dir, show_warnings=not args.no_warnings)
+        validator.validate()

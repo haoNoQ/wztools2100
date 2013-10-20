@@ -7,27 +7,39 @@ pie_load_paths = ["structs/", "misc/", "effects/", "components/prop/", "componen
                   "features/", "misc/micnum/", "misc/minum/", "misc/mivnum/", "misc/researchimds/"]
 
 
-def _get_pies(folder_path):
+def get_pies(folder_path):
+        """
+        Collect all pies from folder_path
+
+        :param folder_path: path to root folder
+        :type folder_path: str
+        :return: dict of name, path to pie files
+        :rtype: dict
+        """
         pie_paths = {}
+        errors = []
         for path in pie_load_paths:
             result_path = os.path.join(folder_path, path)
             if not os.path.exists(result_path):  # mp does not have all folders
                 continue
             for pie_path in os.listdir(result_path):
                 if pie_path in pie_paths:
-                    print "Has duplicate pie file names in %s:" % folder_path,
-                    print '%s%s %s%s' % (path, pie_path, pie_paths[pie_path], pie_path)
+                    errors.append("Has duplicate pie file names in %s: %s%s %s%s" % (folder_path, path, pie_path, pie_paths[pie_path], pie_path))
                     continue
                 pie_paths[pie_path] = path
-        return pie_paths
+        return pie_paths, errors
 
 
 def get_base_path():
-    return _get_pies(BASE_PATH)
+    pies, errors = get_pies(BASE_PATH)
+    print errors
+    return pies
 
 
 def get_mp_path():
-    return _get_pies(MP_PATH)
+    pies, errors = get_pies(MP_PATH)
+    print errors
+    return errors
 
 
 def validate(stats_dir, pie_dict):

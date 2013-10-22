@@ -11,6 +11,7 @@ python get_ini_fields.py body.ini
 
 python get_ini_fields.py body.ini "C:/games/warzone2100"
 """
+from __future__ import print_function
 
 import os
 from config_parser import WZConfigParser
@@ -50,12 +51,12 @@ if __name__ == "__main__":
         if name in files:
             file_path = os.path.join(base, name)
             get_ini_fields(fields, file_path)
-            print "collecting data from", file_path
+            print("collecting data from", file_path)
 
     max_size = max(map(len,  fields.values()))
 
     items = fields.items()
     items.sort(key=lambda x: x[0])
     for field, values in items:
-        print field, "requires=%s" % (len(values) == max_size), "values:", values_to_string(values)
+        print(field, "requires=%s" % (len(values) == max_size), "values:", values_to_string(values))
 

@@ -1,3 +1,4 @@
+from __future__ import print_function
 from profile_loader import get_profiles
 
 MAX_ITEM_TYPE_LENGTH = 40
@@ -51,5 +52,5 @@ def get_header(profile):
 
 if __name__ == "__main__":
     for profile in get_profiles():
-        print "\n" * 3
-        print get_header(profile)
+        print("\n" * 3)
+        print(get_header(profile))

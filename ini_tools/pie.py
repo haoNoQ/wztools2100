@@ -1,3 +1,4 @@
+from __future__ import print_function
 import os
 from ini_file import IniFile
 from enviroment import BASE_PATH, MP_PATH
@@ -32,13 +33,13 @@ def get_pies(folder_path):
 
 def get_base_path():
     pies, errors = get_pies(BASE_PATH)
-    print errors
+    print(errors)
     return pies
 
 
 def get_mp_path():
     pies, errors = get_pies(MP_PATH)
-    print errors
+    print(errors)
     return errors
 
 
@@ -56,7 +57,7 @@ def validate(stats_dir, pie_dict):
                         if not pie_item in pie_dict:
                             #hack
                             if not pie_item == '0':
-                                print "missed pie", pie_item
+                                print("missed pie", pie_item)
                         check_dict.pop(pie_item, None)
     return check_dict
 
@@ -69,8 +70,7 @@ if __name__ == '__main__':
     base_unused_pies = validate(BASE_PATH, base)
     mp_unused_pies = validate(MP_PATH, mp)
 
-    print
-    print "Pie from BASE folder not mentioned in BASE stats"
+    print("Pie from BASE folder not mentioned in BASE stats")
     for k, v in sorted(base_unused_pies.items(), key=lambda x: x[1]):
         if k in mp_unused_pies:
             usage = 'Not used by BASE and MP'
@@ -80,10 +80,10 @@ if __name__ == '__main__':
             else:
                 usage = "This file not used by BASE but used by MP"
 
-        print '%s %s' % (os.path.join(v, k), usage)
+        print('%s %s' % (os.path.join(v, k), usage))
 
-    print
-    print "Pie from MP folders not mentioned in MP stats"
+
+    print("Pie from MP folders not mentioned in MP stats")
     for k, v in sorted(mp_unused_pies.items(), key=lambda x: x[1]):
         if k in mp_only:
-            print '%s %s' % (os.path.join(v, k), 'Not used')
+            print('%s %s' % (os.path.join(v, k), 'Not used'))

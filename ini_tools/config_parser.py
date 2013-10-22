@@ -1,5 +1,11 @@
-from ConfigParser import *
-from StringIO import StringIO
+try:
+    # python 2
+    from ConfigParser import ConfigParser
+    from StringIO import StringIO
+except ImportError:
+    # python 3
+    from configparser import ConfigParser
+    from io import StringIO
 
 
 class WZConfigParser(ConfigParser):

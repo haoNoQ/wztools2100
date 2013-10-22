@@ -1,3 +1,6 @@
+#!/usr/bin/python3
+
+from __future__ import print_function
 import os
 from ini_file import IniFile
 import argparse
@@ -104,7 +107,7 @@ class Validator(object):
 
         for section_name, values in self.messages:
             error_types = self.show_warnings and [self.ERROR, self.WARNING] or [self.ERROR]
-            values = filter(lambda x: x[0] in error_types, values)  # remove warnings
+            values = [x for x in values if x[0] in error_types]  # remove warnings
             if not values:
                 continue
             result.append('%s, number of %s: %s' % (section_name,
@@ -113,7 +116,7 @@ class Validator(object):
             for err_type, header, text in values:
                 template = '\t%-{0}s  %s'.format(max_header_length)
                 result.append(template % (header, text))
-        print "\n".join(result)
+        print("\n".join(result))
 
 
 if __name__ == '__main__':
@@ -123,7 +126,7 @@ if __name__ == '__main__':
     args = parser.parse_args()
 
     if not all([os.path.exists(path) for path in ALL_PATHS]):
-        print "Invalid paths:", [path for path in ALL_PATHS if not os.path.exists(path)]
+        print("Invalid paths:", [path for path in ALL_PATHS if not os.path.exists(path)])
         exit(1)
 
     for mod_dir in ALL_PATHS:

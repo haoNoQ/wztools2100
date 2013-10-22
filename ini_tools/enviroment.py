@@ -1,8 +1,10 @@
+from __future__ import print_function
 import os
+
 try:
     import settings
 except ImportError:
-    print "You must create settings file "
+    print("You must create settings file ")
     exit(1)
 
 REPO_PATH = settings.REPO_PATH

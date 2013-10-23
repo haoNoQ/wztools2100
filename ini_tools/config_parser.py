@@ -14,7 +14,6 @@ class WZConfigParser(ConfigParser):
     Add handling space comments started from spaces.
     Save ini files on ini :)
     """
-    header = None
 
     def optionxform(self, optionstr):
         """default implementation makes it lowercase"""
@@ -29,19 +28,17 @@ class WZConfigParser(ConfigParser):
         for original_line in lines:
             line = original_line.strip()
             if line:
-
                 if is_header:
                     if line.startswith(';'):
-                        self.header.append(original_line)
+                        self.header.append(original_line.rstrip())
                     else:
                         is_header = False
                 new_lines.append(line)
         fp = StringIO('\n'.join(new_lines))
-        self.readfp(fp)
+        self.read_file(fp)
 
     def save(self, fp):
         if self.header:
-            for line in self.header:
-                fp.write(line)
+            fp.write('\n'.join(self.header))
             fp.write('\n')
         self.write(fp)

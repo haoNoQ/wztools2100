@@ -396,6 +396,50 @@ def load_stats_weaponsounds_txt():
 ##########################################################################
 # Routines to write out specific ini files.
 
+
+class BaseConverter(object):
+    DEST = None   # optional
+    SOURCE = None
+
+    def __init__(self, mod_path, override=True):
+        assert self.SOURCE, "SOURCE must be defined"
+        self.dest = self.DEST or self.SOURCE.replace(".txt", '.ini')
+        print("W %s" % self.SOURCE)
+
+        source_file = os.path.join(mod_path, self.SOURCE)
+        self.dest_file = os.path.join(mod_path, self.dest)
+
+        if not override and os.path.exists(self.dest_file):
+            return
+        with open(source_file, 'r') as fd:
+            data = self.convert(fd)
+        self.write(data)
+
+    def convert(self, fd):
+        raise NotImplemented("Implement in children")
+
+    def write(self, data_dict):
+        from ini_tools.ini_file import IniFile
+        ini_file = IniFile(self.dest_file, data_dict)
+        ini_file.save(self.dest_file)
+
+
+class ConvertBodypropulsionimd(BaseConverter):
+    SOURCE = 'stats/bodypropulsionimd.txt'
+
+    def convert(self, fd):
+        dd = {}
+        for line in read_csv_lines(fd, True):
+            key, item_key, v1, v2 = line.split(",")[:4]
+            dd.setdefault(key, {})[item_key] = '%s,%s' % (v1, v2)
+            #n = l[0]
+            #if not n in dd:
+            #    dd[n] = {}
+            #p = l[1]
+            #dd[n][p] = l[2] + ", " + l[3]
+        return dd
+
+
 def write_stats_body_ini():
 	if not os.path.isfile("stats/body.txt"):
 		return
@@ -983,32 +1027,35 @@ def write_stats_weapons_ini():
 # Here goes nothing.
 
 if __name__ == "__main__":
-	load_messages_strings_names_txt()
-	load_stats_assignweapons_txt()
-	load_stats_functions_txt()
-	load_stats_research_multiplayer_prresearch_txt()
-	load_stats_research_multiplayer_redcomponents_txt()
-	load_stats_research_multiplayer_redstructure_txt()
-	load_stats_research_multiplayer_researchfunctions_txt()
-	load_stats_research_multiplayer_resultcomponent_txt()
-	load_stats_research_multiplayer_resultstructure_txt()
-	load_stats_structurefunctions_txt()
-	load_stats_structureweapons_txt()
-	load_stats_weaponsounds_txt()
-	write_stats_body_ini()
-	write_stats_bodypropulsionimd_ini()
-	write_stats_construction_ini()
-	write_stats_ecm_ini()
-	write_stats_features_ini()
-	write_stats_propulsion_ini()
-	write_stats_propulsiontype_ini()
-	write_stats_propulsionsounds_ini()
-	write_stats_research_ini()
-	write_stats_repair_ini()
-	write_stats_sensor_ini()
-	write_stats_structure_ini()
-	write_stats_structuremodifier_ini()
-	write_stats_templates_ini()
-	write_stats_terraintable_ini()
-	write_stats_weaponmodifier_ini()
-	write_stats_weapons_ini()
+
+    path = 'G:/warzone2100/data/base'
+    ConvertBodypropulsionimd(path)
+	#load_messages_strings_names_txt()
+	#load_stats_assignweapons_txt()
+	#load_stats_functions_txt()
+	#load_stats_research_multiplayer_prresearch_txt()
+	#load_stats_research_multiplayer_redcomponents_txt()
+	#load_stats_research_multiplayer_redstructure_txt()
+	#load_stats_research_multiplayer_researchfunctions_txt()
+	#load_stats_research_multiplayer_resultcomponent_txt()
+	#load_stats_research_multiplayer_resultstructure_txt()
+	#load_stats_structurefunctions_txt()
+	#load_stats_structureweapons_txt()
+	#load_stats_weaponsounds_txt()
+	#write_stats_body_ini()
+	#write_stats_bodypropulsionimd_ini()
+	#write_stats_construction_ini()
+	#write_stats_ecm_ini()
+	#write_stats_features_ini()
+	#write_stats_propulsion_ini()
+	#write_stats_propulsiontype_ini()
+	#write_stats_propulsionsounds_ini()
+	#write_stats_research_ini()
+	#write_stats_repair_ini()
+	#write_stats_sensor_ini()
+	#write_stats_structure_ini()
+	#write_stats_structuremodifier_ini()
+	#write_stats_templates_ini()
+	#write_stats_terraintable_ini()
+	#write_stats_weaponmodifier_ini()
+	#write_stats_weapons_ini()

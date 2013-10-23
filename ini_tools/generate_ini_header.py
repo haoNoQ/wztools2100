@@ -8,9 +8,6 @@ def get_header(profile):
     result = [
         "; Section headers in brackets [...] is system ID of %s items. This IDs should be unique." % profile.file_name,
         ]
-
-    fields = profile.keys()
-    fields.sort(key=lambda x: profile.field_order.index(x))
     lines = []
     for key, item in sorted(profile.items(), key=lambda x: profile.field_order.index(x[0])):
         convert_to = item['convert_to']

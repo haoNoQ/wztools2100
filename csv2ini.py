@@ -78,10 +78,10 @@ def write_ini_section(fd, name, dic):
 	fd.write("\n")
 
 
-def read_csv_lines(fd, skipfirst):
+def read_csv_lines(fd, skip_first):
 	# TODO strip each line before adding to list, and check if something present
 	# ret = [line.strip() for line in fd if line(strip)]
-	return list(fd)[skipfirst:]  # True works like 1
+	return list(fd)[skip_first:]  # True works like 1
 
 
 # returns a list of strings which represent non-empty lines of file fd
@@ -128,13 +128,13 @@ def load_messages_strings_names_txt():
 		return
 	print("R messages/strings/names.txt")
 	fd = open("messages/strings/names.txt", "rt")
-	strlist = remove_c_style_comments(fd)
+	str_list = remove_c_style_comments(fd)
 	fd.close()
 	if sys.hexversion >= 0x03000000:
 		trans = str.maketrans("_()\"", "    ")
 	else:
 		trans = string.maketrans("_()\"", "    ")
-	for line in strlist:
+	for line in str_list:
 		one, two = line.split(None, 1)
 		messages_strings_names_txt[one] = two.translate(trans).strip()
 
@@ -388,7 +388,6 @@ def load_stats_weaponsounds_txt():
 	fd = open("stats/weaponsounds.txt", "rt")
 	for line in read_csv_lines(fd, False):
 		l = line.split(",")
-		d = {}
 		n = l[0]
 		stats_weaponsounds_txt[n] = (l[1], l[2])
 	fd.close()
@@ -974,7 +973,7 @@ def write_stats_weapons_ini():
 			d["periodicalDamageWeaponSubClass"] = d["weaponSubClass"]
 			d["periodicalDamageWeaponEffect"] = d["weaponEffect"]
 		d["minimumDamage"] = "33"
-		d["flags"] = list_to_ini_string(flags);
+		d["flags"] = list_to_ini_string(flags)
 		write_ini_section(f, n, d)
 	fd.close()
 	f.close()

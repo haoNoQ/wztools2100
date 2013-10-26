@@ -52,9 +52,10 @@
         "name": "fireOnMove"
     },
     {
-        "help_text": "Flags",
+        "help_text": "Flags, 0 == GroundOnly",
         "type": "choice",
-        "choices": ["AirOnly", "ShootAir"],
+        "choices": ["0", "AirOnly", "ShootAir"],
+        "default": "0",
         "name": "flags"
     },
 

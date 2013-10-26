@@ -50,7 +50,7 @@ class IniFile(dict):
     def prepare_value(self, item):
         key, val = item
         field = self.profile[key]
-        if str(field.get('default')) == val:
+        if str(field.get('default')) == str(val):
             return None
         if field['type'] == 'pie':
             return "%s = %s" % (key, val.lower())

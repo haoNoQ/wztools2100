@@ -2,10 +2,16 @@
 
 """
 Remove entries from names.txt that already present in ini files.
+This script will be need once then template names will be moved to ini files
+
+usage:
+python cleanup_names.txt.py
 """
 
 import os
 import re
+import sys
+sys.path.insert(0, '../ini_tools')
 from enviroment import BASE_PATH, MP_PATH
 from ini_file import IniFile
 

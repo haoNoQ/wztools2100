@@ -70,7 +70,7 @@ class Validator(object):
             field_type = profile_field['type']
             if field_type == 'choice':
                 if value.strip('"') not in profile_field['choices']:
-                    self.err(section_name, 'wrong choice %s expect one of %s' % field_name, profile_field['choices'])
+                    self.err(section_name, 'wrong choice %s expect one of %s' % (field_name, profile_field['choices']))
             elif field_type == 'boolean':
                 if value not in ['0', '1']:
                     self.err(section_name, "wrong boolean value %s for %s" % (value, field_name))

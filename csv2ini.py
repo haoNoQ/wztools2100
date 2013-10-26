@@ -22,7 +22,9 @@
 # 		cyborg and VTOL factories; upgrade functions for cyborg
 # 		and vtol factories are ignored by this script.
 # 	*	replacedComponents are unavailable on CSV side.
-
+#   brain.ini
+#   * missed
+#
 
 from __future__ import print_function
 import os.path

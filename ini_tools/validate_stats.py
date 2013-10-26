@@ -4,7 +4,7 @@ from __future__ import print_function
 import os
 from ini_file import IniFile
 import argparse
-from enviroment import ALL_PATHS
+from enviroment import MODS_PATH
 from pie import get_pies
 
 
@@ -70,7 +70,7 @@ class Validator(object):
             field_type = profile_field['type']
             if field_type == 'choice':
                 if value.strip('"') not in profile_field['choices']:
-                    self.err(section_name, 'wrong choice %s expect one of %s' % (field_name, profile_field['choices']))
+                    self.err(section_name, 'wrong choice "%s = %s" expect one of %s' % (field_name, value, profile_field['choices']))
             elif field_type == 'boolean':
                 if value not in ['0', '1']:
                     self.err(section_name, "wrong boolean value %s for %s" % (value, field_name))
@@ -83,14 +83,17 @@ class Validator(object):
                         if reference_name.startswith('research'):
                             reference_source = ini_file
                         else:
-                            reference_source = self.ini_files[reference_name]
+                            if reference_name in self.ini_files:
+                                reference_source = self.ini_files[reference_name]
+                            else:
+                                continue
                         if key in reference_source:
                             return True
 
                 for key_id in keys:
                     if key_in_reference(key_id.strip(), reference_list):
                         continue
-                    self.err(section_name, "Key <%s> in filed <%s> is missed for section <%s>" % (key_id,
+                    self.err(section_name, "key <%s> in filed <%s> is missed for section <%s>" % (key_id,
                                                                                                   field_name,
                                                                                                   section_name))
         if missed_keys:
@@ -125,10 +128,10 @@ if __name__ == '__main__':
                         help="don't show warnings")
     args = parser.parse_args()
 
-    if not all([os.path.exists(path) for path in ALL_PATHS]):
-        print("Invalid paths:", [path for path in ALL_PATHS if not os.path.exists(path)])
+    if not all([os.path.exists(path) for path in MODS_PATH]):
+        print("Invalid paths:", [path for path in MODS_PATH if not os.path.exists(path)])
         exit(1)
 
-    for mod_dir in ALL_PATHS:
+    for mod_dir in MODS_PATH:
         validator = Validator(mod_dir, show_warnings=not args.no_warnings)
         validator.validate()

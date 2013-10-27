@@ -153,10 +153,33 @@
         "name": "periodicalDamageRadius"
     },
     {
+        "name": "weaponEffect",
+        "help_text": "Weapon type. Controls what targets it's effective against (modifiers)",
+        "required": true,
+        "type": "choice",
+        "choices": [
+            "ALL ROUNDER",
+            "FLAMER",
+            "ANTI TANK",
+            "ANTI PERSONNEL",
+            "ANTI AIRCRAFT",
+            "ARTILLERY ROUND",
+            "BUNKER BUSTER"
+        ]
+    },
+    {
         "name": "periodicalDamageWeaponEffect",
         "help_text": "???",
         "type": "choice",
-        "choices": ["FLAMER"]
+        "choices": [
+            "ALL ROUNDER",
+            "FLAMER",
+            "ANTI TANK",
+            "ANTI PERSONNEL",
+            "ANTI AIRCRAFT",
+            "ARTILLERY ROUND",
+            "BUNKER BUSTER"
+        ]
     },
     {
         "name": "weaponClass",
@@ -250,21 +273,6 @@
         "default": 0,
         "type": "positive_int"
 
-    },
-    {
-        "name": "weaponEffect",
-        "help_text": "Weapon type. Controls what targets it's effective against (modifiers)",
-        "required": true,
-        "type": "choice",
-        "choices": [
-            "ALL ROUNDER",
-            "FLAMER",
-            "ANTI TANK",
-            "ANTI PERSONNEL",
-            "ANTI AIRCRAFT",
-            "ARTILLERY ROUND",
-            "BUNKER BUSTER"
-        ]
     },
     {
         "type": "ogg",

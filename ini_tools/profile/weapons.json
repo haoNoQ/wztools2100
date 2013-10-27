@@ -152,29 +152,65 @@
         "type": "positive_int",
         "name": "periodicalDamageRadius"
     },
+    {
+        "name": "periodicalDamageWeaponEffect",
+        "help_text": "???",
+        "type": "choice",
+        "choices": ["FLAMER"]
+    },
+    {
+        "name": "weaponClass",
+        "help_text": "Weapon class. HEAT or KINETIC. Controls which armor type the damage is reduced by",
+        "type": "choice",
+        "required": true,
+        "choices": [
+            "KINETIC",
+            "HEAT"
+        ]
+    },
+    {
+        "name": "periodicalDamageWeaponClass",
+        "help_text": "If not specified uses weaponClass value",
+        "type": "choice",
+        "choices": ["HEAT", "KINETIC"]
 
-    {
-        "help_text": "???",
-        "type": "choice",
-        "choices": ["HEAT"],
-        "name": "periodicalDamageWeaponClass"
     },
     {
-        "help_text": "???",
+        "name": "weaponSubClass",
+        "help_text": "Weapon subclass. Controls which upgrades the weapon is affected by. if not specified uses periodicalDamageWeaponClass value",
         "type": "choice",
-        "choices": ["FLAMER"],
-        "name": "periodicalDamageWeaponEffect"
+        "choices": [
+            "SLOW MISSILE",
+            "SLOW ROCKET",
+            "COMMAND",
+            "ROCKET",
+            "CANNON",
+            "A-A GUN",
+            "GAUSS",
+            "MISSILE",
+            "BOMB",
+            "MACHINE GUN",
+            "FLAME",
+            "EMP",
+            "LAS_SAT",
+            "MORTARS",
+            "HOWITZERS",
+            "ELECTRONIC",
+            "ENERGY"
+        ]
     },
     {
+        "name": "periodicalDamageWeaponSubClass",
         "help_text": "???",
         "type": "choice",
-        "choices": ["BOMB", "HOWITZERS", "MORTARS"],
-        "name": "periodicalDamageWeaponSubClass"
+        "choices": ["HEAT", "KINETIC"]
+
     },
     {
+        "name": "periodicalDamageTime",
         "help_text": "???",
-        "type": "positive_int",
-        "name": "periodicalDamageTime"
+        "type": "positive_int"
+
     },
     {
         "help_text": "",
@@ -209,25 +245,17 @@
         "name": "reloadTime"
     },
     {
+        "name": "rotate",
         "help_text": "Turret rotation limits of weapon",
         "default": 0,
-        "type": "positive_int",
-        "name": "rotate"
+        "type": "positive_int"
+
     },
     {
-        "help_text": "Weapon class. HEAT or KINETIC. Controls which armor type the damage is reduced by",
-        "type": "choice",
-        "name": "weaponClass",
-        "choices": [
-            "KINETIC",
-            "HEAT"
-        ]
-    },
-    {
+        "name": "weaponEffect",
         "help_text": "Weapon type. Controls what targets it's effective against (modifiers)",
         "required": true,
         "type": "choice",
-        "name": "weaponEffect",
         "choices": [
             "ALL ROUNDER",
             "FLAMER",
@@ -236,29 +264,6 @@
             "ANTI AIRCRAFT",
             "ARTILLERY ROUND",
             "BUNKER BUSTER"
-        ]
-    },
-    {
-        "help_text": "Weapon subclass. Controls which upgrades the weapon is affected by",
-        "type": "choice",
-        "name": "weaponSubClass",
-        "choices": [
-            "SLOW ROCKET",
-            "COMMAND",
-            "ROCKET",
-            "CANNON",
-            "A-A GUN",
-            "GAUSS",
-            "MISSILE",
-            "BOMB",
-            "MACHINE GUN",
-            "FLAME",
-            "EMP",
-            "LAS_SAT",
-            "MORTARS",
-            "HOWITZERS",
-            "ELECTRONIC",
-            "ENERGY"
         ]
     },
     {

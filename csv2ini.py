@@ -1,6 +1,5 @@
 #!/usr/bin/python3
 
-
 # USAGE:
 # 	Run it in the physfs root of your mod. It will create the .ini
 # 	files while leaving the .txt files intact. This will make the mod
@@ -15,8 +14,7 @@
 # 	*	please add the acceleration, deceleration and
 # 		skidDeceleration fields manually.
 # 	weapons.ini:
-# 	*	please review the three periodicalDamageWeapon parameters
-# 		manually.
+# 	*	please add parameters periodicalDamage, periodicalDamageWeaponClass, periodicalDamageWeaponEffect manually if you need them.
 # 	research.ini:
 # 	*	we no longer support separate upgrades for factories,
 # 		cyborg and VTOL factories; upgrade functions for cyborg
@@ -30,7 +28,8 @@ from __future__ import print_function
 import os.path
 import string
 import sys
-
+import argparse
+from ini_tools.ini_file import IniFile
 
 ##########################################################################
 # Globals for storing stats that will not be used instantly.
@@ -383,26 +382,29 @@ class BaseConverter(object):
     SOURCE = None
     DEST = None  # optional
 
-    def __init__(self, mod_path, override=True):
+    def __init__(self, mod_path, save_path, rewrite):
         assert self.SOURCE, "SOURCE must be defined"
         self.dest = self.DEST or self.SOURCE.replace(".txt", '.ini')
-        print("W %s" % self.SOURCE)
+
+
 
         source_file = os.path.join(mod_path, self.SOURCE)
-        self.dest_file = os.path.join(mod_path, self.dest)
+        self.dest_file = os.path.join(save_path, self.dest)
 
-        if not override and os.path.exists(self.dest_file):
+
+        if not rewrite and os.path.exists(self.dest_file):
+            print("Skipping %s, file %s already exists" % (self.SOURCE, self.dest_file))
             return
         with open(source_file, 'r') as fd:
             data = self.convert(fd)
             assert data is not None
         self.write(data)
+        print("Writing %s" % self.dest_file)
 
     def convert(self, fd):
         raise NotImplemented("Implement in children")
 
     def write(self, data_dict):
-        from ini_tools.ini_file import IniFile
         ini_file = IniFile(self.dest_file, data_dict)
         ini_file.save(self.dest_file)
 
@@ -918,10 +920,6 @@ class ConvertWeaporns(BaseConverter):
                 s = stats_weaponsounds_txt[n][1].strip()
                 if s != "-1":
                     d["explosionWav"] = s
-            if is_something(d["periodicalDamage"]):
-                d["periodicalDamageWeaponClass"] = d["weaponClass"]
-                d["periodicalDamageWeaponSubClass"] = d["weaponSubClass"]
-                d["periodicalDamageWeaponEffect"] = d["weaponEffect"]
             d["minimumDamage"] = "33"
             dd[n] = d
         return dd
@@ -931,7 +929,23 @@ class ConvertWeaporns(BaseConverter):
 # Here goes nothing.
 
 if __name__ == "__main__":
-    path = 'base'
+
+    parser = argparse.ArgumentParser()
+    parser.add_argument(dest='mod_path', help="root folder of mod")
+    parser.add_argument('--save-path', help="folder to save result, if not specified save it to mod_path")
+    parser.add_argument('--rewrite', help="If specified rewrite ini files", action="store_true")
+    args = parser.parse_args()
+
+    path=args.mod_path
+    save_path = args.save_path
+    if save_path is None:
+        save_path = path
+    rewrite = args.rewrite
+
+
+
+
+
     load_messages_strings_names_txt(path)
     load_stats_assignweapons_txt(path)
     load_stats_functions_txt(path)
@@ -944,25 +958,25 @@ if __name__ == "__main__":
     load_stats_structurefunctions_txt(path)
     load_stats_structureweapons_txt(path)
     load_stats_weaponsounds_txt(path)
-    
-    ConvertBodypropulsionimd(path)
-    ConvertBody(path)
-    ConvertConstructions(path)
-    ConvertEcm(path)
-    ConvertFeatures(path)
-    ConvertPropulsion(path)
-    ConvertPropulsionType(path)
-    ConvertBodypropulsionimd(path)
-    ConvertResearch(path)
-    ConvertRepair(path)
-    ConvertSensor(path)
-    ConvertStructure(path)
-    ConvertStructureModifier(path)
-    ConvertTemplates(path)
-    ConvertTerrainTable(path)
-    ConvertWepornModifier(path)
-    ConvertWeaporns(path)
-    
+
+    ConvertBodypropulsionimd(path, save_path, rewrite)
+    ConvertBody(path, save_path, rewrite)
+    ConvertConstructions(path, save_path, rewrite)
+    ConvertEcm(path, save_path, rewrite)
+    ConvertFeatures(path, save_path, rewrite)
+    ConvertPropulsion(path, save_path, rewrite)
+    ConvertPropulsionType(path, save_path, rewrite)
+    ConvertBodypropulsionimd(path, save_path, rewrite)
+    ConvertResearch(path, save_path, rewrite)
+    ConvertRepair(path, save_path, rewrite)
+    ConvertSensor(path, save_path, rewrite)
+    ConvertStructure(path, save_path, rewrite)
+    ConvertStructureModifier(path, save_path, rewrite)
+    ConvertTemplates(path, save_path, rewrite)
+    ConvertTerrainTable(path, save_path, rewrite)
+    ConvertWepornModifier(path, save_path, rewrite)
+    ConvertWeaporns(path, save_path, rewrite)
+
 
 
 

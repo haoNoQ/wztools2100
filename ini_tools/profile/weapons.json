@@ -143,14 +143,14 @@
         "name": "numRounds"
     },
     {
+        "name": "periodicalDamageRadius",
         "help_text": "???",
-        "type": "positive_int",
-        "name": "periodicalDamage"
+        "type": "positive_int"
     },
     {
+        "name": "periodicalDamage",
         "help_text": "???",
-        "type": "positive_int",
-        "name": "periodicalDamageRadius"
+        "type": "positive_int"
     },
     {
         "name": "weaponEffect",
@@ -186,10 +186,7 @@
         "help_text": "Weapon class. HEAT or KINETIC. Controls which armor type the damage is reduced by",
         "type": "choice",
         "required": true,
-        "choices": [
-            "KINETIC",
-            "HEAT"
-        ]
+        "choices": ["KINETIC", "HEAT"]
     },
     {
         "name": "periodicalDamageWeaponClass",
@@ -200,7 +197,8 @@
     },
     {
         "name": "weaponSubClass",
-        "help_text": "Weapon subclass. Controls which upgrades the weapon is affected by. if not specified uses periodicalDamageWeaponClass value",
+        "help_text": "Weapon subclass. Controls which upgrades the weapon is affected by.",
+        "required": true,
         "type": "choice",
         "choices": [
             "SLOW MISSILE",
@@ -224,10 +222,27 @@
     },
     {
         "name": "periodicalDamageWeaponSubClass",
-        "help_text": "???",
+        "help_text": "If not specified uses weaponSubClass value",
         "type": "choice",
-        "choices": ["HEAT", "KINETIC"]
-
+        "choices": [
+            "SLOW MISSILE",
+            "SLOW ROCKET",
+            "COMMAND",
+            "ROCKET",
+            "CANNON",
+            "A-A GUN",
+            "GAUSS",
+            "MISSILE",
+            "BOMB",
+            "MACHINE GUN",
+            "FLAME",
+            "EMP",
+            "LAS_SAT",
+            "MORTARS",
+            "HOWITZERS",
+            "ELECTRONIC",
+            "ENERGY"
+        ]
     },
     {
         "name": "periodicalDamageTime",

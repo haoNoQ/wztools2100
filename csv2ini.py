@@ -1,10 +1,19 @@
 #!/usr/bin/python3
 
-# USAGE:
-# 	Run it in the physfs root of your mod. It will create the .ini
-# 	files while leaving the .txt files intact. This will make the mod
+# 	Run this script will make the mod
 # 	compatible with 3.2 while not breaking compatibility with 3.1.
 
+#usage: csv2ini.py [-h] [--save-path SAVE_PATH] [--rewrite] mod_path
+#
+#positional arguments:
+#  mod_path              root folder of mod
+#
+#optional arguments:
+#  -h, --help            show this help message and exit
+#  --save-path SAVE_PATH
+#                        folder to save result, if not specified save it to
+#                        mod_path
+#  --rewrite             If specified rewrite ini files
 
 # KNOWN ISSUES:
 # 	body.ini:
@@ -606,7 +615,7 @@ class ConvertPropulsionType(BaseConverter):
         return dd
 
 class ConvertResearch(BaseConverter):
-    SOURCE = "stats/research/cam1/research.txt"  # todo replace to research after testing
+    SOURCE = "stats/research/multiplayer/research.txt"
     DEST = "stats/research.ini"
 
     def convert(self, fd):

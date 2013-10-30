@@ -29,7 +29,7 @@ import os.path
 import string
 import sys
 import argparse
-from ini_tools.ini_file import IniFile
+from ini_tools import IniFile
 
 ##########################################################################
 # Globals for storing stats that will not be used instantly.
@@ -929,7 +929,6 @@ class ConvertWeaporns(BaseConverter):
 # Here goes nothing.
 
 if __name__ == "__main__":
-
     parser = argparse.ArgumentParser()
     parser.add_argument(dest='mod_path', help="root folder of mod")
     parser.add_argument('--save-path', help="folder to save result, if not specified save it to mod_path")
@@ -941,10 +940,6 @@ if __name__ == "__main__":
     if save_path is None:
         save_path = path
     rewrite = args.rewrite
-
-
-
-
 
     load_messages_strings_names_txt(path)
     load_stats_assignweapons_txt(path)

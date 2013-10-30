@@ -28,6 +28,16 @@ Usage:
 
 _________________________
 
+* validate_stats.py
+
+prints to console errors and warnings about stats
+
+Usage:
+
+ python validate_stats.py [-h] [--no-warnings]
+
+_________________________
+
 * csv2ini.py:
 
 An UNFINISHED converter of large stat mods from old-style comma-separated-values tables used in Warzone 2100 v3.1 or earlier into the ini format suitable for Warzone 2100 v3.2. 

@@ -1,7 +1,7 @@
 import os
-from config_parser import WZConfigParser
-from profile_loader import Profile, get_profiles_name_list
-from generate_ini_header import get_header
+from .config_parser import WZConfigParser
+from .profile_loader import Profile, get_profiles_name_list
+from .generate_ini_header import get_header
 
 
 class WZException(Exception):

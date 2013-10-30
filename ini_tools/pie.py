@@ -1,7 +1,7 @@
 from __future__ import print_function
 import os
-from ini_file import IniFile
-from enviroment import BASE_PATH, MP_PATH
+from .ini_file import IniFile
+from .enviroment import BASE_PATH, MP_PATH
 
 
 pie_load_paths = ["structs/", "misc/", "effects/", "components/prop/", "components/weapons/", "components/bodies/",

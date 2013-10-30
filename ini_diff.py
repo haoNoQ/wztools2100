@@ -22,7 +22,7 @@ optional arguments:
 import os
 import argparse
 from difflib import unified_diff
-from config_parser import WZConfigParser
+from ini_tools import WZConfigParser
 
 
 def diff(file1: str, file2: str) -> None:

@@ -2,10 +2,8 @@
 
 from __future__ import print_function
 import os
-from ini_file import IniFile
 import argparse
-from enviroment import MODS_PATH
-from pie import get_pies
+from ini_tools import IniFile, MODS_PATH, get_pies
 
 
 class Validator(object):

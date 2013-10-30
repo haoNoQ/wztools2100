@@ -1,5 +1,5 @@
 from __future__ import print_function
-from profile_loader import get_profiles
+from .profile_loader import get_profiles
 
 MAX_ITEM_TYPE_LENGTH = 40
 

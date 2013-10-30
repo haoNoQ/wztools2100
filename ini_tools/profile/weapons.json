@@ -144,12 +144,12 @@
     },
     {
         "name": "periodicalDamageRadius",
-        "help_text": "???",
+        "help_text": "Damage on hit over time radius",
         "type": "positive_int"
     },
     {
         "name": "periodicalDamage",
-        "help_text": "???",
+        "help_text": "Damage on hit over time",
         "type": "positive_int"
     },
     {
@@ -169,7 +169,7 @@
     },
     {
         "name": "periodicalDamageWeaponEffect",
-        "help_text": "???",
+        "help_text": "Damage on hit over time effect",
         "type": "choice",
         "choices": [
             "ALL ROUNDER",
@@ -246,12 +246,12 @@
     },
     {
         "name": "periodicalDamageTime",
-        "help_text": "???",
+        "help_text": "Damage on hit over time duration 1/10 second",
         "type": "positive_int"
 
     },
     {
-        "help_text": "",
+        "help_text": "Whether projectile penetrates through a target",
         "type": "boolean",
         "default": 0,
         "name": "penetrate"

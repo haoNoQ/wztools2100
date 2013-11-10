@@ -35,15 +35,13 @@
 
 from __future__ import print_function
 import os.path
-import string
-import sys
 import argparse
-from ini_tools import IniFile
+from ini_tools import IniFile, get_messages_strings_names_txt
 
 ##########################################################################
 # Globals for storing stats that will not be used instantly.
 
-messages_strings_names_txt = {}
+
 stats_assignweapons_txt = {}
 stats_functions_txt = {}
 stats_research_multiplayer_prresearch_txt = {}
@@ -85,60 +83,11 @@ def read_csv_lines(fd, skip_first):
     return (x.strip() for x in list(fd)[skip_first:])
 
 
-# returns a list of strings which represent non-empty lines of file fd
-# with all C-style comments eliminated
-def remove_c_style_comments(fd):
-    ret = []
-    comment_state = False
-    for line in fd:
-        while True:
-            # seems we have nothing left
-            if len(line) < 2:
-                break
-            # we're still inside a comment
-            if comment_state:
-                idx = line.find("*/")
-                if idx > -1:
-                    line = line[idx + 2:]
-                    comment_state = False
-                    continue
-                # comment doesn't seem to end on this line
-                break
-            # we're not inside any comment
-            else:
-                idx = line.find("/*")
-                if idx > -1:
-                    line = line[idx + 2:]
-                    comment_state = True
-                    continue
-                if "//" in line:
-                    line = line.split("//", 1)[0]
-                # only now we can actually do our job
-                line = line.strip()
-                if len(line) > 0:
-                    ret.append(line)
-                break
-    return ret
+
 
 
 ##########################################################################
 # Stuff to pre-load: files referenced from many other files.
-
-def load_messages_strings_names_txt(path):
-    path = os.path.join(path, "messages", "strings", "names.txt")
-    if not os.path.isfile(path):
-        return
-    with open(path) as fd:
-        str_list = remove_c_style_comments(fd)
-
-    if sys.hexversion >= 0x03000000:
-        trans = str.maketrans("_()\"", "    ")
-    else:
-        trans = string.maketrans("_()\"", "    ")
-    for line in str_list:
-        one, two = line.split(None, 1)
-        messages_strings_names_txt[one] = two.translate(trans).strip()
-
 
 def load_stats_assignweapons_txt(path):
     path = os.path.join(path, "stats", "assignweapons.txt")
@@ -977,7 +926,7 @@ if __name__ == "__main__":
         save_path = path
     rewrite = args.rewrite
 
-    load_messages_strings_names_txt(path)
+    messages_strings_names_txt = get_messages_strings_names_txt(path)
     load_stats_assignweapons_txt(path)
     load_stats_functions_txt(path)
     load_stats_research_multiplayer_prresearch_txt(path)

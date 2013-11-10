@@ -829,6 +829,8 @@ class ConvertTemplates(BaseConverter):
             l = line.split(",")
             d = {}
             n = l[0]
+            if n == "ZNULLDESIGN":
+                continue
             d["name"] = messages_strings_names_txt[n]
             #unused = l[1]
             d["compBody"] = l[2]

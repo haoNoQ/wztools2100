@@ -510,6 +510,31 @@ class ConvertConstructions(BaseConverter):
         return dd
 
 
+class ConvertBrain(BaseConverter):
+    SOURCE = "stats/brain.txt"
+    def convert(self, fd):
+        dd= {}
+        for line in read_csv_lines(fd, False):
+            l = line.split(",")
+            d = {}
+            n = l[0]
+            d["name"] = messages_strings_names_txt[n]
+            #unused = l[1]
+            d["buildPower"] = l[2]
+            d["buildPoints"] = l[3]
+            d["weight"] = l[4]
+            #unused = l[5]
+            #unused = l[6]
+            d["turret"] = l[7]
+
+            # add some default values
+            d["maxDroids"] = 6
+            d["maxDroidsMult"] = 2
+            if n != 'ZNULLBRAIN':
+                d["designable"] = 1
+            dd[n] = d
+        return dd
+
 
 class ConvertEcm(BaseConverter):
     SOURCE = "stats/ecm.txt"
@@ -980,6 +1005,7 @@ if __name__ == "__main__":
     ConvertTerrainTable(path, save_path, rewrite)
     ConvertWepornModifier(path, save_path, rewrite)
     ConvertWeaporns(path, save_path, rewrite)
+    ConvertBrain(path, save_path, rewrite)
 
 
 

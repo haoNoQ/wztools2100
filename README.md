@@ -46,8 +46,6 @@ optional arguments:
  		cyborg and VTOL factories; upgrade functions for cyborg
  		and vtol factories are ignored by this script.
  	*	replacedComponents are unavailable on CSV side.
-    brain.ini
-    * script has no brains
 
 _________________________
 

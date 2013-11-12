@@ -4,6 +4,7 @@ from __future__ import print_function
 import os
 import argparse
 from ini_tools import IniFile, MODS_PATH, get_pies
+from ini_tools.enviroment import BASE_PATH
 
 
 class Validator(object):
@@ -22,11 +23,17 @@ class Validator(object):
         self.messages = []
 
         stats_dir = os.path.join(mod_folder, 'stats')
-        self.pies, errros = get_pies(mod_folder)
 
-        if errros:
+
+        self.pies, errors = get_pies(BASE_PATH) # load base pies
+
+        if mod_folder != BASE_PATH:
+            mod_pies, errors = get_pies(mod_folder)
+            self.pies.update(mod_pies)
+
+        if errors:
             self.add_section("Pie errors")
-            [self.err("Pie missed", err) for err in errros]
+            [self.err("Pie missed", err) for err in errors]
         self.show_warnings = show_warnings
 
         self.ini_files = {}
@@ -72,6 +79,14 @@ class Validator(object):
             elif field_type == 'boolean':
                 if value not in ['0', '1']:
                     self.err(section_name, "wrong boolean value %s for %s" % (value, field_name))
+            elif field_type == 'pie':
+                vals = [x.strip() for x in value.split(',')]
+                for val in vals:
+                    if val !='0' and val.lower() not in self.pies:
+                        self.err(section_name, 'Missed pie "%s" for field %s' % (val, field_name))
+                    else:
+                        if val not in self.pies:
+                            self.warn(section_name, 'Pie name "%s" did not match exactly with file for field %s' % (value, field_name))
             elif field_type in ['key', 'key_list']:
                 reference_list = ini_file.profile.get_reference_keys(field_name)
                 keys = value.strip().split(',')
@@ -133,3 +148,4 @@ if __name__ == '__main__':
     for mod_dir in MODS_PATH:
         validator = Validator(mod_dir, show_warnings=not args.no_warnings)
         validator.validate()
+

@@ -33,14 +33,14 @@ def get_pies(folder_path):
 
 def get_base_path():
     pies, errors = get_pies(BASE_PATH)
-    print(errors)
+    errors and print(errors)
     return pies
 
 
 def get_mp_path():
     pies, errors = get_pies(MP_PATH)
-    print(errors)
-    return errors
+    errors and print(errors)
+    return pies
 
 
 def validate(stats_dir, pie_dict):

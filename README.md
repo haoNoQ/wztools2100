@@ -54,12 +54,13 @@ _________________________
 
 Prints to console errors and warnings about stats
 
-#### Setup
-  To use this script you need to create settings.py in this folder.
-  Place path to you mods to MODS_PATH list
 
 ```
-usage: validate_stats.py [-h] [--no-warnings]
+usage: validate_stats.py [-h] [--no-warnings] <modpath> <basepath>
+
+positional arguments:
+  <modpath>      path to mod folder
+  <basepath>     path to base folder
 
 optional arguments:
   -h, --help     show this help message and exit

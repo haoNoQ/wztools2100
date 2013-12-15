@@ -1,6 +1,6 @@
 import os
 import re
-from ini_tools.enviroment import BASE_PATH, MP_PATH
+#from ini_tools.enviroment import BASE_PATH, MP_PATH # environment was removed get this path in different way
 from ini_tools import get_messages_strings_names_txt
 
 

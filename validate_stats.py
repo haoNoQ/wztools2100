@@ -3,8 +3,7 @@
 from __future__ import print_function
 import os
 import argparse
-from ini_tools import IniFile, MODS_PATH, get_pies
-from ini_tools.enviroment import BASE_PATH
+from ini_tools import IniFile, get_pies
 
 
 class Validator(object):
@@ -19,15 +18,15 @@ class Validator(object):
     def warn(self, header, text):
         self.messages[-1][1].append([self.WARNING, header, text])
 
-    def __init__(self, mod_folder, show_warnings=True):
+    def __init__(self, mod_folder, base_path, show_warnings=True):
         self.messages = []
 
         stats_dir = os.path.join(mod_folder, 'stats')
 
 
-        self.pies, errors = get_pies(BASE_PATH) # load base pies
+        self.pies, errors = get_pies(base_path) # load base pies
 
-        if mod_folder != BASE_PATH:
+        if mod_folder != base_path:
             mod_pies, errors = get_pies(mod_folder)
             self.pies.update(mod_pies)
 
@@ -137,15 +136,23 @@ class Validator(object):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('modpath', metavar='<modpath>', help='path to mod folder')
+    parser.add_argument('basepath', metavar='<basepath>', help='path to base folder')
+
     parser.add_argument('--no-warnings', dest='no_warnings', action='store_true',
                         help="don't show warnings")
     args = parser.parse_args()
 
-    if not all([os.path.exists(path) for path in MODS_PATH]):
-        print("Invalid paths:", [path for path in MODS_PATH if not os.path.exists(path)])
+    mod_path = args.modpath
+    base_path = args.basepath
+
+    if not os.path.exists(mod_path):
+        print("Invalid mod path:%s" % mod_path)
+        exit(1)
+    if not os.path.exists(base_path):
+        print("Invalid base path:%s" % base_path)
         exit(1)
 
-    for mod_dir in MODS_PATH:
-        validator = Validator(mod_dir, show_warnings=not args.no_warnings)
-        validator.validate()
+    validator = Validator(mod_path, base_path, show_warnings=not args.no_warnings)
+    validator.validate()
 

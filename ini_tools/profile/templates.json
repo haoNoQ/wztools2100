@@ -1,5 +1,10 @@
 [
     {
+        "name": "name",
+        "type": "name",
+        "help_text": "This field not included to master yet"
+    },
+    {
         "name": "available",
         "type": "positive_int",
         "help_text": "???"

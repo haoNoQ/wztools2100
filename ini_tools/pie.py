@@ -1,7 +1,7 @@
 from __future__ import print_function
+import argparse
 import os
-from ini_file import IniFile
-from enviroment import BASE_PATH, MP_PATH
+from .ini_file import IniFile
 
 
 pie_load_paths = ["structs/", "misc/", "effects/", "components/prop/", "components/weapons/", "components/bodies/",
@@ -31,18 +31,6 @@ def get_pies(folder_path):
         return pie_paths, errors
 
 
-def get_base_path():
-    pies, errors = get_pies(BASE_PATH)
-    print(errors)
-    return pies
-
-
-def get_mp_path():
-    pies, errors = get_pies(MP_PATH)
-    print(errors)
-    return errors
-
-
 def validate(stats_dir, pie_dict):
     stats_dir = os.path.join(stats_dir, 'stats')
     files = [path for path in os.listdir(stats_dir) if path.endswith('.ini')]
@@ -63,12 +51,23 @@ def validate(stats_dir, pie_dict):
 
 
 if __name__ == '__main__':
-    base = get_base_path()
-    mp = get_mp_path()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('modpath', metavar='<modpath>', help='path to mod folder')
+    parser.add_argument('basepath', metavar='<basepath>', help='path to base folder')
+    args = parser.parse_args()
+
+    mod_path = args.modpath
+    base_path = args.basepath
+    base, errors = get_pies(base_path)
+    errors and print(errors)
+
+    mp, errors = get_pies(mod_path)
+    errors and print(errors)
+
     mp_only = mp.copy()
     mp.update(base)
-    base_unused_pies = validate(BASE_PATH, base)
-    mp_unused_pies = validate(MP_PATH, mp)
+    base_unused_pies = validate(base_path, base)
+    mp_unused_pies = validate(mod_path, mp)
 
     print("Pie from BASE folder not mentioned in BASE stats")
     for k, v in sorted(base_unused_pies.items(), key=lambda x: x[1]):

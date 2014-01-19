@@ -2,10 +2,8 @@
 
 from __future__ import print_function
 import os
-from ini_file import IniFile
 import argparse
-from enviroment import ALL_PATHS
-from pie import get_pies
+from ini_tools import IniFile, get_pies
 
 
 class Validator(object):
@@ -20,15 +18,21 @@ class Validator(object):
     def warn(self, header, text):
         self.messages[-1][1].append([self.WARNING, header, text])
 
-    def __init__(self, mod_folder, show_warnings=True):
+    def __init__(self, mod_folder, base_path, show_warnings=True):
         self.messages = []
 
         stats_dir = os.path.join(mod_folder, 'stats')
-        self.pies, errros = get_pies(mod_folder)
 
-        if errros:
+
+        self.pies, errors = get_pies(base_path) # load base pies
+
+        if mod_folder != base_path:
+            mod_pies, errors = get_pies(mod_folder)
+            self.pies.update(mod_pies)
+
+        if errors:
             self.add_section("Pie errors")
-            [self.err("Pie missed", err) for err in errros]
+            [self.err("Pie missed", err) for err in errors]
         self.show_warnings = show_warnings
 
         self.ini_files = {}
@@ -70,10 +74,18 @@ class Validator(object):
             field_type = profile_field['type']
             if field_type == 'choice':
                 if value.strip('"') not in profile_field['choices']:
-                    self.err(section_name, 'wrong choice %s expect one of %s' % field_name, profile_field['choices'])
+                    self.err(section_name, 'wrong choice "%s = %s" expect one of %s' % (field_name, value, profile_field['choices']))
             elif field_type == 'boolean':
                 if value not in ['0', '1']:
                     self.err(section_name, "wrong boolean value %s for %s" % (value, field_name))
+            elif field_type == 'pie':
+                vals = [x.strip() for x in value.split(',')]
+                for val in vals:
+                    if val !='0' and val.lower() not in self.pies:
+                        self.err(section_name, 'Missed pie "%s" for field %s' % (val, field_name))
+                    else:
+                        if val not in self.pies:
+                            self.warn(section_name, 'Pie name "%s" did not match exactly with file for field %s' % (value, field_name))
             elif field_type in ['key', 'key_list']:
                 reference_list = ini_file.profile.get_reference_keys(field_name)
                 keys = value.strip().split(',')
@@ -83,14 +95,17 @@ class Validator(object):
                         if reference_name.startswith('research'):
                             reference_source = ini_file
                         else:
-                            reference_source = self.ini_files[reference_name]
+                            if reference_name in self.ini_files:
+                                reference_source = self.ini_files[reference_name]
+                            else:
+                                continue
                         if key in reference_source:
                             return True
 
                 for key_id in keys:
                     if key_in_reference(key_id.strip(), reference_list):
                         continue
-                    self.err(section_name, "Key <%s> in filed <%s> is missed for section <%s>" % (key_id,
+                    self.err(section_name, "key <%s> in filed <%s> is missed for section <%s>" % (key_id,
                                                                                                   field_name,
                                                                                                   section_name))
         if missed_keys:
@@ -121,14 +136,23 @@ class Validator(object):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
+    parser.add_argument('modpath', metavar='<modpath>', help='path to mod folder')
+    parser.add_argument('basepath', metavar='<basepath>', help='path to base folder')
+
     parser.add_argument('--no-warnings', dest='no_warnings', action='store_true',
                         help="don't show warnings")
     args = parser.parse_args()
 
-    if not all([os.path.exists(path) for path in ALL_PATHS]):
-        print("Invalid paths:", [path for path in ALL_PATHS if not os.path.exists(path)])
+    mod_path = args.modpath
+    base_path = args.basepath
+
+    if not os.path.exists(mod_path):
+        print("Invalid mod path:%s" % mod_path)
+        exit(1)
+    if not os.path.exists(base_path):
+        print("Invalid base path:%s" % base_path)
         exit(1)
 
-    for mod_dir in ALL_PATHS:
-        validator = Validator(mod_dir, show_warnings=not args.no_warnings)
-        validator.validate()
+    validator = Validator(mod_path, base_path, show_warnings=not args.no_warnings)
+    validator.validate()
+

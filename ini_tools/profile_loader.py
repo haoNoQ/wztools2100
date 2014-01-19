@@ -20,7 +20,7 @@ class Profile(dict):
     HANDLERS = {
         'string_list': string_list,
         'int': int,
-        'bool': int,
+        'boolean': int,
         'str': str
     }
 

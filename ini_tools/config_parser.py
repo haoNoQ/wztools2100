@@ -35,7 +35,10 @@ class WZConfigParser(ConfigParser):
                         is_header = False
                 new_lines.append(line)
         fp = StringIO('\n'.join(new_lines))
-        self.read_file(fp)
+        if hasattr(self, 'read_file'):
+            self.read_file(fp)  # python 3.3
+        else:
+            self.readfp(fp)     # python 2.7
 
     def save(self, fp):
         if self.header:

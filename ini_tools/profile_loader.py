@@ -17,6 +17,18 @@ class Profile(dict):
     Convert profile json files to dict with params
     """
     COMPONENTS = ['brain', 'ecm', 'repair', 'sensor', 'weapons', 'body', 'propulsion', 'construction']
+    HANDLERS = {
+        'string_list': string_list,
+        'int': int,
+        'bool': int,
+        'str': str
+    }
+
+    def get_deafult_handlers(self):
+        handlers = {}
+        for field, field_info in self.items():
+            handlers[field] = self.HANDLERS[field_info['convert_to']]
+        return handlers
 
     def __init__(self, file_name):
         self.file_name = file_name
@@ -47,6 +59,8 @@ class Profile(dict):
             else:
                 result_keys.append(item)
         return result_keys
+
+
 
 
 def get_profiles_name_list():
